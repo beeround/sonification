@@ -1,1 +1,1 @@
-# DiAM - Digital Asset Manager
+# Sonification project
