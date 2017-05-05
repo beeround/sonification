@@ -6,5 +6,10 @@ controller('mainCtrl', function ($scope, $http, $location) {
         $location.path('/app/compare');
     }
 
+}).
+    controller('chartCtrl', function ($scope) {
+    $scope.test = "Chart";
+
+
 });
 

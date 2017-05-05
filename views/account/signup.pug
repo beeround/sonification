@@ -6,7 +6,7 @@ block content
     .col-md-8.col-md-offset-2
       .col-md-8.col-md-offset-2
         h3.text-center Sign up
-        form.form-horizontal(id='signup-form', method='POST')
+        #form.form-horizontal(id='signup-form', method='POST', action="/signup")
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
               input.form-control(type='name', name='name', id='name', placeholder='Name', autofocus, required)
