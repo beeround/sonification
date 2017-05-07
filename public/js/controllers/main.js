@@ -6,6 +6,47 @@ angular.module('sonificationAPP.controllers.main', [])
             $location.path('/app/compare');
         }
     })
+    
+    .controller('fbCtrl', function ($scope, $http) {
+
+        $scope.searchUser = function () {
+
+            $scope.currentWindow = "SearchList";
+
+            $scope.searchResult = undefined;
+
+            let data = {
+                query : $scope.query.name,
+            };
+
+            $http.post('/api/post/fb/search', data ).then(results => {
+                $scope.searchResults = results.data;
+                console.log(results.data)
+            });
+
+        };
+
+        $scope.changeFeed = function (fbID) {
+
+            $scope.currentWindow = "Feed";
+            $scope.fbData = undefined;
+
+            let data = {
+                id : fbID
+            };
+
+            $http.post('/api/post/fb/posts', data ).then(posts => {
+                $scope.fbData = posts.data;
+            });
+
+        };
+
+        $scope.showWindow = function (window) {
+            $scope.currentWindow = window;
+        }
+
+
+    })
 
     .controller('chartCtrl', function ($scope) {
         $scope.chartTitle = 'Test';

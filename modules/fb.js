@@ -1,28 +1,39 @@
 const FB = require('fb');
 const request = require('request');
 
-function getReactions(posts){
+
+function searchUser(query) {
+
     return new Promise((resolve, reject) => {
+        FB.api('oauth/access_token', {
+            client_id: '133078730567202',
+            client_secret: '232468909d66ee6bd9a58ee5f07179ce',
+            grant_type: 'client_credentials'
+        }, function (res) {
+            if (!res || res.error) {
+                console.log(!res ? 'error occurred' : res.error);
+                return;
+            }
 
-        posts.map((data, index) => {
-            FB.api(
-                data.id+"/reactions",
-                function (response) {
-                    if (response && !response.error) {
-                        data.reactions = response;
+            FB.setAccessToken(res.access_token);
 
-                        if(index == posts.length-1) {
-                            resolve(posts)
-                        }
-                    }
+            FB.api('/search?q='+query+'&type=page&fields=picture,name,description,category', function (res) {
+                if(!res || res.error) {
+                    console.log(!res ? 'error occurred' : res.error);
+                    return;
                 }
-            );
-        });
-    })
+                resolve(res)
+            });
+        })
+    });
+
 }
 
-function getPosts() {
+function getPosts(id) {
     return new Promise((resolve, reject) => {
+
+        const pageId = id;
+
         FB.api('oauth/access_token', {
             client_id: '133078730567202',
             client_secret: '232468909d66ee6bd9a58ee5f07179ce',
@@ -35,14 +46,12 @@ function getPosts() {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api('113878732017445/posts', function (res) {
+            FB.api(pageId+'/posts?fields=from,picture,full_picture,message,reactions.type(LIKE).summary(total_count).as(like),reactions.type(LOVE).summary(true).as(love),reactions.type(HAHA).summary(total_count).as(haha),reactions.type(SAD).summary(total_count).as(sad),reactions.type(ANGRY).summary(total_count).as(angry),reactions.type(WOW).summary(total_count).as(wow)', function (res) {
                 if(!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
                     return;
                 }
-                getReactions(res.data).then(result => {
-                    resolve(result);
-                })
+                resolve(res.data);
 
             });
         });
@@ -52,6 +61,6 @@ function getPosts() {
 
 module.exports = {
     getPosts,
-    getReactions
+    searchUser
 
 };

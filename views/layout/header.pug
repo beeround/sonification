@@ -1,38 +1,28 @@
 header
-  .navbar.navbar-default.navbar-fixed-top
-    .container
-      .navbar-header
-        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-
-
-      .collapse.navbar-collapse
-        ul.nav.navbar-nav
-          //if !user
-            li(class=(title == 'Home') ? 'active' : undefined)
-              a(href='/') Home
-          if user
-            li(class=(title == 'Dashboard') ? 'active' : undefined)
-              a(href='/app') Dashboard
+  nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+    button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    a.navbar-brand(href='/') SocialSound
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav
+        if user
+          li.nav-item(class=(title == 'Dashboard') ? 'active' : undefined)
+            a.nav-link(href='/app')
+              | Dashboard
 
 
 
-        ul.nav.navbar-nav.navbar-right
-          if user
-            li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
-              a.dropdown-toggle(href='#', data-toggle='dropdown')
-                if user.profile.picture
-                  img.photo(src=user.profile.picture)
-                else
-                  img(src=user.gravatar(60))
-                span= user.profile.name || user.email || user.id
-                i.caret
-              ul.dropdown-menu
-                li
-                  a(href='/account') My Account
-                li.divider
-                li
-                  a(href='/logout') Logout
+      ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
+        if user
+          li.user.pull-xs-right.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              if user.profile.picture
+                img.photo(src=user.profile.picture)
+              else
+                img(src=user.gravatar(60))
+              span= user.profile.name || user.email || user.id
+              i.caret
+            .dropdown-menu
+              a.dropdown-item(href='/account') My Account
+              span.divider
+              a.dropdown-item(href='/logout') Logout

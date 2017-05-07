@@ -5,14 +5,14 @@ const fb = require('../modules/fb');
 
 router.get('/', function(req, res) {
 
-    res.render('index', { title: 'Hey', message: 'Hello there!'});
+    res.render('index', { title: 'Home', message: 'Hello there!'});
 });
 router.get('/imprint', function(req, res) {
-    res.render('imprint', { title: 'Hey', message: 'Hello there!'});
+    res.render('imprint', { title: 'Imprint', message: 'Hello there!'});
 });
 
 router.get('/dashboard', function(req, res) {
-    res.render('app/index', { title: 'Hey', message: 'Hello there!'});
+    res.render('app/index', { title: 'Dashboard', message: 'Hello there!'});
 });
 
 router.get('/facebook', function(req, res) {

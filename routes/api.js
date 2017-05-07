@@ -5,8 +5,29 @@ const fb = require('../modules/fb');
 
 
 router.get('/get/fb/posts', function(req, res) {
-    fb.getPosts().then(result => {
+    fb.getPosts('113878732017445').then(result => {
         res.status(200).json(result)
+    });
+});
+
+router.post('/post/fb/posts', function(req, res) {
+
+    fb.getPosts(req.body.id).then(result => {
+        res.status(200).json(result)
+    });
+});
+
+
+router.get('/get/fb/search', function(req, res) {
+    fb.searchUser().then(result => {
+        res.status(200).json(result)
+    });
+});
+
+router.post('/post/fb/search', function(req, res) {
+
+    fb.searchUser(req.body.query).then(result => {
+        res.status(200).json(result.data)
     });
 });
 

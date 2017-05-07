@@ -1,2 +1,62 @@
 h1 Dashboard
-span.btn.btn-empty(ng-click="goToCompare()") Go To Compare
+
+.section(ng-controller="fbCtrl")
+
+    .row
+        .col-md-12
+            form(ng-submit="searchUser()")
+                .row
+                    .col-md-10
+                        .form-group
+                            input.form-control(type='text', required, ng-model="query.name" placeholder='Facebook page name')
+                    .col-md-2
+                        button.btn.btn-primary(type='submit') search
+
+        .col-md-12(ng-show="searchResults")
+            h3 Search Results
+            span(ng-show="currentWindow != 'SearchList'", ng-click="showWindow('SearchList')") Show search results
+            .search(ng-show="currentWindow == 'SearchList'")
+                .searchResult(ng-repeat="search in searchResults")
+                    .card.card-inverse(style='background-color: #333; border-color: #333;')
+                        .card-block
+                            h3.card-title
+                                img.profile(ng-src="{{search.picture.data.url}}")
+                                | {{search.name}}
+                            p.card-text {{search.category}}
+                            span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id)") show feed
+
+
+
+        .row.feed(ng-show="currentWindow == 'Feed'")
+            .col-md-6
+                .post(ng-repeat="fb in fbData")
+                    p {{fb.message}}
+                    img(ng-src="{{fb.full_picture}}")
+
+                    .row
+                        .col
+                            h5 Like
+                            p {{fb.like.summary.total_count}}
+
+                        .col
+                            h5 Love
+                            p {{fb.love.summary.total_count}}
+
+                        .col
+                            h5 Haha
+                            p {{fb.haha.summary.total_count}}
+
+                        .col
+                            h5 Sad
+                            p {{fb.sad.summary.total_count}}
+
+                        .col
+                            h5 Angry
+                            p {{fb.angry.summary.total_count}}
+
+                    hr
+            .col-md-6
+
+        .col-md-12(style="margin-top:500px")
+            span.btn.btn-empty(ng-click="goToCompare()") Verlinkung zur Charttestseite
+
