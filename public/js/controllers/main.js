@@ -10,7 +10,6 @@ angular.module('sonificationAPP.controllers.main', [])
     .controller('fbCtrl', function ($scope, $http) {
 
         $scope.searchUser = function () {
-
             $scope.currentWindow = "SearchList";
 
             $scope.searchResult = undefined;
@@ -21,7 +20,6 @@ angular.module('sonificationAPP.controllers.main', [])
 
             $http.post('/api/post/fb/search', data ).then(results => {
                 $scope.searchResults = results.data;
-                console.log(results.data)
             });
 
         };
