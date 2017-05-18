@@ -15,6 +15,10 @@ router.get('/dashboard', function(req, res) {
     res.render('app/index', { title: 'Dashboard', message: 'Hello there!'});
 });
 
+router.get('/search', function(req, res) {
+    res.render('app/index', { title: 'Search', message: 'Hello there!'});
+});
+
 router.get('/facebook', function(req, res) {
     fb.getPosts().then(result => {
         console.log(result);

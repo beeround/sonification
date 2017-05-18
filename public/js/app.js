@@ -7,8 +7,8 @@ config(function ($routeProvider, $locationProvider ) {
     when('/app', {
         templateUrl: '/app/partials/dashboard'
     }).
-    when('/app/compare', {
-        templateUrl: '/app/partials/compare'
+    when('/app/search', {
+        templateUrl: '/app/partials/search'
 
     });
 
