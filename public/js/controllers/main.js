@@ -18,10 +18,27 @@ angular.module('sonificationAPP.controllers.main', [])
     
     .controller('fbCtrl', function ($scope, $http, $timeout) {
 
+        $scope.currentDate;
+
         $scope.datePicker = {
             date : {startDate: null, endDate: null}
 
         };
+        $scope.opts = {
+            applyClass: 'btn-green',
+            locale: {
+                applyLabel: "Apply",
+                fromLabel: "From",
+                format: "DD-MMM-YY", //will give you 2017-01-06
+                toLabel: "To",
+                cancelLabel: 'Cancel',
+                customRangeLabel: 'Custom range'
+            },
+            ranges: {
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()]
+            }
+        }
 
         $scope.$on('DrawCharts', function(){
             $timeout(function () {
@@ -32,8 +49,6 @@ angular.module('sonificationAPP.controllers.main', [])
 
         });
 
-
-        $scope.labels =["Love", "Haha", "Wow", "Sad", "Angry"];
 
         $scope.drawChart = function (love, haha, wow, sad, angry, id) {
 
@@ -84,12 +99,18 @@ angular.module('sonificationAPP.controllers.main', [])
         };
 
         $scope.changeFeed = function (fbID) {
+            $scope.currentDate = {
+                start: moment($scope.datePicker.date.startDate).format("DD.MM.YYYY"),
+                end: moment($scope.datePicker.date.endDate).add(1, 'days').format("DD.MM.YYYY")
+            };
 
             $scope.currentWindow = "Feed";
             $scope.fbData = undefined;
 
             let data = {
-                id : fbID
+                id : fbID,
+                start: $scope.currentDate.start,
+                end: $scope.currentDate.end
             };
 
             $http.post('/api/post/fb/posts', data ).then(posts => {
