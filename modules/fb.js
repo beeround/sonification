@@ -17,7 +17,7 @@ function searchUser(query) {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api('/search?q='+query+'&type=page&fields=picture,name,description,category', function (res) {
+            FB.api('/search?q='+query+'&type=page&fields=picture,name,description,category,fan_count', function (res) {
                 if(!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
                     return;

@@ -24,6 +24,8 @@ h1 Dashboard
                                 img.profile(ng-src="{{search.picture.data.url}}")
                                 | {{search.name}}
                             p.card-text {{search.category}}
+                            p.card-text {{search.fan_count}} Likes
+
                             span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id)") show feed
 
 
@@ -35,9 +37,6 @@ h1 Dashboard
                     img(ng-src="{{fb.full_picture}}")
 
                     .row
-                        .col
-                            h5 Like
-                            p {{fb.like.summary.total_count}}
 
                         .col
                             h5 Love
