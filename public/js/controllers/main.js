@@ -5,7 +5,7 @@ angular.module('sonificationAPP.controllers.main', [])
     .directive('emitLastRepeaterElement', function() {
         return function(scope) {
             if (scope.$last){
-                //scope.$emit('DrawCharts');
+                scope.$emit('DrawCharts');
             }
         };
     })
@@ -17,8 +17,6 @@ angular.module('sonificationAPP.controllers.main', [])
     })
     
     .controller('fbCtrl', function ($scope, $http, $timeout) {
-
-        $scope.currentDate;
 
         $scope.datePicker = {
             date : {startDate: null, endDate: null}
