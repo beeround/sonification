@@ -46,7 +46,7 @@ function getPosts(id) {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api(pageId+'/posts?fields=from,picture,full_picture,message,reactions.type(LIKE).summary(total_count).as(like),reactions.type(LOVE).summary(true).as(love),reactions.type(HAHA).summary(total_count).as(haha),reactions.type(SAD).summary(total_count).as(sad),reactions.type(ANGRY).summary(total_count).as(angry),reactions.type(WOW).summary(total_count).as(wow)', function (res) {
+            FB.api(pageId+'/posts?fields=from,picture,created_time,full_picture,message,reactions.type(LIKE).summary(total_count).as(like),reactions.type(LOVE).summary(true).as(love),reactions.type(HAHA).summary(total_count).as(haha),reactions.type(SAD).summary(total_count).as(sad),reactions.type(ANGRY).summary(total_count).as(angry),reactions.type(WOW).summary(total_count).as(wow)', function (res) {
                 if(!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
                     return;

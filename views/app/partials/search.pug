@@ -30,7 +30,7 @@ h1 Suche
 
 
 
-        .row.feed(ng-show="currentWindow == 'Feed'",ng-repeat=" fb in fbData" )
+        .row.feed(ng-show="currentWindow == 'Feed'",ng-repeat=" fb in fbData", emit-last-repeater-element )
             .col-md-6
                 .post
                     p {{fb.message}}

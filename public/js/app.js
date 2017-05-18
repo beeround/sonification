@@ -1,7 +1,7 @@
 'use strict';
-angular.module('sonificationAPP',['ngRoute', 'sonificationAPP.controllers.main', 'sonificationAPP.controllers.header']).
+angular.module('sonificationAPP',['ngRoute', 'sonificationAPP.controllers.main', 'sonificationAPP.controllers.header'])
 
-config(function ($routeProvider, $locationProvider ) {
+    .config(function ($routeProvider, $locationProvider ) {
 
     $routeProvider.
     when('/app', {
