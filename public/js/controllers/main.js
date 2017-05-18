@@ -9,6 +9,46 @@ angular.module('sonificationAPP.controllers.main', [])
     
     .controller('fbCtrl', function ($scope, $http) {
 
+        $scope.drawChart = function (love, haha, wow, sad, angry) {
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ["LOVE", "HAHA", "WOW", "SAD", "ANGRY"],
+                    datasets: [
+                        {
+                            label: "Post1",
+                            backgroundColor:[
+                                "#ffa3d3",
+                                "#fffd00",
+                                "#38dacd",
+                                "#949494",
+                                "#9a0400"
+
+                            ],
+                            borderColor: "rgba(179,181,198,1)",
+                            pointBackgroundColor: "rgba(179,181,198,1)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgba(179,181,198,1)",
+                            data: [love, haha, wow, sad, angry]
+                        },
+
+
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
         $scope.searchUser = function () {
             $scope.currentWindow = "SearchList";
 
@@ -89,5 +129,7 @@ angular.module('sonificationAPP.controllers.main', [])
                 }
             });
         }
+
+
     });
 
