@@ -34,6 +34,7 @@ h1 Suche
             .col-md-6
                 .post
                     p {{fb.message}}
+                    a(ng-href="{{fb.permalink_url}}", target="blank") Permanentlink
                     img(ng-src="{{fb.full_picture}}")
 
                     .row
@@ -56,10 +57,11 @@ h1 Suche
                         .col
                             h5 Angry
                             p {{fb.angry.summary.total_count}}
-                    a.btn.btn-danger(ng-click="drawChart(fb.love.summary.total_count,fb.haha.summary.total_count,fb.wow.summary.total_count,fb.sad.summary.total_count,fb.angry.summary.total_count, $index)") show Chart
+                    a.btn.btn-danger
                     hr
             .col-md-6
-                div
-                    canvas(ng-attr-id="myChart{{$index}}")
+                canvas#polar-area.chart.chart-polar-area(chart-data="[1,2,3,4,5]", chart-labels='labels')
+                    chart-series="series"
+
 
 

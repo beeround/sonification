@@ -5,7 +5,7 @@ angular.module('sonificationAPP.controllers.main', [])
     .directive('emitLastRepeaterElement', function() {
         return function(scope) {
             if (scope.$last){
-                scope.$emit('DrawCharts');
+                //scope.$emit('DrawCharts');
             }
         };
     })
@@ -28,6 +28,7 @@ angular.module('sonificationAPP.controllers.main', [])
         });
 
 
+        $scope.labels =["Love", "Haha", "Wow", "Sad", "Angry"];
 
         $scope.drawChart = function (love, haha, wow, sad, angry, id) {
 
