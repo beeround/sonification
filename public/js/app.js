@@ -1,5 +1,5 @@
 'use strict';
-angular.module('sonificationAPP',['ngRoute', 'sonificationAPP.controllers.main', 'sonificationAPP.controllers.header', 'chart.js'])
+angular.module('sonificationAPP',['daterangepicker','ngRoute', 'sonificationAPP.controllers.main', 'sonificationAPP.controllers.header', 'chart.js'])
 
     .config(function ($routeProvider, $locationProvider ) {
 

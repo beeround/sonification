@@ -18,6 +18,11 @@ angular.module('sonificationAPP.controllers.main', [])
     
     .controller('fbCtrl', function ($scope, $http, $timeout) {
 
+        $scope.datePicker = {
+            date : {startDate: null, endDate: null}
+
+        };
+
         $scope.$on('DrawCharts', function(){
             $timeout(function () {
                 $scope.fbData.map((fb, index) => {

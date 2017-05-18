@@ -26,6 +26,8 @@ h1 Suche
                             p.card-text {{search.category}}
                             p.card-text {{search.fan_count}} Likes
 
+                            input.form-control.date-picker(date-range-picker='', type='text', ng-model='datePicker.date')
+
                             span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id)") show feed
 
 

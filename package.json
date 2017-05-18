@@ -43,6 +43,7 @@
     "mongoose": "^4.6.6",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
+    "ng-bs-daterangepicker": "0.0.3",
     "node-iptc": "^1.0.4",
     "node-sass": "^4.5.2",
     "node-sass-middleware": "^0.9.8",
