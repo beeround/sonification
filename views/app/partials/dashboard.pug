@@ -30,9 +30,9 @@ h1 Dashboard
 
 
 
-        .row.feed(ng-show="currentWindow == 'Feed'")
+        .row.feed(ng-show="currentWindow == 'Feed'",ng-repeat=" fb in fbData" )
             .col-md-6
-                .post(ng-repeat="fb in fbData")
+                .post
                     p {{fb.message}}
                     img(ng-src="{{fb.full_picture}}")
 
@@ -56,12 +56,10 @@ h1 Dashboard
                         .col
                             h5 Angry
                             p {{fb.angry.summary.total_count}}
-                    a.btn.btn-danger(ng-click="drawChart(fb.love.summary.total_count,fb.haha.summary.total_count,fb.wow.summary.total_count,fb.sad.summary.total_count,fb.angry.summary.total_count)") show Chart
+                    a.btn.btn-danger(ng-click="drawChart(fb.love.summary.total_count,fb.haha.summary.total_count,fb.wow.summary.total_count,fb.sad.summary.total_count,fb.angry.summary.total_count, $index)") show Chart
                     hr
             .col-md-6
-                div(style=" width:500px; height:500px")
-                    canvas#myChart
+                div
+                    canvas(ng-attr-id="myChart{{$index}}")
 
-        .col-md-12(style="margin-top:500px")
-            span.btn.btn-empty(ng-click="goToCompare()") Verlinkung zur Charttestseite
 
