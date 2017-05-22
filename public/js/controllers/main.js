@@ -15,7 +15,31 @@ angular.module('sonificationAPP.controllers.main', [])
             $location.path('/app/compare');
         }
     })
-    
+
+    .controller('dashboardCtrl', function ($scope, $http, $timeout) {
+        $http.get('/api/get/fb/favorite').then(results => {
+            $scope.favData = results;
+            $scope.allReactions = {
+                total_love : 0,
+                total_haha : 0,
+                total_wow : 0,
+                total_sad : 0,
+                total_angry : 0
+            };
+            function getAllReactions ( posts ) {
+                posts.data.map( data => {
+                    $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
+                    $scope.allReactions.total_haha = $scope.allReactions.total_haha +  data.haha.summary.total_count;
+                    $scope.allReactions.total_wow = $scope.allReactions.total_wow +  data.wow.summary.total_count;
+                    $scope.allReactions.total_sad = $scope.allReactions.total_sad +  data.sad.summary.total_count;
+                    $scope.allReactions.total_angry = $scope.allReactions.total_angry +  data.angry.summary.total_count;
+                })
+            }
+            getAllReactions($scope.favData.data.posts);
+        });
+
+    })
+
     .controller('fbCtrl', function ($scope, $http, $timeout) {
 
         $scope.limit = 10;
