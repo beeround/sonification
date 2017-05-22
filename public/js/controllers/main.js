@@ -16,11 +16,6 @@ angular.module('sonificationAPP.controllers.main', [])
         };
 
 
-        $rootScope.user = {
-            id : $(".uid").text()
-        };
-
-
     })
 
     .controller('dashboardCtrl', function ($scope, $http, $timeout) {
@@ -234,9 +229,6 @@ angular.module('sonificationAPP.controllers.main', [])
                     fbID : fbID,
                     name : fbName,
                 },
-                user : {
-                    id: $rootScope.user.id
-                }
 
             };
 

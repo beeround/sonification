@@ -392,8 +392,9 @@ exports.getSearchActivity = (req, res) => {
 
 exports.postSearchActivity = (req, res) => {
   let search = req.body.search;
+  console.log(req.user._id)
 
-    User.findById(req.user.id, (err, user) => {
+    User.findById(req.user._id, (err, user) => {
 
         if (err) { return next(err); }
 
