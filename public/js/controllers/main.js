@@ -133,7 +133,6 @@ angular.module('sonificationAPP.controllers.main', [])
 
     $scope.sonify = function(love, haha, wow, sad, angry) {
       var velocity = reactionsInPercent(love, haha, wow, sad, angry);
-      console.log(reactionTrend(love, haha, wow, sad, angry))
       var sonifyLove1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
       var sonifyHaha1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
       var sonifyWow1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
