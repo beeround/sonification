@@ -18,10 +18,20 @@ angular.module('sonificationAPP.controllers.main', [])
     
     .controller('fbCtrl', function ($scope, $http, $timeout) {
 
-        $scope.datePicker = {
-            date : {startDate: null, endDate: null}
+        $scope.limit = 10;
 
+        $scope.datePicker = [];
+
+        $scope.datePicker.date = {
+            startDate: moment().subtract(6, 'days'),
+            endDate: moment()
         };
+
+        $scope.currentDate = {
+            start: moment().format("DD.MM.YYYY"),
+            end: ""
+        };
+
         $scope.opts = {
             applyClass: 'btn-green',
             locale: {
@@ -35,8 +45,13 @@ angular.module('sonificationAPP.controllers.main', [])
             ranges: {
                 'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                 'Last 30 Days': [moment().subtract(29, 'days'), moment()]
+            },
+            eventHandlers: {
+                'apply.daterangepicker': function(ev, picker) {
+                    $scope.changeFeed($scope.currentFBId);
+                }
             }
-        }
+        };
 
         $scope.$on('DrawCharts', function(){
             $timeout(function () {
@@ -97,9 +112,11 @@ angular.module('sonificationAPP.controllers.main', [])
         };
 
         $scope.changeFeed = function (fbID) {
+            $scope.currentFBId = fbID;
+
             $scope.currentDate = {
                 start: moment($scope.datePicker.date.startDate).format("DD.MM.YYYY"),
-                end: moment($scope.datePicker.date.endDate).add(1, 'days').format("DD.MM.YYYY")
+                end: moment($scope.datePicker.date.endDate).format("DD.MM.YYYY")
             };
 
             $scope.currentWindow = "Feed";
@@ -108,13 +125,18 @@ angular.module('sonificationAPP.controllers.main', [])
             let data = {
                 id : fbID,
                 start: $scope.currentDate.start,
-                end: $scope.currentDate.end
+                end: $scope.currentDate.end,
+                limit: $scope.limit
             };
 
             $http.post('/api/post/fb/posts', data ).then(posts => {
                 $scope.fbData = posts.data;
-
             });
+        };
+
+        $scope.setLimit = function (limit) {
+            $scope.limit = limit;
+            $scope.changeFeed($scope.currentFBId);
 
         };
 

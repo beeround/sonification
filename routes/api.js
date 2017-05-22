@@ -12,7 +12,7 @@ router.get('/get/fb/posts', function(req, res) {
 
 router.post('/post/fb/posts', function(req, res) {
 
-    fb.getPosts(req.body.id, req.body.start, req.body.end).then(result => {
+    fb.getPosts(req.body.id, req.body.start, req.body.end, req.body.limit).then(result => {
         res.status(200).json(result)
     });
 });

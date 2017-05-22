@@ -29,7 +29,7 @@ function searchUser(query) {
 
 }
 
-function getPosts(id, start, end) {
+function getPosts(id, start, end, limit) {
     return new Promise((resolve, reject) => {
 
         const pageId = id;
@@ -46,7 +46,7 @@ function getPosts(id, start, end) {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api(pageId+'/posts?fields=from,picture,full_picture,message,reactions.type(LIKE).summary(total_count).as(like),reactions.type(LOVE).summary(true).as(love),reactions.type(HAHA).summary(total_count).as(haha),reactions.type(SAD).summary(total_count).as(sad),reactions.type(ANGRY).summary(total_count).as(angry),reactions.type(WOW).summary(total_count).as(wow),permalink_url,created_time&since='+start+'&until='+end, function (res) {
+            FB.api(pageId+'/posts?limit='+limit+'&fields=from,picture,full_picture,message,reactions.type(LIKE).summary(total_count).as(like),reactions.type(LOVE).summary(true).as(love),reactions.type(HAHA).summary(total_count).as(haha),reactions.type(SAD).summary(total_count).as(sad),reactions.type(ANGRY).summary(total_count).as(angry),reactions.type(WOW).summary(total_count).as(wow),permalink_url,created_time&since='+start+'&until='+end, function (res) {
                 if(!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
                     return;

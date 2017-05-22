@@ -80,3 +80,13 @@ header {
   }
 }
 
+.limit {
+  .active {
+    font-weight: bold;
+  }
+  span {
+    color: white;
+    cursor: pointer;
+    margin-right: 15px;
+  }
+}

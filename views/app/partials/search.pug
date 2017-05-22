@@ -7,7 +7,7 @@ h1 Suche
 
             form(ng-submit="searchUser()")
                 .row
-                    .col-md-10
+                    .col-md-5
                         .form-group
                             input.form-control(type='text', required, ng-model="query.name" placeholder='Facebook page name')
                     .col-md-2
@@ -26,14 +26,27 @@ h1 Suche
                             p.card-text {{search.category}}
                             p.card-text {{search.fan_count}} Likes
 
-                            input.form-control.date-picker(date-range-picker type='text', ng-model='datePicker.date', options="opts", placeholder="Select date range")
 
                             span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id)") show feed
 
 
-        .feed(ng-show="currentWindow == 'Feed'")
-            h4 Start: {{currentDate.start}} - End: {{currentDate.end}}
-            .row(ng-repeat=" fb in fbData", emit-last-repeater-element )
+    .feed(ng-show="currentWindow == 'Feed'")
+        h4 Start: {{currentDate.start}} - End: {{currentDate.end}}
+        .row
+            .col-md-6
+                .form-group
+                    input.form-control.date-picker(date-range-picker type='text', ng-model='datePicker.date', options="opts", placeholder="Select date range")
+
+            .col-md-6.limit
+                span Limit:
+                span(ng-click="setLimit(10)", ng-class="{'active': limit == 10}") 10
+                span(ng-click="setLimit(25)", ng-class="{'active': limit == 25}") 25
+                span(ng-click="setLimit(50)", ng-class="{'active': limit == 50}") 50
+                span(ng-click="setLimit(100)", ng-class="{'active': limit == 100}") 100
+
+
+
+    .row(ng-repeat=" fb in fbData", emit-last-repeater-element )
                 .col-md-6
                     .post
                         p.small {{fb.created_time | date:'dd.MM.yyyy - HH:mm'}} Uhr
