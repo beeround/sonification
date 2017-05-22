@@ -1,4 +1,29 @@
 div(ng-controller="dashboardCtrl")
     h1 Dashboard
     .div
-        p {{allReactions}}
+        //hier durchschleifen
+        img(ng-src="{{favData.data.picture.data.url}}" width="100px" height="100px")
+        p {{favData.data.name}}
+        p.icon.like {{favData.data.fan_count}}
+        p Letzten 50 Posts
+        ul
+            li.icon.love {{allReactions.total_love}}
+            li.icon.haha {{allReactions.total_haha}}
+            li.icon.wow {{allReactions.total_wow}}
+            li.icon.sad {{allReactions.total_sad}}
+            li.icon.angry {{allReactions.total_angry}}
+        p Letzten 5 Postings
+        ul
+            li.icon(ng-class="favData.data.posts.data[0].total_reaction") {{favData.data.posts.data[0].message}}
+            li.icon(ng-class="favData.data.posts.data[1].total_reaction") {{favData.data.posts.data[1].message}}
+            li.icon(ng-class="favData.data.posts.data[2].total_reaction") {{favData.data.posts.data[2].message}}
+            li.icon(ng-class="favData.data.posts.data[3].total_reaction") {{favData.data.posts.data[3].message}}
+            li.icon(ng-class="favData.data.posts.data[4].total_reaction") {{favData.data.posts.data[4].message}}
+
+
+
+        canvas(ng-attr-id="myChart0")
+
+
+
+

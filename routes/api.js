@@ -25,10 +25,12 @@ router.get('/get/fb/search', function(req, res) {
 });
 
 router.get('/get/fb/favorite', function(req, res) {
-    fb.getFavData(751543424967890).then(result => {
+    fb.getFavData(176063032413299).then(result => {
         res.status(200).json(result)
     });
 });
+// 540404695989874 AFD
+// 176063032413299 Leo Messi
 
 
 router.get('/get/fb/search', function(req, res) {

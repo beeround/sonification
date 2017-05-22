@@ -16,6 +16,39 @@ angular.module('sonificationAPP.controllers.main', [])
         };
 
 
+
+        $scope.drawChart = function (love, haha, wow, sad, angry, id) {
+
+            let ctx = document.getElementById("myChart"+id);
+            let myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ["LOVE", "HAHA", "WOW", "SAD", "ANGRY"],
+                    datasets: [
+                        {
+                            label: "Post1",
+                            backgroundColor:[
+                                "#ffa3d3",
+                                "#fffd00",
+                                "#38dacd",
+                                "#949494",
+                                "#9a0400"
+
+                            ],
+                            borderColor: "rgba(179,181,198,1)",
+                            pointBackgroundColor: "rgba(179,181,198,1)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgba(179,181,198,1)",
+                            data: [love, haha, wow, sad, angry]
+                        },
+
+
+                    ]
+                },
+
+            });
+        }
     })
 
     .controller('dashboardCtrl', function ($scope, $http, $timeout) {
@@ -28,25 +61,27 @@ angular.module('sonificationAPP.controllers.main', [])
                 total_sad : 0,
                 total_angry : 0
             };
+
             function getAllReactions ( posts ) {
-                posts.data.map( data => {
+                posts.data.map( (data, index)  => {
+
                     $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
                     $scope.allReactions.total_haha = $scope.allReactions.total_haha +  data.haha.summary.total_count;
                     $scope.allReactions.total_wow = $scope.allReactions.total_wow +  data.wow.summary.total_count;
                     $scope.allReactions.total_sad = $scope.allReactions.total_sad +  data.sad.summary.total_count;
                     $scope.allReactions.total_angry = $scope.allReactions.total_angry +  data.angry.summary.total_count;
+                    data.total_reaction = reactionTrend(data.love.summary.total_count, data.haha.summary.total_count, data.wow.summary.total_count, data.sad.summary.total_count, data.angry.summary.total_count);
+                    $scope.favData.data.posts.data[index].total_reaction = data.total_reaction;
+                    console.log($scope.favData.data.posts.data[index].total_reaction + index)
                 })
             }
             getAllReactions($scope.favData.data.posts);
+            $scope.drawChart($scope.allReactions.total_love, $scope.allReactions.total_haha, $scope.allReactions.total_wow, $scope.allReactions.total_sad, $scope.allReactions.total_angry, 0);
         });
 
     })
 
-  .controller('fbCtrl', function($scope, $http, $timeout, $rootScope) {
-
-        $http.get('/user/activity').then(results => {
-            $scope.lastSearchActivity = results.data;
-        })
+    .controller('fbCtrl', function ($scope, $http, $timeout) {
 
         $scope.limit = 10;
 
@@ -93,38 +128,7 @@ angular.module('sonificationAPP.controllers.main', [])
         });
 
 
-        $scope.drawChart = function (love, haha, wow, sad, angry, id) {
 
-            let ctx = document.getElementById("myChart"+id);
-            let myChart = new Chart(ctx, {
-                type: 'polarArea',
-                data: {
-                    labels: ["LOVE", "HAHA", "WOW", "SAD", "ANGRY"],
-                    datasets: [
-                        {
-                            label: "Post1",
-                            backgroundColor:[
-                                "#ffa3d3",
-                                "#fffd00",
-                                "#38dacd",
-                                "#949494",
-                                "#9a0400"
-
-                            ],
-                            borderColor: "rgba(179,181,198,1)",
-                            pointBackgroundColor: "rgba(179,181,198,1)",
-                            pointBorderColor: "#fff",
-                            pointHoverBackgroundColor: "#fff",
-                            pointHoverBorderColor: "rgba(179,181,198,1)",
-                            data: [love, haha, wow, sad, angry]
-                        },
-
-
-                    ]
-                },
-
-            });
-        }
 
     $scope.sonify = function(love, haha, wow, sad, angry) {
       var velocity = reactionsInPercent(love, haha, wow, sad, angry);

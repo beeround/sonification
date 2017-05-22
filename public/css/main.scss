@@ -8,7 +8,7 @@
 html, body {
   background-color: #34495e;
 }
-h1,h2,h3,h4,h5,p {
+h1,h2,h3,h4,h5,p,li {
   color: $white;
 
 }
@@ -95,4 +95,37 @@ header {
     cursor: pointer;
     margin-right: 15px;
   }
+}
+
+ul{
+    padding-left: 0;
+}
+
+// Icons
+
+.icon{
+  background-size: contain;
+  list-style: none;
+  background-position: left center;
+  padding:0 0 0 30px;
+  margin: 10px 0;
+  background-repeat: no-repeat;
+}
+.like{
+  background-image: url("../img/icons/facebook-like.svg");
+}
+.love{
+  background-image: url("../img/icons/facebook-love.svg");
+}
+.haha{
+  background-image: url("../img/icons/facebook-haha.svg");
+}
+.wow{
+  background-image: url("../img/icons/facebook-wow.svg");
+}
+.sad{
+  background-image: url("../img/icons/facebook-sad.svg");
+}
+.angry{
+  background-image: url("../img/icons/facebook-angry.svg");
 }

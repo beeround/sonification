@@ -79,7 +79,7 @@ function getFavData(id) {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api(pageId+'?fields=name,picture{url},posts.limit(50){reactions.type(LOVE).limit(0).summary(true).as(love),reactions.type(HAHA).limit(0).summary(total_count).as(haha),reactions.type(SAD).limit(0).summary(total_count).as(sad),reactions.type(ANGRY).limit(0).summary(total_count).as(angry),reactions.type(WOW).limit(0).summary(total_count).as(wow),created_time}', function (res) {
+            FB.api(pageId+'?fields=name,fan_count,picture{url},posts.limit(50){message,reactions.type(LOVE).limit(0).summary(true).as(love),reactions.type(HAHA).limit(0).summary(total_count).as(haha),reactions.type(SAD).limit(0).summary(total_count).as(sad),reactions.type(ANGRY).limit(0).summary(total_count).as(angry),reactions.type(WOW).limit(0).summary(total_count).as(wow),created_time}', function (res) {
                 //
                 console.log(res);
                 if(!res || res.error) {
