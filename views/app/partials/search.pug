@@ -13,6 +13,13 @@ h1 Suche
                     .col-md-2
                         button.btn.btn-primary(type='submit') search
 
+        .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
+            h5 Letzte Suchanfragen
+            .activity(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")
+                p
+                    | {{activity.name}}
+                    i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}
+
         .col-md-12(ng-show="searchResults")
             h3 Search Results
             span.btn.btn-sm.btn-primary(ng-show="currentWindow != 'SearchList'", ng-click="showWindow('SearchList')") Show search results
@@ -27,7 +34,7 @@ h1 Suche
                             p.card-text {{search.fan_count}} Likes
 
 
-                            span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id)") show feed
+                            span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, search.name)") show feed
 
 
     .feed(ng-show="currentWindow == 'Feed'")
@@ -38,6 +45,7 @@ h1 Suche
                     input.form-control.date-picker(date-range-picker type='text', ng-model='datePicker.date', options="opts", placeholder="Select date range")
 
             .col-md-6.limit
+
                 span Limit:
                 span(ng-click="setLimit(10)", ng-class="{'active': limit == 10}") 10
                 span(ng-click="setLimit(25)", ng-class="{'active': limit == 25}") 25

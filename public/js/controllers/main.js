@@ -2,60 +2,70 @@
 angular.module('sonificationAPP.controllers.main', [])
 
 
-  .directive('emitLastRepeaterElement', function() {
-    return function(scope) {
-      if (scope.$last) {
-        scope.$emit('DrawCharts');
-      }
-    };
-  })
+    .directive('emitLastRepeaterElement', function() {
+        return function(scope) {
+            if (scope.$last){
+                scope.$emit('DrawCharts');
+            }
+        };
+    })
 
-  .controller('mainCtrl', function($scope, $http, $location) {
-    $scope.goToCompare = function() {
-      $location.path('/app/compare');
-    }
-  })
+    .controller('mainCtrl', function ($scope, $http, $location, $rootScope) {
+        $scope.goToCompare = function () {
+            $location.path('/app/compare');
+        };
 
-  .controller('dashboardCtrl', function($scope, $http, $timeout) {
-    $http.get('/api/get/fb/favorite').then(results => {
-      $scope.favData = results;
-      $scope.allReactions = {
-        total_love: 0,
-        total_haha: 0,
-        total_wow: 0,
-        total_sad: 0,
-        total_angry: 0
-      };
 
-      function getAllReactions(posts) {
-        posts.data.map(data => {
-          $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
-          $scope.allReactions.total_haha = $scope.allReactions.total_haha + data.haha.summary.total_count;
-          $scope.allReactions.total_wow = $scope.allReactions.total_wow + data.wow.summary.total_count;
-          $scope.allReactions.total_sad = $scope.allReactions.total_sad + data.sad.summary.total_count;
-          $scope.allReactions.total_angry = $scope.allReactions.total_angry + data.angry.summary.total_count;
+        $rootScope.user = {
+            id : $(".uid").text()
+        };
+
+
+    })
+
+    .controller('dashboardCtrl', function ($scope, $http, $timeout) {
+        $http.get('/api/get/fb/favorite').then(results => {
+            $scope.favData = results;
+            $scope.allReactions = {
+                total_love : 0,
+                total_haha : 0,
+                total_wow : 0,
+                total_sad : 0,
+                total_angry : 0
+            };
+            function getAllReactions ( posts ) {
+                posts.data.map( data => {
+                    $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
+                    $scope.allReactions.total_haha = $scope.allReactions.total_haha +  data.haha.summary.total_count;
+                    $scope.allReactions.total_wow = $scope.allReactions.total_wow +  data.wow.summary.total_count;
+                    $scope.allReactions.total_sad = $scope.allReactions.total_sad +  data.sad.summary.total_count;
+                    $scope.allReactions.total_angry = $scope.allReactions.total_angry +  data.angry.summary.total_count;
+                })
+            }
+            getAllReactions($scope.favData.data.posts);
+        });
+
+    })
+
+  .controller('fbCtrl', function($scope, $http, $timeout, $rootScope) {
+
+        $http.get('/user/activity').then(results => {
+            $scope.lastSearchActivity = results.data;
         })
-      }
-      getAllReactions($scope.favData.data.posts);
-    });
 
-  })
+        $scope.limit = 10;
 
-  .controller('fbCtrl', function($scope, $http, $timeout) {
+        $scope.datePicker = [];
 
-    $scope.limit = 10;
+        $scope.datePicker.date = {
+            startDate: moment().subtract(6, 'days'),
+            endDate: moment()
+        };
 
-    $scope.datePicker = [];
-
-    $scope.datePicker.date = {
-      startDate: moment().subtract(6, 'days'),
-      endDate: moment()
-    };
-
-    $scope.currentDate = {
-      start: moment().format("DD.MM.YYYY"),
-      end: ""
-    };
+        $scope.currentDate = {
+            start: moment().format("DD.MM.YYYY"),
+            end: ""
+        };
 
     $scope.opts = {
       applyClass: 'btn-green',
@@ -73,52 +83,53 @@ angular.module('sonificationAPP.controllers.main', [])
       },
       eventHandlers: {
         'apply.daterangepicker': function(ev, picker) {
-          $scope.changeFeed($scope.currentFBId);
+          $scope.changeFeed($scope.currentFB.id, $scope.currentFB.name);
         }
       }
     };
 
-    $scope.$on('DrawCharts', function() {
-      $timeout(function() {
-        $scope.fbData.map((fb, index) => {
-          $scope.drawChart(fb.love.summary.total_count, fb.haha.summary.total_count, fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count, index)
-        })
-      }, 0)
+        $scope.$on('DrawCharts', function(){
+            $timeout(function () {
+                $scope.fbData.map((fb, index) => {
+                    $scope.drawChart(fb.love.summary.total_count, fb.haha.summary.total_count, fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count, index)
+                })
+            },0)
 
-    });
-
-
-    $scope.drawChart = function(love, haha, wow, sad, angry, id) {
-
-      let ctx = document.getElementById("myChart" + id);
-      let myChart = new Chart(ctx, {
-        type: 'polarArea',
-        data: {
-          labels: ["LOVE", "HAHA", "WOW", "SAD", "ANGRY"],
-          datasets: [{
-              label: "Post1",
-              backgroundColor: [
-                "#ffa3d3",
-                "#fffd00",
-                "#38dacd",
-                "#949494",
-                "#9a0400"
-
-              ],
-              borderColor: "rgba(179,181,198,1)",
-              pointBackgroundColor: "rgba(179,181,198,1)",
-              pointBorderColor: "#fff",
-              pointHoverBackgroundColor: "#fff",
-              pointHoverBorderColor: "rgba(179,181,198,1)",
-              data: [love, haha, wow, sad, angry]
-            },
+        });
 
 
-          ]
-        },
+        $scope.drawChart = function (love, haha, wow, sad, angry, id) {
 
-      });
-    }
+            let ctx = document.getElementById("myChart"+id);
+            let myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ["LOVE", "HAHA", "WOW", "SAD", "ANGRY"],
+                    datasets: [
+                        {
+                            label: "Post1",
+                            backgroundColor:[
+                                "#ffa3d3",
+                                "#fffd00",
+                                "#38dacd",
+                                "#949494",
+                                "#9a0400"
+
+                            ],
+                            borderColor: "rgba(179,181,198,1)",
+                            pointBackgroundColor: "rgba(179,181,198,1)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgba(179,181,198,1)",
+                            data: [love, haha, wow, sad, angry]
+                        },
+
+
+                    ]
+                },
+
+            });
+        }
 
     $scope.sonify = function(love, haha, wow, sad, angry) {
       var velocity = reactionsInPercent(love, haha, wow, sad, angry);
@@ -180,50 +191,73 @@ angular.module('sonificationAPP.controllers.main', [])
     $scope.searchUser = function() {
       $scope.currentWindow = "SearchList";
 
-      $scope.searchResult = undefined;
+            $scope.searchResult = undefined;
 
-      let data = {
-        query: $scope.query.name,
-      };
+            let data = {
+                query : $scope.query.name,
+            };
 
-      $http.post('/api/post/fb/search', data).then(results => {
-        $scope.searchResults = results.data;
-      });
+            $http.post('/api/post/fb/search', data ).then(results => {
+                $scope.searchResults = results.data;
+            });
 
-    };
+        };
 
-    $scope.changeFeed = function(fbID) {
-      $scope.currentFBId = fbID;
+    $scope.changeFeed = function(fbID, fbName) {
 
-      $scope.currentDate = {
-        start: moment($scope.datePicker.date.startDate).format("DD.MM.YYYY"),
-        end: moment($scope.datePicker.date.endDate).format("DD.MM.YYYY")
-      };
+      $scope.currentFB = {
+                id : fbID,
+                name: fbName
+            };
 
-      $scope.currentWindow = "Feed";
-      $scope.fbData = undefined;
+            $scope.currentDate = {
+                start: moment($scope.datePicker.date.startDate).format("DD.MM.YYYY"),
+                end: moment($scope.datePicker.date.endDate).format("DD.MM.YYYY")
+            };
 
-      let data = {
-        id: fbID,
-        start: $scope.currentDate.start,
-        end: $scope.currentDate.end,
-        limit: $scope.limit
-      };
+            $scope.currentWindow = "Feed";
+            $scope.fbData = undefined;
 
-      $http.post('/api/post/fb/posts', data).then(posts => {
-        $scope.fbData = posts.data;
-      });
+            let data = {
+                id : fbID,
+                start: $scope.currentDate.start,
+                end: $scope.currentDate.end,
+                limit: $scope.limit
+            };
+
+            $http.post('/api/post/fb/posts', data ).then(posts => {
+                $scope.fbData = posts.data;
+            });
+
+            // POST Activity
+            let activity = {
+                search : {
+                    fbID : fbID,
+                    name : fbName,
+                },
+                user : {
+                    id: $rootScope.user.id
+                }
+
+            };
+
+            $http.post('/user/activity', activity ).then(results => {
+
+                $http.get('/user/activity').then(results => {
+                    $scope.lastSearchActivity = results.data;
+                })
+            });
     };
 
     $scope.setLimit = function(limit) {
       $scope.limit = limit;
-      $scope.changeFeed($scope.currentFBId);
+      $scope.changeFeed($scope.currentFB.id, $scope.currentFB.name);
 
-    };
+        };
 
-    $scope.showWindow = function(window) {
-      $scope.currentWindow = window;
-    }
+        $scope.showWindow = function (window) {
+            $scope.currentWindow = window;
+        }
 
 
-  });
+    });

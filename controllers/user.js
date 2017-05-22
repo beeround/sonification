@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
+const moment = require('moment');
 
 /**
  * GET /login
@@ -378,3 +379,39 @@ exports.postForgot = (req, res, next) => {
     res.redirect('/forgot');
   });
 };
+
+exports.getSearchActivity = (req, res) => {
+
+    User.findById(req.user._id, (err, user) => {
+
+        if (err) { return next(err); }
+
+        res.status(200).json(user.searchQueries)
+    });
+};
+
+exports.postSearchActivity = (req, res) => {
+  let search = req.body.search;
+
+    User.findById(req.user.id, (err, user) => {
+
+        if (err) { return next(err); }
+
+        user.searchQueries.push(
+            {
+                fbID : search.fbID,
+                name : search.name,
+                date : new Date()
+            }
+        );
+        user.save(function () {
+            res.status(200).send("success")
+        });
+    });
+};
+
+
+
+
+
+

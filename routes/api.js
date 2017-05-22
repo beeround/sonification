@@ -30,6 +30,15 @@ router.get('/get/fb/favorite', function(req, res) {
     });
 });
 
+
+router.get('/get/fb/search', function(req, res) {
+    fb.searchUser().then(result => {
+        res.status(200).json(result)
+    });
+});
+
+
+
 router.post('/post/fb/search', function(req, res) {
 
     fb.searchUser(req.body.query).then(result => {

@@ -1,6 +1,7 @@
 const FB = require('fb');
 const request = require('request');
-const moment = require('moment')
+const moment = require('moment');
+
 
 
 function searchUser(query) {
@@ -91,7 +92,6 @@ function getFavData(id) {
         });
     });
 }
-
 
 module.exports = {
     getPosts,
