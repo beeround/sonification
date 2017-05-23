@@ -225,6 +225,29 @@ angular.module('sonificationAPP.controllers.main', [])
 
             $http.post('/api/post/fb/posts', data ).then(posts => {
                 $scope.fbData = posts.data;
+                console.log($scope.fbData);
+
+                //Alle Reactions im Zeitraum
+                $scope.allReactions = {
+                    total_love : 0,
+                    total_haha : 0,
+                    total_wow : 0,
+                    total_sad : 0,
+                    total_angry : 0
+                };
+
+                function getAllReactions ( posts ) {
+                    posts.map( (data, index)  => {
+
+                        $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
+                        $scope.allReactions.total_haha = $scope.allReactions.total_haha +  data.haha.summary.total_count;
+                        $scope.allReactions.total_wow = $scope.allReactions.total_wow +  data.wow.summary.total_count;
+                        $scope.allReactions.total_sad = $scope.allReactions.total_sad +  data.sad.summary.total_count;
+                        $scope.allReactions.total_angry = $scope.allReactions.total_angry +  data.angry.summary.total_count;
+                    })
+                }
+                getAllReactions($scope.fbData);
+
             });
 
             // POST Activity

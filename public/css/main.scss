@@ -98,18 +98,30 @@ header {
 }
 
 ul{
-    padding-left: 0;
+  padding-left: 0;
+  list-style:none;
 }
+li{
+  margin: 8px 0;
+}
+.row.white{
+  background-color: #FFF;
+  padding: 20px;
+  li,p{
+    color: #333333;
+  }
+}
+
 
 // Icons
 
+
+
 .icon{
   background-size: contain;
-  list-style: none;
-  background-position: left center;
   padding:0 0 0 30px;
-  margin: 10px 0;
   background-repeat: no-repeat;
+
 }
 .like{
   background-image: url("../img/icons/facebook-like.svg");

@@ -22,6 +22,7 @@ h1 Suche
 
         .col-md-12(ng-show="searchResults")
             h3 Search Results
+
             span.btn.btn-sm.btn-primary(ng-show="currentWindow != 'SearchList'", ng-click="showWindow('SearchList')") Show search results
             .search(ng-show="currentWindow == 'SearchList'")
                 .searchResult(ng-repeat="search in searchResults")
@@ -53,37 +54,51 @@ h1 Suche
                 span(ng-click="setLimit(100)", ng-class="{'active': limit == 100}") 100
 
 
+        .row
+            .col-md-2
+                img(ng-src="{{fbData[0].from.picture.data.url}}" width="100px" height="100px")
+                p
+                    a(href="{{fbData[0].from.link}}" target="blank") {{fbData[0].from.name}}
+                p.icon.like {{fbData[0].from.fan_count}}
+                p Alle Reactions im Zeitraum und Limit
+                ul
+                    li.icon.love {{allReactions.total_love}}
+                    li.icon.haha {{allReactions.total_haha}}
+                    li.icon.wow {{allReactions.total_wow}}
+                    li.icon.sad {{allReactions.total_sad}}
+                    li.icon.angry {{allReactions.total_angry}}
+            .col-md-10
+                .row(ng-repeat=" fb in fbData", emit-last-repeater-element )
 
-    .row(ng-repeat=" fb in fbData", emit-last-repeater-element )
-                .col-md-6
-                    .post
-                        p.small {{fb.created_time | date:'dd.MM.yyyy - HH:mm'}} Uhr
-                        p {{fb.message}}
-                        a(ng-href="{{fb.permalink_url}}", target="blank") Permanentlink
-                        button(ng-click="sonify(fb.love.summary.total_count, fb.haha.summary.total_count,fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count)") sonifizieren
-                        img(ng-src="{{fb.full_picture}}")
+                    .col-md-6
+                        .post
+                            p.small {{fb.created_time | date:'dd.MM.yyyy - HH:mm'}} Uhr
+                            p {{fb.message}}
+                            a(ng-href="{{fb.permalink_url}}", target="blank") Permanentlink
+                            button(ng-click="sonify(fb.love.summary.total_count, fb.haha.summary.total_count,fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count)") sonifizieren
+                            img(ng-src="{{fb.full_picture}}")
 
-                        .row
-                            .col
-                                h5 Love
-                                p {{fb.love.summary.total_count}}
+                            .row
+                                .col
+                                    h5 Love
+                                    p {{fb.love.summary.total_count}}
 
-                            .col
-                                h5 Haha
-                                p {{fb.haha.summary.total_count}}
+                                .col
+                                    h5 Haha
+                                    p {{fb.haha.summary.total_count}}
 
-                            .col
-                                h5 Wow
-                                p {{fb.wow.summary.total_count}}
+                                .col
+                                    h5 Wow
+                                    p {{fb.wow.summary.total_count}}
 
-                            .col
-                                h5 Sad
-                                p {{fb.sad.summary.total_count}}
+                                .col
+                                    h5 Sad
+                                    p {{fb.sad.summary.total_count}}
 
-                            .col
-                                h5 Angry
-                                p {{fb.angry.summary.total_count}}
-                            hr
-                .col-md-6
-                    div
-                        canvas(ng-attr-id="myChart{{$index}}")
+                                .col
+                                    h5 Angry
+                                    p {{fb.angry.summary.total_count}}
+                                hr
+                    .col-md-6
+                        div
+                            canvas(ng-attr-id="myChart{{$index}}")

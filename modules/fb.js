@@ -48,7 +48,7 @@ function getPosts(id, start, end, limit) {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api(pageId+'/posts?limit='+limit+'&fields=from,picture,full_picture,message,reactions.type(LIKE).summary(total_count).as(like),reactions.type(LOVE).summary(true).as(love),reactions.type(HAHA).summary(total_count).as(haha),reactions.type(SAD).summary(total_count).as(sad),reactions.type(ANGRY).summary(total_count).as(angry),reactions.type(WOW).summary(total_count).as(wow),permalink_url,created_time&since='+start+'&until='+end, function (res) {
+            FB.api(pageId+'/posts?limit='+limit+'&fields=from{name, link, fan_count, picture},picture,full_picture,message,reactions.type(LOVE).limit(0).summary(true).as(love),reactions.type(HAHA).limit(0).summary(total_count).as(haha),reactions.type(SAD).limit(0).summary(total_count).as(sad),reactions.type(ANGRY).limit(0).summary(total_count).as(angry),reactions.type(WOW).limit(0).summary(total_count).as(wow),permalink_url,created_time&since='+start+'&until='+end, function (res) {
                 if(!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
                     return;
@@ -79,7 +79,7 @@ function getFavData(id) {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api(pageId+'?fields=name,fan_count,picture{url},posts.limit(50){message,reactions.type(LOVE).limit(0).summary(true).as(love),reactions.type(HAHA).limit(0).summary(total_count).as(haha),reactions.type(SAD).limit(0).summary(total_count).as(sad),reactions.type(ANGRY).limit(0).summary(total_count).as(angry),reactions.type(WOW).limit(0).summary(total_count).as(wow),created_time}', function (res) {
+            FB.api(pageId+'?fields=name,link,fan_count,picture{url},posts.limit(50){message,reactions.type(LOVE).limit(0).summary(true).as(love),reactions.type(HAHA).limit(0).summary(total_count).as(haha),reactions.type(SAD).limit(0).summary(total_count).as(sad),reactions.type(ANGRY).limit(0).summary(total_count).as(angry),reactions.type(WOW).limit(0).summary(total_count).as(wow),created_time}', function (res) {
                 //
                 console.log(res);
                 if(!res || res.error) {
