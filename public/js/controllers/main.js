@@ -311,7 +311,7 @@ angular.module('sonificationAPP.controllers.main', [])
             $http.post('/user/add/favorite', data).then(function () {
                $scope.isFav = true;
             })
-        }
+        };
 
         $scope.removeFavorite = function () {
             let data = {

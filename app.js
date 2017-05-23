@@ -127,11 +127,11 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.post('/user/activity', userController.postSearchActivity);
-app.get('/user/activity', userController.getSearchActivity);
-app.get('/user/get/favorites', userController.getFavorites);
-app.post('/user/add/favorite', userController.addFavorite);
-app.put('/user/remove/favorite', userController.removeFavorite);
+app.post('/user/activity', passportConfig.isAuthenticated,  userController.postSearchActivity);
+app.get('/user/activity', passportConfig.isAuthenticated,  userController.getSearchActivity);
+app.get('/user/get/favorites', passportConfig.isAuthenticated,  userController.getFavorites);
+app.post('/user/add/favorite', passportConfig.isAuthenticated,  userController.addFavorite);
+app.put('/user/remove/favorite', passportConfig.isAuthenticated,  userController.removeFavorite);
 
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);

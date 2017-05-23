@@ -11,7 +11,7 @@ router.get('/imprint', function(req, res) {
     res.render('imprint', { title: 'Imprint', message: 'Hello there!'});
 });
 
-router.get('/dashboard', function(req, res) {
+router.get('/dashboard', passportConfig.isAuthenticated,  function(req, res) {
     res.render('app/index', { title: 'Dashboard', message: 'Hello there!'});
 });
 
