@@ -9,6 +9,9 @@ router.get('/', passportConfig.isAuthenticated, function(req, res) {
 router.get('/search', passportConfig.isAuthenticated, function(req, res) {
     res.render('app/index', { title: 'Search', message: 'Hello there!'});
 });
+router.get('/search/:id', passportConfig.isAuthenticated, function(req, res) {
+    res.render('app/index', { title: 'Search', message: 'Hello there!'});
+});
 
 router.get('/partials/:view', passportConfig.isAuthenticated, function(req, res) {
 

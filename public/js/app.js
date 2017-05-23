@@ -10,6 +10,10 @@ angular.module('sonificationAPP',['angular.filter','daterangepicker','ngRoute', 
     when('/app/search', {
         templateUrl: '/app/partials/search'
 
+    }).
+    when('/app/search/:id', {
+        templateUrl: '/app/partials/search'
+
     });
 
     $locationProvider.html5Mode({

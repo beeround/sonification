@@ -86,7 +86,8 @@ angular.module('sonificationAPP.controllers.main', [])
 
     })
 
-    .controller('fbCtrl', function ($scope, $http, $timeout) {
+    .controller('fbCtrl', function ($scope, $http, $timeout, $routeParams) {
+
 
         // GET Last activites
         $http.get('/user/activity').then(results => {
@@ -107,6 +108,11 @@ angular.module('sonificationAPP.controllers.main', [])
             end: ""
         };
 
+        // Load Feed, if a parameter isset
+        if ($routeParams.id) {
+            getFeed($routeParams.id);
+        }
+
         $scope.opts = {
             applyClass: 'btn-green',
             locale: {
@@ -123,10 +129,11 @@ angular.module('sonificationAPP.controllers.main', [])
             },
             eventHandlers: {
                 'apply.daterangepicker': function (ev, picker) {
-                    $scope.changeFeed($scope.currentFB.id, $scope.currentFB.name);
+                    updateFeed($scope.currentFB.id);
                 }
             }
         };
+
 
         $scope.$on('DrawCharts', function () {
             $timeout(function () {
@@ -210,11 +217,94 @@ angular.module('sonificationAPP.controllers.main', [])
 
         };
 
-        $scope.changeFeed = function (fbID, fbName) {
+        $scope.changeFeed = function (fbID) {
+
+            getFeed(fbID)
+        };
+
+        $scope.setLimit = function (limit) {
+            $scope.limit = limit;
+            updateFeed($scope.currentFB.id);
+
+        };
+
+        $scope.showWindow = function (window) {
+            $scope.currentWindow = window;
+        };
+
+        $scope.addToFavorites = function () {
+            let data = {
+                fbID: $scope.currentFB.id,
+                name: $scope.currentFB.name
+
+            };
+
+            $http.post('/user/add/favorite', data).then(function () {
+                $scope.isFav = true;
+            })
+        };
+
+        $scope.removeFavorite = function () {
+            let data = {
+                fbID: $scope.currentFB.id,
+
+            };
+
+            $http.put('/user/remove/favorite', data).then(function () {
+                $scope.isFav = false;
+            })
+        }
+
+
+        function updateFeed(fbID){
+            $scope.fbData = undefined;
+
+            $scope.currentDate = {
+                start: moment($scope.datePicker.date.startDate).format("DD.MM.YYYY"),
+                end: moment($scope.datePicker.date.endDate).format("DD.MM.YYYY")
+            };
+
+            $scope.currentWindow = "Feed";
+
+            let data = {
+                id: fbID,
+                start: $scope.currentDate.start,
+                end: $scope.currentDate.end,
+                limit: $scope.limit
+            };
+            console.log(data);
+
+            $http.post('/api/post/fb/posts', data).then(posts => {
+                $scope.fbData = posts.data;
+                console.log($scope.fbData);
+
+                // IF No DATA is available
+                if (posts.data.length == 0) {
+                    alert("No DATA")
+                }
+                else {
+
+                    //Alle Reactions im Zeitraum
+                    $scope.allReactions = {
+                        total_love: 0,
+                        total_haha: 0,
+                        total_wow: 0,
+                        total_sad: 0,
+                        total_angry: 0
+                    };
+
+                    // Get Reactions
+                    getAllReactions($scope.fbData);
+                }
+
+            });
+        };
+
+        function getFeed(fbID) {
+            $scope.fbData = undefined;
 
             $scope.currentFB = {
-                id: fbID,
-                name: fbName
+                id: fbID
             };
 
             $scope.currentDate = {
@@ -223,7 +313,7 @@ angular.module('sonificationAPP.controllers.main', [])
             };
 
             $scope.currentWindow = "Feed";
-            $scope.fbData = undefined;
+
 
             let data = {
                 id: fbID,
@@ -236,93 +326,76 @@ angular.module('sonificationAPP.controllers.main', [])
                 $scope.fbData = posts.data;
                 console.log($scope.fbData);
 
-                //Alle Reactions im Zeitraum
-                $scope.allReactions = {
-                    total_love: 0,
-                    total_haha: 0,
-                    total_wow: 0,
-                    total_sad: 0,
-                    total_angry: 0
+                // IF No DATA is available
+                if ($scope.fbData.length == 0) {
+                    alert("No DATA");
+                }
+                else {
+                    $scope.currentFB = {
+                        id: fbID,
+                        name: $scope.fbData[0].from.name
+                    };
+
+                    //Alle Reactions im Zeitraum
+                    $scope.allReactions = {
+                        total_love: 0,
+                        total_haha: 0,
+                        total_wow: 0,
+                        total_sad: 0,
+                        total_angry: 0
+                    };
+
+
+                    // Get Reactions
+                    getAllReactions($scope.fbData);
+
+
+                    // Add activity, if no param
+                    if ($routeParams.id) {
+                        // POST Activity
+                        let activity = {
+                            search: {
+                                fbID: $scope.currentFB.id,
+                                name: $scope.currentFB.name,
+                            },
+
+                        };
+
+                        $http.post('/user/activity', activity).then(results => {
+                            $http.get('/user/activity').then(results => {
+                                $scope.lastSearchActivity = results.data;
+                            })
+                        });
+                    }
+
                 };
 
-                function getAllReactions(posts) {
-                    posts.map((data, index) => {
+                //GET FAV
+                $http.get('/user/get/favorites').then(results => {
+                    $scope.isFav = false;
 
-                        $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
-                        $scope.allReactions.total_haha = $scope.allReactions.total_haha + data.haha.summary.total_count;
-                        $scope.allReactions.total_wow = $scope.allReactions.total_wow + data.wow.summary.total_count;
-                        $scope.allReactions.total_sad = $scope.allReactions.total_sad + data.sad.summary.total_count;
-                        $scope.allReactions.total_angry = $scope.allReactions.total_angry + data.angry.summary.total_count;
-                    })
-                }
-
-                getAllReactions($scope.fbData);
-
-            });
-
-            // POST Activity
-            let activity = {
-                search: {
-                    fbID: fbID,
-                    name: fbName,
-                },
-
-            };
-
-            $http.post('/user/activity', activity).then(results => {
-
-                $http.get('/user/activity').then(results => {
-                    $scope.lastSearchActivity = results.data;
-                })
-            });
-
-            //GET FAV
-            $http.get('/user/get/favorites').then(results => {
-                $scope.isFav = false;
-
-                // check, if element is fav
-                results.data.map(result => {
-                    console.log(result);
-
-                    if(result.fbID == $scope.currentFB.id){
-                        $scope.isFav = true;
-                    }
+                    // check, if element is fav
+                    results.data.map(result => {
+                        if (result.fbID == $scope.currentFB.id) {
+                            $scope.isFav = true;
+                        }
+                    });
                 });
+
+
             });
-        };
 
-        $scope.setLimit = function (limit) {
-            $scope.limit = limit;
-            $scope.changeFeed($scope.currentFB.id, $scope.currentFB.name);
-
-        };
-
-        $scope.showWindow = function (window) {
-            $scope.currentWindow = window;
-        };
-
-        $scope.addToFavorites = function () {
-            let data = {
-                fbID : $scope.currentFB.id,
-                name : $scope.currentFB.name
-
-            };
-
-            $http.post('/user/add/favorite', data).then(function () {
-               $scope.isFav = true;
-            })
-        };
-
-        $scope.removeFavorite = function () {
-            let data = {
-                fbID : $scope.currentFB.id,
-
-            };
-
-            $http.put('/user/remove/favorite', data).then(function () {
-                $scope.isFav = false;
-            })
         }
 
+        function getAllReactions(posts) {
+            posts.map((data, index) => {
+
+                $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
+                $scope.allReactions.total_haha = $scope.allReactions.total_haha + data.haha.summary.total_count;
+                $scope.allReactions.total_wow = $scope.allReactions.total_wow + data.wow.summary.total_count;
+                $scope.allReactions.total_sad = $scope.allReactions.total_sad + data.sad.summary.total_count;
+                $scope.allReactions.total_angry = $scope.allReactions.total_angry + data.angry.summary.total_count;
+            })
+        }
 
     });
