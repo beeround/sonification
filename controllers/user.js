@@ -392,7 +392,6 @@ exports.getSearchActivity = (req, res) => {
 
 exports.postSearchActivity = (req, res) => {
   let search = req.body.search;
-  console.log(req.user._id)
 
     User.findById(req.user._id, (err, user) => {
 
@@ -410,6 +409,45 @@ exports.postSearchActivity = (req, res) => {
         });
     });
 };
+
+exports.getFavorites = (req, res) => {
+
+    User.findById(req.user._id, (err, user) => {
+
+        if (err) { return next(err); }
+
+        res.status(200).json(user.favorites)
+    });
+};
+
+exports.addFavorite = (req, res) => {
+
+    User.findById(req.user._id, (err, user) => {
+
+        if (err) { return next(err); }
+
+        user.favorites.push(
+            {
+                fbID : req.body.fbID,
+                name : req.body.name,
+                date : new Date()
+            }
+        );
+        user.save(function () {
+            res.status(200).send("success")
+        });
+    });
+};
+
+exports.removeFavorite = (req, res) => {
+
+    User.update( {_id: req.user._id}, {$pull: {"favorites": {"fbID": req.body.fbID, }} } , function () {
+        res.status(200).send("success")
+    });
+
+};
+
+
 
 
 

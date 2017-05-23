@@ -129,6 +129,9 @@ app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.post('/user/activity', userController.postSearchActivity);
 app.get('/user/activity', userController.getSearchActivity);
+app.get('/user/get/favorites', userController.getFavorites);
+app.post('/user/add/favorite', userController.addFavorite);
+app.put('/user/remove/favorite', userController.removeFavorite);
 
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);

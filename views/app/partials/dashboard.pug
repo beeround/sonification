@@ -45,7 +45,12 @@ div(ng-controller="dashboardCtrl")
                     span {{favData.data.posts.data[4].message | limitTo: 45 }}{{favData.data.posts.data[4].message.length > 20 ? '...' : ''}}
         .col-md-3
             canvas(ng-attr-id="myChart0")
-
-
-
-
+    .row.white(style="margin-top: 20px")
+        .col-md-12
+            p
+                strong Favoriten
+            ul
+                li(ng-repeat="fav in favorites")
+                    p
+                        strong {{fav.name}}
+                        small  {{fav.fbID}}
