@@ -10,13 +10,74 @@ angular.module('sonificationAPP.controllers.main', [])
         };
     })
 
-    .controller('mainCtrl', function ($scope, $http, $location, $rootScope) {
+    .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout) {
         $scope.goToCompare = function () {
             $location.path('/app/compare');
         };
+        let music = false;
+        $scope.sonify = function (love, haha, wow, sad, angry) {
+
+            console.log(music);
+
+            if (music == false){
+                music = true;
+                var velocity = reactionsInPercent(love, haha, wow, sad, angry);
+                var sonifyLove1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
+                var sonifyHaha1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
+                var sonifyWow1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
+                var sonifySad1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
+                var sonifyAngry = new Tone.PolySynth(6, Tone.Synth).toMaster();
+                switch (reactionTrend(love, haha, wow, sad, angry)) {
+                    case "love":
+                        sonifyLove1.triggerAttackRelease("D4", "2n", "+0", velocity.love);
+                        sonifyLove1.triggerAttackRelease("E4", "2n", "+0.1", velocity.love);
+                        sonifyLove1.triggerAttackRelease("G4", "2n", "+0.2", velocity.love);
+                        sonifyLove1.triggerAttackRelease("B4", "2n", "+0.3", velocity.love);
+                        sonifyLove1.releaseAll();
+                        break;
+                    case "haha":
+                        sonifyHaha1.triggerAttackRelease('A5', '8n', '+0', velocity.haha);
+                        sonifyHaha1.triggerAttackRelease('GB5', '8n', '+0.1', velocity.haha);
+                        sonifyHaha1.triggerAttackRelease('D5', '8n', '+0.2', velocity.haha);
+                        sonifyHaha1.triggerAttackRelease('D4', '8n', '+0.3', velocity.haha);
+                        sonifyHaha1.releaseAll();
+                        break;
+                    case "wow":
+                        sonifyWow1.triggerAttackRelease('C4', '1n', '+0', velocity.wow);
+                        sonifyWow1.triggerAttackRelease('E4', '1n', '+0', velocity.wow);
+                        sonifyWow1.triggerAttackRelease('AB4', '1n', '+0', velocity.wow);
+                        sonifyWow1.releaseAll();
+                        break;
+                    case "sad":
+                        sonifySad1.triggerAttackRelease('A3', '1n', '+0', velocity.sad);
+                        sonifySad1.triggerAttackRelease('D4', '1n', '+0', velocity.sad);
+                        sonifySad1.triggerAttackRelease('F4', '1n', '+0', velocity.sad);
+                        sonifySad1.triggerAttackRelease('G3', '1n', '+2', velocity.sad);
+                        sonifySad1.triggerAttackRelease('BB3', '1n', '+2', velocity.sad);
+                        sonifySad1.triggerAttackRelease('D4', '1n', '+2', velocity.sad);
+                        sonifySad1.triggerAttackRelease('E4', '1n', '+2', velocity.sad);
+                        sonifySad1.releaseAll();
+                        break;
+                    case "angry":
+                        sonifyAngry.triggerAttackRelease('A4', '1n', '+0', velocity.angry);
+                        sonifyAngry.triggerAttackRelease('C5', '1n', '+0', velocity.angry);
+                        sonifyAngry.triggerAttackRelease('EB5', '1n', '+0', velocity.angry);
+                        sonifyAngry.triggerAttackRelease('GB5', '1n', '+0', velocity.angry);
+                        sonifyAngry.releaseAll();
+                        break;
+                    default:
+                }}
+            $timeout(function () {
+                sonifyLove1.dispose();
+                sonifyHaha1.dispose();
+                sonifyWow1.dispose();
+                sonifySad1.dispose();
+                sonifyAngry.dispose();
+                music = false;
+            }, 5000)
+        };
 
         $scope.drawChart = function (love, haha, wow, sad, angry, id) {
-            console.log(love, haha, wow, sad, angry, id);
             let ctx = document.getElementById("myChart" + id);
 
             let myChart = new Chart(ctx, {
@@ -49,6 +110,36 @@ angular.module('sonificationAPP.controllers.main', [])
 
             });
 
+        };
+
+        $scope.reactionTrendValue = function (love, wow, haha, sad, angry) {
+            let value;
+
+            function reactionInProcent(reaction, total) {
+                const reactioninProcent = reaction / total;
+                return reactioninProcent;
+            }
+
+            const total = love + wow + haha + sad + angry;
+            love = reactionInProcent(love, total);
+            wow = reactionInProcent(wow, total);
+            haha = reactionInProcent(haha, total);
+            sad = reactionInProcent(sad, total);
+            angry = reactionInProcent(angry, total);
+
+            if (love > wow && love > haha && love > sad && love > angry) {
+                value = love - (0.9 * sad) - (0.9 * angry) + (0.1 * haha) + (0.1 * wow);
+            } else if (wow > love && wow > haha && wow > sad && wow > angry) {
+                value = wow - (0.9 * love) - (0.9 * haha) + (0.1 * angry) + (0.1 * sad);
+            } else if (haha > love && haha > wow && haha > sad && haha > angry) {
+                value = haha - (0.9 * sad) - (0.9 * angry) + (0.1 * love) + (0.1 * wow);
+            } else if (sad > love && sad > haha && sad > wow && sad > angry) {
+                value = sad - (0.9 * angry) + (0.1 * love) + (0.1 * haha) + (0.1 * wow);
+            } else if (angry > love && angry > haha && angry > wow && angry > sad) {
+                value = angry - (0.9 * sad) + (0.1 * haha) + (0.1 * sad) + (0.1 * wow);
+            }
+            console.log(value);
+            return value;
         }
     })
 
@@ -62,7 +153,6 @@ angular.module('sonificationAPP.controllers.main', [])
         $http.get('/user/get/favorites').then(results => {
             let favMap = results.data.map((fav,index)=> {
                 return $http.get('/api/get/fb/favorite?favID=' + fav.fbID).then(results => {
-                    console.log(results.data);
                     return results.data;
 
                 })
@@ -73,7 +163,6 @@ angular.module('sonificationAPP.controllers.main', [])
             $timeout(function (){
                $scope.favData = data2;
             },0);
-            console.log($scope.favData);
             data2.map((fav,index)=> {
                 getAllReactions(fav, index);
             });
@@ -104,14 +193,11 @@ angular.module('sonificationAPP.controllers.main', [])
 
             });
             fav.allReactions = tempAllReactions;
-            console.log(fav.allReactions);
-            console.log(fav.name);
-            console.log("ich habe noch nicht male gemacht");
+            fav.total_reaction = reactionTrend(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
+            fav.total_reactionvalue = $scope.reactionTrendValue(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
             $timeout(function (){
                 $scope.drawChart(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry, index);
             },0);
-            console.log("ich habe male gemacht");
-            console.log(index)
         }
     })
 
@@ -174,61 +260,7 @@ angular.module('sonificationAPP.controllers.main', [])
         });
 
 
-        $scope.sonify = function (love, haha, wow, sad, angry) {
-            var velocity = reactionsInPercent(love, haha, wow, sad, angry);
-            var sonifyLove1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-            var sonifyHaha1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-            var sonifyWow1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-            var sonifySad1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-            var sonifyAngry = new Tone.PolySynth(6, Tone.Synth).toMaster();
-            switch (reactionTrend(love, haha, wow, sad, angry)) {
-                case "love":
-                    sonifyLove1.triggerAttackRelease("D4", "2n", "+0", velocity.love);
-                    sonifyLove1.triggerAttackRelease("E4", "2n", "+0.1", velocity.love);
-                    sonifyLove1.triggerAttackRelease("G4", "2n", "+0.2", velocity.love);
-                    sonifyLove1.triggerAttackRelease("B4", "2n", "+0.3", velocity.love);
-                    sonifyLove1.releaseAll();
-                    break;
-                case "haha":
-                    sonifyHaha1.triggerAttackRelease('A5', '8n', '+0', velocity.haha);
-                    sonifyHaha1.triggerAttackRelease('GB5', '8n', '+0.1', velocity.haha);
-                    sonifyHaha1.triggerAttackRelease('D5', '8n', '+0.2', velocity.haha);
-                    sonifyHaha1.triggerAttackRelease('D4', '8n', '+0.3', velocity.haha);
-                    sonifyHaha1.releaseAll();
-                    break;
-                case "wow":
-                    sonifyWow1.triggerAttackRelease('C4', '1n', '+0', velocity.wow);
-                    sonifyWow1.triggerAttackRelease('E4', '1n', '+0', velocity.wow);
-                    sonifyWow1.triggerAttackRelease('AB4', '1n', '+0', velocity.wow);
-                    sonifyWow1.releaseAll();
-                    break;
-                case "sad":
-                    sonifySad1.triggerAttackRelease('A3', '1n', '+0', velocity.sad);
-                    sonifySad1.triggerAttackRelease('D4', '1n', '+0', velocity.sad);
-                    sonifySad1.triggerAttackRelease('F4', '1n', '+0', velocity.sad);
-                    sonifySad1.triggerAttackRelease('G3', '1n', '+2', velocity.sad);
-                    sonifySad1.triggerAttackRelease('BB3', '1n', '+2', velocity.sad);
-                    sonifySad1.triggerAttackRelease('D4', '1n', '+2', velocity.sad);
-                    sonifySad1.triggerAttackRelease('E4', '1n', '+2', velocity.sad);
-                    sonifySad1.releaseAll();
-                    break;
-                case "angry":
-                    sonifyAngry.triggerAttackRelease('A4', '1n', '+0', velocity.angry);
-                    sonifyAngry.triggerAttackRelease('C5', '1n', '+0', velocity.angry);
-                    sonifyAngry.triggerAttackRelease('EB5', '1n', '+0', velocity.angry);
-                    sonifyAngry.triggerAttackRelease('GB5', '1n', '+0', velocity.angry);
-                    sonifyAngry.releaseAll();
-                    break;
-                default:
-            }
-            $timeout(function () {
-                sonifyLove1.dispose();
-                sonifyHaha1.dispose();
-                sonifyWow1.dispose();
-                sonifySad1.dispose();
-                sonifyAngry.dispose();
-            }, 5000)
-        }
+
 
 
         $scope.searchUser = function () {

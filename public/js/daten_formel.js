@@ -22,6 +22,12 @@ function reactionTrend(love, wow, haha, sad, angry) {
 
 function reactionTrendValue(love, wow, haha, sad, angry) {
   let value;
+
+    function reactionInProcent(reaction, total) {
+        const reactioninProcent = reaction / total;
+        return reactioninProcent;
+    }
+
   const total = love + wow + haha + sad + angry;
   love = reactionInProcent(love, total);
   wow = reactionInProcent(wow, total);

@@ -12,8 +12,12 @@ div(ng-controller="dashboardCtrl")
                             //hier durchschleifen
                             img(ng-src="{{fav.picture.data.url}}" width="100px" height="100px")
                             p
-                                a(href="{{fav.link}}" target="blank") {{fav.name}}
+                                a(ng-href="{{fav.link}}" target="blank") {{fav.name}}
                             p.icon.like {{fav.fan_count| number:0}}
+                            p
+                                i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
+                                span {{fav.total_reactionvalue*100| number:2}}%
+
                         .col-md-2
                             p Letzten 50 Posts
                             ul
@@ -37,18 +41,18 @@ div(ng-controller="dashboardCtrl")
                             ul
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
-                                    span {{fav.posts.data[0].message | limitTo: 35 }}{{fav.posts.data[0].message.length > 35 ? '...' : ''}}
+                                    a(ng-href="{{fav.posts.data[0].permalink_url}}" target="blank") {{fav.posts.data[0].message | limitTo: 25 }}{{fav.posts.data[0].message.length > 25 ? '...' : ''}}
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[1].total_reaction}}':fav.posts.data[1].total_reaction, 'noreaction': fav.posts.data[1].total_reaction == null}")
-                                    span {{fav.posts.data[1].message | limitTo: 35 }}{{fav.posts.data[1].message.length > 35 ? '...' : ''}}
+                                    a(ng-href="{{fav.posts.data[1].permalink_url}}" target="blank") {{fav.posts.data[1].message | limitTo: 25 }}{{fav.posts.data[1].message.length > 25 ? '...' : ''}}{{fav.posts.data[1].message.length > 1 ? '' : 'Link'}}
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[2].total_reaction}}':fav.posts.data[2].total_reaction, 'noreaction': fav.posts.data[2].total_reaction == null}")
-                                    span {{fav.posts.data[2].message | limitTo: 35 }}{{fav.posts.data[2].message.length > 35 ? '...' : ''}}
+                                    a(ng-href="{{fav.posts.data[2].permalink_url}}" target="blank") {{fav.posts.data[2].message | limitTo: 25 }}{{fav.posts.data[2].message.length > 25 ? '...' : ''}}
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[3].total_reaction}}':fav.posts.data[3].total_reaction, 'noreaction': fav.posts.data[3].total_reaction == null}")
-                                    span {{fav.posts.data[3].message | limitTo: 35 }}{{fav.posts.data[3].message.length > 35 ? '...' : ''}}
+                                    a(ng-href="{{fav.posts.data[3].permalink_url}}" target="blank") {{fav.posts.data[3].message | limitTo: 25 }}{{fav.posts.data[3].message.length > 25 ? '...' : ''}}
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
-                                    span {{fav.posts.data[4].message | limitTo: 35 }}{{fav.posts.data[4].message.length > 35 ? '...' : ''}}
+                                    a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 25 }}{{fav.posts.data[4].message.length > 25 ? '...' : ''}}
                         .col-md-3
                             canvas(ng-attr-id="myChart{{$index}}")
