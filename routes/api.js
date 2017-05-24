@@ -25,7 +25,7 @@ router.get('/get/fb/search', function(req, res) {
 });
 
 router.get('/get/fb/favorite', function(req, res) {
-    fb.getFavData(176063032413299).then(result => {
+    fb.getFavData(req.query.favID).then(result => {
         res.status(200).json(result)
     });
 });

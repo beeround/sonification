@@ -15,17 +15,17 @@ angular.module('sonificationAPP.controllers.main', [])
             $location.path('/app/compare');
         };
 
-
         $scope.drawChart = function (love, haha, wow, sad, angry, id) {
-
+            console.log(love, haha, wow, sad, angry, id);
             let ctx = document.getElementById("myChart" + id);
+
             let myChart = new Chart(ctx, {
                 type: 'polarArea',
                 data: {
                     labels: ["LOVE", "HAHA", "WOW", "SAD", "ANGRY"],
                     datasets: [
                         {
-                            label: "Post1",
+                            label: "Post "+(id+1),
                             backgroundColor: [
                                 "#ffa3d3",
                                 "#fffd00",
@@ -43,47 +43,76 @@ angular.module('sonificationAPP.controllers.main', [])
                         },
 
 
+
                     ]
                 },
 
             });
+
         }
     })
 
     .controller('dashboardCtrl', function ($scope, $http, $timeout) {
-        $http.get('/api/get/fb/favorite').then(results => {
-            $scope.favData = results;
-            $scope.allReactions = {
+
+
+
+
+
+        //GET FAV
+        $http.get('/user/get/favorites').then(results => {
+            let favMap = results.data.map((fav,index)=> {
+                return $http.get('/api/get/fb/favorite?favID=' + fav.fbID).then(results => {
+                    console.log(results.data);
+                    return results.data;
+
+                })
+            });
+
+                // Save to var and give back, if function has ended
+        Promise.all(favMap).then(function (data2) {
+            $timeout(function (){
+               $scope.favData = data2;
+            },0);
+            console.log($scope.favData);
+            data2.map((fav,index)=> {
+                getAllReactions(fav, index);
+            });
+
+
+
+        });
+
+        });
+
+        function getAllReactions(fav, index) {
+            let tempAllReactions = {
                 total_love: 0,
                 total_haha: 0,
                 total_wow: 0,
                 total_sad: 0,
                 total_angry: 0
             };
+            fav.posts.data.map((data) => {
 
-            function getAllReactions(posts) {
-                posts.data.map((data, index) => {
 
-                    $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
-                    $scope.allReactions.total_haha = $scope.allReactions.total_haha + data.haha.summary.total_count;
-                    $scope.allReactions.total_wow = $scope.allReactions.total_wow + data.wow.summary.total_count;
-                    $scope.allReactions.total_sad = $scope.allReactions.total_sad + data.sad.summary.total_count;
-                    $scope.allReactions.total_angry = $scope.allReactions.total_angry + data.angry.summary.total_count;
-                    data.total_reaction = reactionTrend(data.love.summary.total_count, data.haha.summary.total_count, data.wow.summary.total_count, data.sad.summary.total_count, data.angry.summary.total_count);
-                    $scope.favData.data.posts.data[index].total_reaction = data.total_reaction;
-                    console.log($scope.favData.data.posts.data[index].total_reaction + index)
-                })
-            }
+                tempAllReactions.total_love = tempAllReactions.total_love + data.love.summary.total_count;
+                tempAllReactions.total_haha = tempAllReactions.total_haha + data.haha.summary.total_count;
+                tempAllReactions.total_wow = tempAllReactions.total_wow + data.wow.summary.total_count;
+                tempAllReactions.total_sad = tempAllReactions.total_sad + data.sad.summary.total_count;
+                tempAllReactions.total_angry = tempAllReactions.total_angry + data.angry.summary.total_count;
+                data.total_reaction = reactionTrend(data.love.summary.total_count, data.haha.summary.total_count, data.wow.summary.total_count, data.sad.summary.total_count, data.angry.summary.total_count);
 
-            getAllReactions($scope.favData.data.posts);
-            $scope.drawChart($scope.allReactions.total_love, $scope.allReactions.total_haha, $scope.allReactions.total_wow, $scope.allReactions.total_sad, $scope.allReactions.total_angry, 0);
-        });
-
-        //GET FAV
-        $http.get('/user/get/favorites').then(results => {
-            $scope.favorites = results.data;
-        })
-
+            });
+            fav.allReactions = tempAllReactions;
+            console.log(fav.allReactions);
+            console.log(fav.name);
+            console.log("ich habe noch nicht male gemacht");
+            $timeout(function (){
+                $scope.drawChart(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry, index);
+            },0);
+            console.log("ich habe male gemacht");
+            console.log(index)
+        }
     })
 
     .controller('fbCtrl', function ($scope, $http, $timeout, $routeParams) {

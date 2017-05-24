@@ -17,7 +17,6 @@ router.get('/dashboard', passportConfig.isAuthenticated,  function(req, res) {
 
 router.get('/facebook', function(req, res) {
     fb.getPosts().then(result => {
-        console.log(result);
         res.render('app/index', { title: 'Hey', message: 'Hello there!', fb : result.data});
     });
 });

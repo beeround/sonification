@@ -58,7 +58,7 @@ h1 Suche
             .col-md-2
                 img(ng-src="{{fbData[0].from.picture.data.url}}" width="100px" height="100px")
                 p
-                    a(href="{{fbData[0].from.link}}" target="blank") {{fbData[0].from.name}} {{fbData[0].from.id}}
+                    a(href="{{fbData[0].from.link}}" target="blank") {{fbData[0].from.name}}
 
                 span.btn.btn-warning.btn-sm(ng-click="addToFavorites()", ng-show="!isFav") Favorisieren
                 span.btn.btn-danger.btn-sm(ng-click="removeFavorite()", ng-show="isFav") Von Favoritenliste löschen
