@@ -119,10 +119,20 @@ li{
 
 .icon{
   background-size: contain;
-  padding:0 0 0 30px;
+  padding:0 0 0 50px;
   background-repeat: no-repeat;
 
 }
+.icon:hover{
+  cursor: url("../img/cursor/hammer.cur"), auto;
+}
+.icon:active{
+  cursor: url("../img/cursor/hammerdown.cur"), auto;
+}
+.icon.large{
+  font-size:2em;
+}
+
 .like{
   background-image: url("../img/icons/facebook-like.svg");
 }

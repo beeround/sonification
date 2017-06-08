@@ -13663,7 +13663,7 @@
 		 *         for making different types of distortion sounds.
 		 *         Note that odd orders sound very different from even ones, 
 		 *         and order = 1 is no change. 
-		 *         Read more at [music.columbia.edu](http://music.columbia.edu/cmc/musicandcomputers/chapter4/04_06.php).
+		 *         Read more at [sounds.columbia.edu](http://music.columbia.edu/cmc/musicandcomputers/chapter4/04_06.php).
 		 *
 		 *  @extends {Tone.Effect}
 		 *  @constructor

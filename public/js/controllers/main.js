@@ -10,71 +10,30 @@ angular.module('sonificationAPP.controllers.main', [])
         };
     })
 
-    .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout) {
+    .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout, soundService) {
         $scope.goToCompare = function () {
             $location.path('/app/compare');
         };
-        let music = false;
+        $scope.sounds = soundService.getSounds();
+
+        $scope.changeSelectedSound = function () {
+        }
+        $scope.data = {selectedSound:soundService.getSounds()[0].name};
+        $scope.sonifyByReaction = function (reaction) {
+            switch($scope.data.selectedSound){
+                case "Simple":
+                    soundService.playSoundsV1(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Instrument":
+                    soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
+                    break;
+            }
+
+        };
         $scope.sonify = function (love, haha, wow, sad, angry) {
 
-            console.log(music);
+            soundService.playSoundsV1(love, haha, wow, sad, angry, null)
 
-            if (music == false){
-                music = true;
-                var velocity = reactionsInPercent(love, haha, wow, sad, angry);
-                var sonifyLove1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-                var sonifyHaha1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-                var sonifyWow1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-                var sonifySad1 = new Tone.PolySynth(6, Tone.Synth).toMaster();
-                var sonifyAngry = new Tone.PolySynth(6, Tone.Synth).toMaster();
-                switch (reactionTrend(love, haha, wow, sad, angry)) {
-                    case "love":
-                        sonifyLove1.triggerAttackRelease("D4", "2n", "+0", velocity.love);
-                        sonifyLove1.triggerAttackRelease("E4", "2n", "+0.1", velocity.love);
-                        sonifyLove1.triggerAttackRelease("G4", "2n", "+0.2", velocity.love);
-                        sonifyLove1.triggerAttackRelease("B4", "2n", "+0.3", velocity.love);
-                        sonifyLove1.releaseAll();
-                        break;
-                    case "haha":
-                        sonifyHaha1.triggerAttackRelease('A5', '8n', '+0', velocity.haha);
-                        sonifyHaha1.triggerAttackRelease('GB5', '8n', '+0.1', velocity.haha);
-                        sonifyHaha1.triggerAttackRelease('D5', '8n', '+0.2', velocity.haha);
-                        sonifyHaha1.triggerAttackRelease('D4', '8n', '+0.3', velocity.haha);
-                        sonifyHaha1.releaseAll();
-                        break;
-                    case "wow":
-                        sonifyWow1.triggerAttackRelease('C4', '1n', '+0', velocity.wow);
-                        sonifyWow1.triggerAttackRelease('E4', '1n', '+0', velocity.wow);
-                        sonifyWow1.triggerAttackRelease('AB4', '1n', '+0', velocity.wow);
-                        sonifyWow1.releaseAll();
-                        break;
-                    case "sad":
-                        sonifySad1.triggerAttackRelease('A3', '1n', '+0', velocity.sad);
-                        sonifySad1.triggerAttackRelease('D4', '1n', '+0', velocity.sad);
-                        sonifySad1.triggerAttackRelease('F4', '1n', '+0', velocity.sad);
-                        sonifySad1.triggerAttackRelease('G3', '1n', '+2', velocity.sad);
-                        sonifySad1.triggerAttackRelease('BB3', '1n', '+2', velocity.sad);
-                        sonifySad1.triggerAttackRelease('D4', '1n', '+2', velocity.sad);
-                        sonifySad1.triggerAttackRelease('E4', '1n', '+2', velocity.sad);
-                        sonifySad1.releaseAll();
-                        break;
-                    case "angry":
-                        sonifyAngry.triggerAttackRelease('A4', '1n', '+0', velocity.angry);
-                        sonifyAngry.triggerAttackRelease('C5', '1n', '+0', velocity.angry);
-                        sonifyAngry.triggerAttackRelease('EB5', '1n', '+0', velocity.angry);
-                        sonifyAngry.triggerAttackRelease('GB5', '1n', '+0', velocity.angry);
-                        sonifyAngry.releaseAll();
-                        break;
-                    default:
-                }}
-            $timeout(function () {
-                sonifyLove1.dispose();
-                sonifyHaha1.dispose();
-                sonifyWow1.dispose();
-                sonifySad1.dispose();
-                sonifyAngry.dispose();
-                music = false;
-            }, 5000)
         };
 
         $scope.drawChart = function (love, haha, wow, sad, angry, id) {
@@ -569,7 +528,7 @@ angular.module('sonificationAPP.controllers.main', [])
     })
 
     .controller('settingsCtrl', function ($scope, $http, $timeout, soundService) {
-        soundService.getFirstVersion();
+
     });
 
 
