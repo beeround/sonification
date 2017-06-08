@@ -170,6 +170,31 @@ angular.module('sonificationAPP.controllers.main', [])
 
         });
 
+        $scope.removeFav = "hallo";
+        $scope.tempdIndex = null;
+
+        $scope.openModal = function (tempFav, index) {
+            $('#ModalRemoveFav').modal('show');
+            $scope.removeFav = tempFav;
+            $scope.tempdIndex = index;
+        };
+
+
+        $scope.removeFavorite = function () {
+
+            if ($scope.removeFav != null){
+                let data = {
+                    fbID: $scope.removeFav.id,
+
+                };
+                $scope.removeFav.index = $scope.tempdIndex;
+                $('#ModalRemoveFav').modal('hide');
+
+                $http.put('/user/remove/favorite', data).then(function () {
+                    $scope.isFav = false;
+                })
+            }}
+
         function getAllReactions(fav, index) {
             let tempAllReactions = {
                 total_love: 0,

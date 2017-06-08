@@ -7,52 +7,72 @@ div(ng-controller="dashboardCtrl")
                 strong Favoriten
             ul
                 li(ng-repeat="fav in favData")
-                    .row.white
-                        .col-md-2
-                            //hier durchschleifen
-                            img(ng-src="{{fav.picture.data.url}}" width="100px" height="100px")
-                            p
-                                a(ng-href="{{fav.link}}" target="blank") {{fav.name}}
-                            p.icon.like {{fav.fan_count| number:0}}
-                            p
-                                i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
-                                span {{fav.total_reactionvalue*100| number:2}}%
+                    .row.white(ng-hide="$index == removeFav.index")
+                        .col-md-12
+                            .row
+                                div
+                                    button.btn.btn-primary(ng-click='openModal(fav, $index)') Favorit entfernen
 
-                        .col-md-2
-                            p Letzten 50 Posts
-                            ul
-                                li
-                                    i.icon.love
-                                    span {{fav.allReactions.total_love| number:0}}
-                                li
-                                    i.icon.haha
-                                    span {{fav.allReactions.total_haha| number:0}}
-                                li
-                                    i.icon.wow
-                                    span {{fav.allReactions.total_wow| number:0}}
-                                li
-                                    i.icon.sad
-                                    span {{fav.allReactions.total_sad | number:0}}
-                                li
-                                    i.icon.angry
-                                    span {{fav.allReactions.total_angry| number:0}}
-                        .col-md-5
-                            p Letzten 5 Postings
-                            ul
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[0].permalink_url}}" target="blank") {{fav.posts.data[0].message | limitTo: 25 }}{{fav.posts.data[0].message.length > 25 ? '...' : ''}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[1].total_reaction}}':fav.posts.data[1].total_reaction, 'noreaction': fav.posts.data[1].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[1].permalink_url}}" target="blank") {{fav.posts.data[1].message | limitTo: 25 }}{{fav.posts.data[1].message.length > 25 ? '...' : ''}}{{fav.posts.data[1].message.length > 1 ? '' : 'Link'}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[2].total_reaction}}':fav.posts.data[2].total_reaction, 'noreaction': fav.posts.data[2].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[2].permalink_url}}" target="blank") {{fav.posts.data[2].message | limitTo: 25 }}{{fav.posts.data[2].message.length > 25 ? '...' : ''}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[3].total_reaction}}':fav.posts.data[3].total_reaction, 'noreaction': fav.posts.data[3].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[3].permalink_url}}" target="blank") {{fav.posts.data[3].message | limitTo: 25 }}{{fav.posts.data[3].message.length > 25 ? '...' : ''}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 25 }}{{fav.posts.data[4].message.length > 25 ? '...' : ''}}
-                        .col-md-3
-                            canvas(ng-attr-id="myChart{{$index}}")
+                            .row
+                                .col-md-2
+                                    //hier durchschleifen
+                                    img(ng-src="{{fav.picture.data.url}}" width="100px" height="100px")
+                                    p
+                                        a(ng-href="{{fav.link}}" target="blank") {{fav.name}}
+                                    p.icon.like {{fav.fan_count| number:0}}
+                                    p
+                                        i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
+                                        span {{fav.total_reactionvalue*100| number:2}}%
+
+                                .col-md-2
+                                    p Letzten 50 Posts
+                                    ul
+                                        li
+                                            i.icon.love
+                                            span {{fav.allReactions.total_love| number:0}}
+                                        li
+                                            i.icon.haha
+                                            span {{fav.allReactions.total_haha| number:0}}
+                                        li
+                                            i.icon.wow
+                                            span {{fav.allReactions.total_wow| number:0}}
+                                        li
+                                            i.icon.sad
+                                            span {{fav.allReactions.total_sad | number:0}}
+                                        li
+                                            i.icon.angry
+                                            span {{fav.allReactions.total_angry| number:0}}
+                                .col-md-5
+                                    p Letzten 5 Postings
+                                    ul
+                                        li
+                                            i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
+                                            a(ng-href="{{fav.posts.data[0].permalink_url}}" target="blank") {{fav.posts.data[0].message | limitTo: 25 }}{{fav.posts.data[0].message.length > 25 ? '...' : ''}}
+                                        li
+                                            i.icon(ng-class="{'{{fav.posts.data[1].total_reaction}}':fav.posts.data[1].total_reaction, 'noreaction': fav.posts.data[1].total_reaction == null}")
+                                            a(ng-href="{{fav.posts.data[1].permalink_url}}" target="blank") {{fav.posts.data[1].message | limitTo: 25 }}{{fav.posts.data[1].message.length > 25 ? '...' : ''}}{{fav.posts.data[1].message.length > 1 ? '' : 'Link'}}
+                                        li
+                                            i.icon(ng-class="{'{{fav.posts.data[2].total_reaction}}':fav.posts.data[2].total_reaction, 'noreaction': fav.posts.data[2].total_reaction == null}")
+                                            a(ng-href="{{fav.posts.data[2].permalink_url}}" target="blank") {{fav.posts.data[2].message | limitTo: 25 }}{{fav.posts.data[2].message.length > 25 ? '...' : ''}}
+                                        li
+                                            i.icon(ng-class="{'{{fav.posts.data[3].total_reaction}}':fav.posts.data[3].total_reaction, 'noreaction': fav.posts.data[3].total_reaction == null}")
+                                            a(ng-href="{{fav.posts.data[3].permalink_url}}" target="blank") {{fav.posts.data[3].message | limitTo: 25 }}{{fav.posts.data[3].message.length > 25 ? '...' : ''}}
+                                        li
+                                            i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
+                                            a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 25 }}{{fav.posts.data[4].message.length > 25 ? '...' : ''}}
+                                .col-md-3
+                                    canvas(ng-attr-id="myChart{{$index}}")
+
+
+    #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Favoriten entfernen
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    | Sind sie sicher, dass sie {{removeFav.name}} aus den Favoriten entfernen wollen?
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Abbrechen
+                    button.btn.btn-danger.btn-sm(ng-click="removeFavorite()") Ja, entfernen
