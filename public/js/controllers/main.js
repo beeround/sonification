@@ -146,9 +146,6 @@ angular.module('sonificationAPP.controllers.main', [])
     .controller('dashboardCtrl', function ($scope, $http, $timeout) {
 
 
-
-
-
         //GET FAV
         $http.get('/user/get/favorites').then(results => {
             let favMap = results.data.map((fav,index)=> {
@@ -411,23 +408,20 @@ angular.module('sonificationAPP.controllers.main', [])
                     getAllReactions($scope.fbData);
 
 
-                    // Add activity, if no param
-                    if ($routeParams.id) {
-                        // POST Activity
-                        let activity = {
-                            search: {
-                                fbID: $scope.currentFB.id,
-                                name: $scope.currentFB.name,
-                            },
+                    // POST Activity
+                    let activity = {
+                        search: {
+                            fbID: $scope.currentFB.id,
+                            name: $scope.currentFB.name,
+                        },
 
-                        };
+                    };
 
-                        $http.post('/user/activity', activity).then(results => {
-                            $http.get('/user/activity').then(results => {
-                                $scope.lastSearchActivity = results.data;
-                            })
-                        });
-                    }
+                    $http.post('/user/activity', activity).then(results => {
+                        $http.get('/user/activity').then(results => {
+                            $scope.lastSearchActivity = results.data;
+                        })
+                    });
 
                 };
 
