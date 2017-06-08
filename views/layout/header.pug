@@ -2,7 +2,7 @@ header
   nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
     button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
-    a.navbar-brand(href='/') SocialSound
+    a.navbar-brand(href='/app') SocialSound
     #navbarNavDropdown.collapse.navbar-collapse
       ul.navbar-nav
         if user
@@ -12,6 +12,10 @@ header
           li.nav-item(class=(title == 'Search') ? 'active' : undefined)
             a.nav-link(href='/app/search')
               | Suche
+
+          li.nav-item(class=(title == 'Compare') ? 'active' : undefined)
+            a.nav-link(href='/app/compare')
+              | Vergleichen
 
 
       ul.nav.navbar-nav.ml-auto.w-100.justify-content-end

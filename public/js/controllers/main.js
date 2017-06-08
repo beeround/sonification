@@ -448,7 +448,7 @@ angular.module('sonificationAPP.controllers.main', [])
                         })
                     });
 
-                };
+                }
 
                 //GET FAV
                 $http.get('/user/get/favorites').then(results => {
@@ -478,4 +478,95 @@ angular.module('sonificationAPP.controllers.main', [])
             })
         }
 
+    })
+
+    .controller('compareCtrl', function ($scope, $http, $timeout) {
+
+        //LEFT
+        $scope.searchUserOne = function () {
+            $scope.currentWindowOne = "SearchList";
+            $scope.dataLeft = null;
+
+            $scope.searchResultsOne = undefined;
+
+            let data = {
+                query: $scope.queryOne.name,
+            };
+
+            $http.post('/api/post/fb/search', data).then(results => {
+                $scope.searchResultsOne = results.data;
+            });
+        };
+
+        $scope.changeFeed = function (fbID, side) {
+
+            getFeed(fbID, side)
+        };
+
+
+        //RIGHT
+        $scope.searchUserTwo = function () {
+            $scope.currentWindowTwo = "SearchList";
+            $scope.dataRight = null;
+
+
+            $scope.searchResultsTwo = undefined;
+
+            let data = {
+                query: $scope.queryTwo.name,
+            };
+
+            $http.post('/api/post/fb/search', data).then(results => {
+                $scope.searchResultsTwo = results.data;
+            });
+        };
+
+
+
+
+        function getFeed(fbID, side) {
+            $http.get('/api/get/fb/favorite?favID=' + fbID).then(results => {
+                console.log(results.data);
+                getAllReactions(results.data);
+
+                if(side == 'left'){
+                    $scope.dataLeft = results.data;
+
+                }
+                else {
+                    $scope.dataRight = results.data;
+
+                }
+
+
+            })
+        }
+
+        function getAllReactions(data) {
+            let tempAllReactions = {
+                total_love: 0,
+                total_haha: 0,
+                total_wow: 0,
+                total_sad: 0,
+                total_angry: 0
+            };
+            data.posts.data.map((result) => {
+
+
+                tempAllReactions.total_love = tempAllReactions.total_love + result.love.summary.total_count;
+                tempAllReactions.total_haha = tempAllReactions.total_haha + result.haha.summary.total_count;
+                tempAllReactions.total_wow = tempAllReactions.total_wow + result.wow.summary.total_count;
+                tempAllReactions.total_sad = tempAllReactions.total_sad + result.sad.summary.total_count;
+                tempAllReactions.total_angry = tempAllReactions.total_angry + result.angry.summary.total_count;
+                result.total_reaction = reactionTrend(result.love.summary.total_count, result.haha.summary.total_count, result.wow.summary.total_count, result.sad.summary.total_count, result.angry.summary.total_count);
+
+            });
+            data.allReactions = tempAllReactions;
+            data.total_reaction = reactionTrend(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
+            data.total_reactionvalue = $scope.reactionTrendValue(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
+
+        }
+
     });
+
+

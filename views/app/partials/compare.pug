@@ -1,4 +1,72 @@
-section(ng-controller="chartCtrl")
-    h1 {{chartTitle}}
-    div(style=" width:500px; height:500px")
-        canvas#myChart
+section(ng-controller="compareCtrl")
+    h1 Compare
+
+    .row
+        .col-md-6
+            form(ng-submit="searchUserOne()")
+                .row
+                    .col-md-8
+                        .form-group
+                            input.form-control(type='text', required, ng-model="queryOne.name" placeholder='Facebook page name')
+                    .col-md-2
+                        button.btn.btn-primary(type='submit') search
+            .row
+                .col-md-12(ng-show="searchResultsOne && !dataLeft")
+                    h3 Search Results
+
+                    .search(ng-show="currentWindowOne == 'SearchList'")
+                        .searchResult(ng-repeat="search in searchResultsOne")
+                            .card.card-inverse(style='background-color: #333; border-color: #333;')
+                                .card-block
+                                    h3.card-title
+                                        img.profile(ng-src="{{search.picture.data.url}}")
+                                        | {{search.name}}
+                                    p.card-text {{search.category}}
+                                    p.card-text {{search.fan_count}} Likes
+
+
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')") show feed
+
+            .row
+                .col-md-12(ng-show="dataLeft")
+                    h3 Name: {{dataLeft.name}}
+                    p Fans: {{dataLeft.fan_count}}
+                    p Reaction Value: {{dataLeft.total_reactionvalue}}
+                    p Total Reaction: {{dataLeft.total_reaction}}
+
+
+
+
+
+
+        .col-md-6
+            form(ng-submit="searchUserTwo()")
+                .row
+                    .col-md-8
+                        .form-group
+                            input.form-control(type='text', required, ng-model="queryTwo.name" placeholder='Facebook page name')
+                    .col-md-2
+                        button.btn.btn-primary(type='submit') search
+            .row
+                .col-md-12(ng-show="searchResultsTwo && !dataRight")
+                    h3 Search Results
+
+                    .search(ng-show="currentWindowTwo == 'SearchList'")
+                        .searchResult(ng-repeat="search in searchResultsTwo")
+                            .card.card-inverse(style='background-color: #333; border-color: #333;')
+                                .card-block
+                                    h3.card-title
+                                        img.profile(ng-src="{{search.picture.data.url}}")
+                                        | {{search.name}}
+                                    p.card-text {{search.category}}
+                                    p.card-text {{search.fan_count}} Likes
+
+
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')") show feed
+
+            .row
+                .col-md-12(ng-show="dataRight")
+                    h3 Name: {{dataRight.name}}
+                    p Fans: {{dataRight.fan_count}}
+                    p Reaction Value: {{dataRight.total_reactionvalue}}
+                    p Total Reaction: {{dataRight.total_reaction}}
