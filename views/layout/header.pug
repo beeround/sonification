@@ -17,6 +17,9 @@ header
             a.nav-link(href='/app/compare')
               | Vergleichen
 
+          li.nav-item(class=(title == 'Settings') ? 'active' : undefined)
+            a.nav-link(href='/app/settings')
+              | Settings
 
       ul.nav.navbar-nav.ml-auto.w-100.justify-content-end
         if user

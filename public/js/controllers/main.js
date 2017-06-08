@@ -145,7 +145,6 @@ angular.module('sonificationAPP.controllers.main', [])
 
     .controller('dashboardCtrl', function ($scope, $http, $timeout) {
 
-
         //GET FAV
         $http.get('/user/get/favorites').then(results => {
             let favMap = results.data.map((fav,index)=> {
@@ -567,6 +566,11 @@ angular.module('sonificationAPP.controllers.main', [])
 
         }
 
+    })
+
+    .controller('settingsCtrl', function ($scope, $http, $timeout, soundService) {
+        soundService.getFirstVersion();
     });
+
 
 

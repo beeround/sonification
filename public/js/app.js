@@ -1,5 +1,5 @@
 'use strict';
-angular.module('sonificationAPP',['angular.filter','daterangepicker','ngRoute', 'sonificationAPP.controllers.main', 'sonificationAPP.controllers.header'])
+angular.module('sonificationAPP',['angular.filter','daterangepicker','ngRoute', 'sonificationAPP.controllers.main', 'sonificationAPP.controllers.header','sonificationAPP.services.sounds'])
 
     .config(function ($routeProvider, $locationProvider ) {
 
@@ -17,6 +17,10 @@ angular.module('sonificationAPP',['angular.filter','daterangepicker','ngRoute', 
     }).
     when('/app/compare', {
         templateUrl: '/app/partials/compare'
+
+    }).
+    when('/app/settings', {
+        templateUrl: '/app/partials/settings'
 
     });
 

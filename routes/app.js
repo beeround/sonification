@@ -17,6 +17,11 @@ router.get('/search/:id', passportConfig.isAuthenticated, function(req, res) {
 router.get('/compare', passportConfig.isAuthenticated, function(req, res) {
     res.render('app/index', { title: 'Compare', message: 'Hello there!'});
 });
+
+router.get('/settings', passportConfig.isAuthenticated, function(req, res) {
+    res.render('app/index', { title: 'Settings', message: 'Hello there!'});
+});
+
 router.get('/partials/:view', passportConfig.isAuthenticated, function(req, res) {
 
     var view = req.params.view;
