@@ -8,7 +8,7 @@
 html, body {
   background-color: $brand-darken;
 }
-h1,h2,h3,h4,h5,p,li {
+h1,h2,h3,h4,h5,p,li,label {
   color: $white;
 }
 
@@ -128,7 +128,9 @@ header {
     margin-right: 15px;
   }
 }
-
+.searchResult.box {
+  margin-bottom: 5px;
+}
 
 // POSTS
 .feed {
@@ -180,13 +182,10 @@ li{
     line-height: 1.5;
   }
 
-  li,p{
+  li,p,span{
     color: $white;
   }
 
-}
-.box:hover{
-background-color: #ff9800;
 }
 
 
@@ -196,7 +195,7 @@ background-color: #ff9800;
 
 .icon{
   background-size: contain;
-  padding:0 0 0 50px;
+  padding:0 0 0 40px;
   background-repeat: no-repeat;
 
 }
@@ -254,4 +253,11 @@ background-color: #ff9800;
   background-color: $brand-darken;
   border-color: $brand-primary;
   color: $brand-primary;
+}
+
+.legend {
+  margin: 0 5px;
+}
+hr {
+  border-color: $grey;
 }

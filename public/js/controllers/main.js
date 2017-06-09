@@ -93,8 +93,12 @@ angular.module('sonificationAPP.controllers.main', [])
             };
 
             let chart = new google.visualization.PieChart(document.getElementById("myChart" + id));
-            chart.draw(data, options);
-        };
+
+            $timeout(function () {
+                chart.draw(data, options);
+
+            },4000);
+       };
 
         /*$scope.drawChart = function (love, haha, wow, sad, angry, id) {
             let ctx = document.getElementById("myChart" + id);
@@ -160,6 +164,7 @@ angular.module('sonificationAPP.controllers.main', [])
 
     .controller('dashboardCtrl', function ($scope, $http, $timeout) {
 
+        //TODO Reload after Fav Delete
         //GET FAV
         $http.get('/user/get/favorites').then(results => {
             let favMap = results.data.map((fav,index)=> {

@@ -11,7 +11,7 @@ h1 Suche
                         .form-group
                             input.form-control(type='text', required, ng-model="query.name" placeholder='Facebook page name')
                     .col-md-2
-                        button.btn.btn-primary(type='submit') search
+                        button.btn.btn-primary(type='submit') suchen
 
         .col-md-12
             .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
@@ -21,29 +21,61 @@ h1 Suche
                         | {{activity.name}}
                         i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}
 
-        .col-md-12(ng-show="searchResults")
-            h3 Search Results
-            span.btn.btn-sm.btn-primary(ng-show="currentWindow != 'SearchList'", ng-click="showWindow('SearchList')") Show search results
-            .search(ng-show="currentWindow == 'SearchList'")
-                .searchResult(ng-repeat="search in searchResults")
-                    .card.card-inverse(style='background-color: #333; border-color: #333;')
-                        .card-block
-                            h3.card-title
-                                img.profile(ng-src="{{search.picture.data.url}}")
-                                | {{search.name}}
-                            p.card-text {{search.category}}
-                            p.card-text {{search.fan_count}} Likes
+        .col-md-12(ng-show="searchResults", style="margin-top:30px")
+            h3
+                span Suchergebnisse
+                span.btn.btn-sm.btn-primary.pull-right(ng-show="currentWindow != 'SearchList'", ng-click="showWindow('SearchList')") Letzte Suchergebnisse anzeigen
+
+            hr
+            .search(ng-show="currentWindow == 'SearchList'", style="margin-top:30px")
+                .row.legend
+                    .col-md-4
+                        h5 Name
+                    .col-md-4
+                        h5 Kategorie
+                    .col-md-4
+                        h5 Likes
+
+                .row
+                    .col
+                        .searchResult.box(ng-repeat="search in searchResults")
+                            .row
+                                .col-md-4
+                                    img.profile(ng-src="{{search.picture.data.url}}", width="30" height="30")
+                                    span {{search.name}}
+
+                                .col-md-4
+                                    p {{search.category}}
+                                .col-md-2
+                                    p.icon.like {{search.fan_count| number:0}}
+
+                                .col-md-2
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id)") Feed anzeigen
 
 
-                            span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id)") show feed
+
+
+
+
 
 
     .feed(ng-show="currentWindow == 'Feed'")
-        h4 Start: {{currentDate.start}} - End: {{currentDate.end}}
+        .row
+            .col-md-8
+                img(ng-src="{{fbData[0].from.cover.source}}")
+            .col-md-4
+                p Start: {{currentDate.start}} - End: {{currentDate.end}}
+                .form-group
+                    label Zeitraum wählen
+                    input.form-control.date-picker(date-range-picker type='text', ng-model='datePicker.date', options="opts", placeholder="Select date range")
+
+                img(ng-src="{{fbData[0].from.picture.data.url}}")
+                p
+                    a(href="{{fbData[0].from.link}}" target="blank") {{fbData[0].from.name}}
+
         .row
             .col-md-6
-                .form-group
-                    input.form-control.date-picker(date-range-picker type='text', ng-model='datePicker.date', options="opts", placeholder="Select date range")
+
 
             .col-md-6.limit
 
@@ -56,10 +88,6 @@ h1 Suche
 
         .row(ng-show="fbData.length > 0")
             .col-md-2
-                img(ng-src="{{fbData[0].from.picture.data.url}}" width="100px" height="100px")
-                img(ng-src="{{fbData[0].from.cover.source}}")
-                p
-                    a(href="{{fbData[0].from.link}}" target="blank") {{fbData[0].from.name}}
 
                 span.btn.btn-warning.btn-sm(ng-click="addToFavorites()", ng-show="!isFav") Favorisieren
                 span.btn.btn-danger.btn-sm(ng-click="removeFavorite()", ng-show="isFav") Von Favoritenliste löschen

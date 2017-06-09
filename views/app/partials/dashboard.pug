@@ -22,7 +22,7 @@ div(ng-controller="dashboardCtrl")
 
 
     .row(style="margin-top:30px" ng-show="favData")
-        .col-md-5
+        .col-md-4
             h5 Favorit
         .col-md-2
             h5 Likes
@@ -30,13 +30,13 @@ div(ng-controller="dashboardCtrl")
             h5 Trend
         .col-md-2
             h5 Hinzugefügt am
-        .col-md-1
+        .col-md-2
     .row
         ul.col#accordion
             li(ng-repeat="fav in favData", ng-hide="$index == removeFav.index")
-                .collapsed.box()
+                .collapsed.box
                     .row
-                        .col-md-5
+                        .col-md-4
                             img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}" width="30" height="30")
                             | {{fav.name}}
                         .col-md-2
@@ -46,17 +46,18 @@ div(ng-controller="dashboardCtrl")
                             span {{fav.total_reactionvalue*100| number:2}}%
                         .col-md-2
                             p {{fav.date | date:'dd.MM.yyyy'}}
-                        .col-md-1
-                            .row
-                                button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)') x
-                                button.btn.btn-primary.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion' ng-click='drawChartDashboard(fav, $index)') v
+                        .col-md-2
+                            .row.pull-right
+                                button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)', style="margin-right:10px")
+                                    i.fa.fa-minus
+                                button.btn.btn-primary.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px")
+                                    i.fa.fa-caret-down
 
 
 
 
                 .collapse.box(id="index{{$index}}")
                    .row
-
                         .col-md-2
                             p Letzten 50 Posts
                             ul
