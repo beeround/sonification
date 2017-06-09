@@ -42,6 +42,9 @@ a {
   color: $brand-primary;
   transition: all 1s;
 }
+a:hover {
+  color: $grey;
+}
 
 // BUTTON
 

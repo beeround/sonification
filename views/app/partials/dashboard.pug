@@ -94,7 +94,7 @@ div(ng-controller="dashboardCtrl")
                                     i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
                                     a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 50 }}{{fav.posts.data[4].message.length > 50 ? '...' : ''}}{{fav.posts.data[4].message.length > 1 ? '' : 'Zum Post'}}
                         .col-md-3
-                            canvas(ng-attr-id="myChart{{$index}}")
+                            div(google-chart='', chart='myChartObject', style='height:200px; width:100%;')
 
 
     #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')
