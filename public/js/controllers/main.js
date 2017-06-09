@@ -60,29 +60,29 @@ angular.module('sonificationAPP.controllers.main', [])
             }
 
         };
-/*
-        google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
-                ['Watch TV', 2],
-                ['Sleep',    7]
-            ]);
 
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback($scope.drawChart);
+        $scope.drawChart =function (love, haha, wow, sad, angry, id) {
+            var data = google.visualization.arrayToDataTable([
+                ['Reaction', ''],
+                ['Love',     love],
+                ['haha',      haha],
+                ['wow',  wow],
+                ['sad', sad],
+                ['angry',    angry]
+            ]);
             var options = {
-                title: 'My Daily Activities',
+
+                title: 'Test Titel',
                 pieHole: 0.4,
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            var chart = new google.visualization.PieChart(document.getElementById("myChart" + id));
             chart.draw(data, options);
         }
-*/
-        $scope.drawChart = function (love, haha, wow, sad, angry, id) {
+
+        /*$scope.drawChart = function (love, haha, wow, sad, angry, id) {
             let ctx = document.getElementById("myChart" + id);
             console.log(love,haha,wow,sad,angry,id);
             let myChart = new Chart(ctx, {
@@ -113,7 +113,7 @@ angular.module('sonificationAPP.controllers.main', [])
 
             });
 
-        };
+        };*/
         $scope.reactionTrendValue = function (love, wow, haha, sad, angry) {
             let value;
 
