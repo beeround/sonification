@@ -52,6 +52,7 @@ angular.module('sonificationAPP.controllers.main', [])
             let ctx = document.getElementById("myChart" + id);
 
             let myChart = new Chart(ctx, {
+
                 type: 'polarArea',
                 data: {
                     labels: ["LOVE", "HAHA", "WOW", "SAD", "ANGRY"],
@@ -66,18 +67,15 @@ angular.module('sonificationAPP.controllers.main', [])
                                 "#9a0400"
 
                             ],
-                            borderColor: "rgba(179,181,198,1)",
-                            pointBackgroundColor: "rgba(179,181,198,1)",
-                            pointBorderColor: "#fff",
-                            pointHoverBackgroundColor: "#fff",
-                            pointHoverBorderColor: "rgba(179,181,198,1)",
                             data: [love, haha, wow, sad, angry]
                         },
-
-
-
-                    ]
+                    ],
                 },
+                options: {
+                    legend: {
+                        display : false
+                    }
+                }
 
             });
 
@@ -118,8 +116,9 @@ angular.module('sonificationAPP.controllers.main', [])
         //GET FAV
         $http.get('/user/get/favorites').then(results => {
             let favMap = results.data.map((fav,index)=> {
-                return $http.get('/api/get/fb/favorite?favID=' + fav.fbID).then(results => {
-                    return results.data;
+                return $http.get('/api/get/fb/favorite?favID=' + fav.fbID).then(result => {
+                    result.data.date = fav.date;
+                    return result.data;
 
                 })
             });
@@ -489,8 +488,6 @@ angular.module('sonificationAPP.controllers.main', [])
                 $scope.searchResultsTwo = results.data;
             });
         };
-
-
 
 
         function getFeed(fbID, side) {

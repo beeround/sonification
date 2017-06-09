@@ -33,6 +33,7 @@ section(ng-controller="compareCtrl")
                     p Fans: {{dataLeft.fan_count}}
                     p Reaction Value: {{dataLeft.total_reactionvalue}}
                     p Total Reaction: {{dataLeft.total_reaction}}
+                    p All Reactions: {{dataLeft.allReactions | json}}
 
 
 
@@ -70,3 +71,4 @@ section(ng-controller="compareCtrl")
                     p Fans: {{dataRight.fan_count}}
                     p Reaction Value: {{dataRight.total_reactionvalue}}
                     p Total Reaction: {{dataRight.total_reaction}}
+                    p All Reactions: {{dataRight.allReactions | json}}

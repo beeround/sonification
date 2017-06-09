@@ -2,66 +2,97 @@ div(ng-controller="dashboardCtrl")
     h1 Dashboard
 
     .row
-        .col-md-12
-            p
-                strong Favoriten
-            ul
-                li(ng-repeat="fav in favData")
-                    .row.white(ng-hide="$index == removeFav.index")
-                        .col-md-12
-                            .row
-                                div
-                                    button.btn.btn-primary(ng-click='openModal(fav, $index)') Favorit entfernen
+        .col.box
+            h5 Anzahl Favoriten
+            h2 #{user.favorites.length}
 
-                            .row
-                                .col-md-2
-                                    //hier durchschleifen
-                                    img(ng-src="{{fav.picture.data.url}}" width="100px" height="100px")
-                                    p
-                                        a(ng-href="{{fav.link}}" target="blank") {{fav.name}}
-                                    p.icon.like {{fav.fan_count| number:0}}
-                                    p
-                                        i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
-                                        span {{fav.total_reactionvalue*100| number:2}}%
+        .col.box
+            h5 Anzahl Suchanfragen
+            h2 #{user.searchQueries.length}
 
-                                .col-md-2
-                                    p Letzten 50 Posts
-                                    ul
-                                        li
-                                            i.icon.love
-                                            span {{fav.allReactions.total_love| number:0}}
-                                        li
-                                            i.icon.haha
-                                            span {{fav.allReactions.total_haha| number:0}}
-                                        li
-                                            i.icon.wow
-                                            span {{fav.allReactions.total_wow| number:0}}
-                                        li
-                                            i.icon.sad
-                                            span {{fav.allReactions.total_sad | number:0}}
-                                        li
-                                            i.icon.angry
-                                            span {{fav.allReactions.total_angry| number:0}}
-                                .col-md-5
-                                    p Letzten 5 Postings
-                                    ul
-                                        li
-                                            i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
-                                            a(ng-href="{{fav.posts.data[0].permalink_url}}" target="blank") {{fav.posts.data[0].message | limitTo: 25 }}{{fav.posts.data[0].message.length > 25 ? '...' : ''}}
-                                        li
-                                            i.icon(ng-class="{'{{fav.posts.data[1].total_reaction}}':fav.posts.data[1].total_reaction, 'noreaction': fav.posts.data[1].total_reaction == null}")
-                                            a(ng-href="{{fav.posts.data[1].permalink_url}}" target="blank") {{fav.posts.data[1].message | limitTo: 25 }}{{fav.posts.data[1].message.length > 25 ? '...' : ''}}{{fav.posts.data[1].message.length > 1 ? '' : 'Link'}}
-                                        li
-                                            i.icon(ng-class="{'{{fav.posts.data[2].total_reaction}}':fav.posts.data[2].total_reaction, 'noreaction': fav.posts.data[2].total_reaction == null}")
-                                            a(ng-href="{{fav.posts.data[2].permalink_url}}" target="blank") {{fav.posts.data[2].message | limitTo: 25 }}{{fav.posts.data[2].message.length > 25 ? '...' : ''}}
-                                        li
-                                            i.icon(ng-class="{'{{fav.posts.data[3].total_reaction}}':fav.posts.data[3].total_reaction, 'noreaction': fav.posts.data[3].total_reaction == null}")
-                                            a(ng-href="{{fav.posts.data[3].permalink_url}}" target="blank") {{fav.posts.data[3].message | limitTo: 25 }}{{fav.posts.data[3].message.length > 25 ? '...' : ''}}
-                                        li
-                                            i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
-                                            a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 25 }}{{fav.posts.data[4].message.length > 25 ? '...' : ''}}
-                                .col-md-3
-                                    canvas(ng-attr-id="myChart{{$index}}")
+
+        .col.box
+            h5 Letzte Suchanfrage
+            h2 #{user.searchQueries[user.searchQueries.length - 1].name}
+
+        .col.box
+            h5 Letzter Login
+            h2= moment(user.updatedAt).format("DD.MM.YYYY")
+
+
+
+    .row(style="margin-top:30px")
+        .col-md-5
+            h5 Favorit
+        .col-md-2
+            h5 Likes
+        .col-md-2
+            h5 Trend
+        .col-md-2
+            h5 Hinzugefügt am
+        .col-md-1
+    .row
+        ul.col#accordion
+            li(ng-repeat="fav in favData", ng-hide="$index == removeFav.index")
+                .collapsed.box(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion')
+                    .row
+                        .col-md-5
+                            img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}" width="30" height="30")
+                            | {{fav.name}}
+                        .col-md-2
+                            p.icon.like {{fav.fan_count| number:0}}
+                        .col-md-2
+                            i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
+                            span {{fav.total_reactionvalue*100| number:2}}%
+                        .col-md-2
+                            p {{fav.date | date:'dd.MM.yyyy'}}
+                        .col-md-1
+                            button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)') x
+
+
+
+
+                .collapse.box(id="index{{$index}}")
+                   .row
+
+                        .col-md-2
+                            p Letzten 50 Posts
+                            ul
+                                li
+                                    i.icon.love
+                                    span {{fav.allReactions.total_love| number:0}}
+                                li
+                                    i.icon.haha
+                                    span {{fav.allReactions.total_haha| number:0}}
+                                li
+                                    i.icon.wow
+                                    span {{fav.allReactions.total_wow| number:0}}
+                                li
+                                    i.icon.sad
+                                    span {{fav.allReactions.total_sad | number:0}}
+                                li
+                                    i.icon.angry
+                                    span {{fav.allReactions.total_angry| number:0}}
+                        .col-md-7
+                            p Letzten 5 Postings
+                            ul
+                                li
+                                    i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
+                                    a(ng-href="{{fav.posts.data[0].permalink_url}}" target="blank") {{fav.posts.data[0].message | limitTo: 50 }}{{fav.posts.data[0].message.length > 50 ? '...' : ''}}{{fav.posts.data[0].message.length > 1 ? '' : 'Zum Post'}}
+                                li
+                                    i.icon(ng-class="{'{{fav.posts.data[1].total_reaction}}':fav.posts.data[1].total_reaction, 'noreaction': fav.posts.data[1].total_reaction == null}")
+                                    a(ng-href="{{fav.posts.data[1].permalink_url}}" target="blank") {{fav.posts.data[1].message | limitTo: 50 }}{{fav.posts.data[1].message.length > 50 ? '...' : ''}}{{fav.posts.data[1].message.length > 1 ? '' : 'Zum Post'}}
+                                li
+                                    i.icon(ng-class="{'{{fav.posts.data[2].total_reaction}}':fav.posts.data[2].total_reaction, 'noreaction': fav.posts.data[2].total_reaction == null}")
+                                    a(ng-href="{{fav.posts.data[2].permalink_url}}" target="blank") {{fav.posts.data[2].message | limitTo: 50 }}{{fav.posts.data[2].message.length > 50 ? '...' : ''}}{{fav.posts.data[2].message.length > 1 ? '' : 'Zum Post'}}
+                                li
+                                    i.icon(ng-class="{'{{fav.posts.data[3].total_reaction}}':fav.posts.data[3].total_reaction, 'noreaction': fav.posts.data[3].total_reaction == null}")
+                                    a(ng-href="{{fav.posts.data[3].permalink_url}}" target="blank") {{fav.posts.data[3].message | limitTo: 50 }}{{fav.posts.data[3].message.length > 50 ? '...' : ''}}{{fav.posts.data[3].message.length > 1 ? '' : 'Zum Post'}}
+                                li
+                                    i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
+                                    a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 50 }}{{fav.posts.data[4].message.length > 50 ? '...' : ''}}{{fav.posts.data[4].message.length > 1 ? '' : 'Zum Post'}}
+                        .col-md-3
+                            canvas(ng-attr-id="myChart{{$index}}")
 
 
     #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')

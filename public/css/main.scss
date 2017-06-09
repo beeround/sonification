@@ -6,11 +6,59 @@
 @import "themes/default/default";
 
 html, body {
-  background-color: #34495e;
+  background-color: $brand-darken;
 }
 h1,h2,h3,h4,h5,p,li {
   color: $white;
+}
 
+
+.container {
+  margin-top: 120px;
+}
+
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+h5 {
+  color: $grey;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul.col {
+  margin: 0;
+  padding: 0;
+
+}
+.bg-faded {
+  background-color: #131b21;
+
+  a,span {
+    color: $grey!important;
+  }
+
+  a:hover {
+    text-decoration: underline!important;
+  }
+  .active a {
+    text-decoration: underline!important;
+  }
+
+  .dropdown-menu {
+    background-color: $brand-dark!important;
+
+    .dropdown-item:hover {
+      background: none!important;
+    }
+  }
 }
 header {
   position: fixed;
@@ -46,9 +94,6 @@ header {
     color: #34495e;
   }
 }
-.container {
-  margin-top: 100px;
-}
 
 
 // SEARCH
@@ -71,7 +116,6 @@ header {
 }
 .post {
   padding: 10px;
-  background-color: $brand-primary;
   margin-bottom: 10px;
 
   img {
@@ -104,12 +148,22 @@ ul{
 li{
   margin: 8px 0;
 }
-.row.white{
-  background-color: #FFF;
+
+.box{
+  background-color: $brand-dark;
   padding: 20px;
-  li,p{
-    color: #333333;
+  margin: 0 5px;
+
+  h2 {
+    font-size: 28px;
+    margin-top: 25px;
+    line-height: 1.5;
   }
+
+  li,p{
+    color: $white;
+  }
+
 }
 
 
@@ -158,4 +212,12 @@ li{
 .fade.in{
   opacity: 1;
   transition: all 1s;
+}
+
+
+//Accordion
+.collapsed {
+  display: block;
+}
+.collapse {
 }
