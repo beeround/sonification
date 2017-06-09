@@ -57,6 +57,7 @@ h1 Suche
         .row(ng-show="fbData.length > 0")
             .col-md-2
                 img(ng-src="{{fbData[0].from.picture.data.url}}" width="100px" height="100px")
+                img(ng-src="{{fbData[0].from.cover.source}}")
                 p
                     a(href="{{fbData[0].from.link}}" target="blank") {{fbData[0].from.name}}
 
@@ -79,6 +80,7 @@ h1 Suche
                         .post
                             p.small {{fb.created_time | date:'dd.MM.yyyy - HH:mm'}} Uhr
                             p {{fb.message}}
+
                             a(ng-href="{{fb.permalink_url}}", target="blank") Permanentlink
                             button(ng-click="sonify(fb.love.summary.total_count, fb.haha.summary.total_count,fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count)") sonifizieren
                             img(ng-src="{{fb.full_picture}}")
