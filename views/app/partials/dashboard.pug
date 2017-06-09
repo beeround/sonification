@@ -49,7 +49,7 @@ div(ng-controller="dashboardCtrl")
                         .col-md-1
                             .row
                                 button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)') x
-                                button.btn.btn-primary.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion') v
+                                button.btn.btn-primary.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion' ng-click='drawChartDashboard(fav, $index)') v
 
 
 
@@ -94,7 +94,7 @@ div(ng-controller="dashboardCtrl")
                                     i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
                                     a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 50 }}{{fav.posts.data[4].message.length > 50 ? '...' : ''}}{{fav.posts.data[4].message.length > 1 ? '' : 'Zum Post'}}
                         .col-md-3
-                            div(ng-attr-id="myChart{{$index}}")
+                            div(ng-attr-id="myChart{{$index}}" )
 
 
     #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')

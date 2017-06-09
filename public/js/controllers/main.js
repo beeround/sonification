@@ -79,8 +79,17 @@ angular.module('sonificationAPP.controllers.main', [])
             ]);
             let options = {
 
-                title: 'Test Titel',
                 pieHole: 0.4,
+                backgroundColor: 'transparent',
+                legend: {position: 'none'},
+                pieSliceText: 'none',
+                chartArea: {
+                    left: "0%",
+                    top: "0%",
+                    height: "100%",
+                    width: "100%"
+                }
+
             };
 
             let chart = new google.visualization.PieChart(document.getElementById("myChart" + id));
@@ -176,6 +185,13 @@ angular.module('sonificationAPP.controllers.main', [])
 
         });
 
+        $scope.drawChartDashboard = function (fav, index) {
+
+            $timeout(function (){
+                $scope.drawChart(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry, index);
+            },0);
+        }
+
         $scope.removeFav = "hallo";
         $scope.tempdIndex = null;
 
@@ -223,9 +239,7 @@ angular.module('sonificationAPP.controllers.main', [])
             fav.allReactions = tempAllReactions;
             fav.total_reaction = reactionTrend(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
             fav.total_reactionvalue = $scope.reactionTrendValue(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
-            $timeout(function (){
-                $scope.drawChart(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry, index);
-            },0);
+
         }
     })
 
@@ -413,7 +427,6 @@ angular.module('sonificationAPP.controllers.main', [])
 
             $http.post('/api/post/fb/posts', data).then(posts => {
                 $scope.fbData = posts.data;
-                console.log($scope.fbData);
 
                 // IF No DATA is available
                 if ($scope.fbData.length == 0) {

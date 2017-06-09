@@ -107,8 +107,7 @@ h1 Suche
                                     p {{fb.angry.summary.total_count}}
                                 hr
                     .col-md-6
-                        div
-                            canvas(ng-attr-id="myChart{{$index}}")
+                        div(ng-attr-id="myChart{{$index}}")
         .row(ng-show="fbData.length == 0")
 
             p Keine Daten gefunden! Bitte ändere den Zeitraum
