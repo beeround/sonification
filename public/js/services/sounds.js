@@ -2,15 +2,17 @@
 angular.module('sonificationAPP.services.sounds', [])
     .service('soundService', ['$http', '$q', '$timeout',
         function ($http, $q, $timeout) {
+            let currentsong = new Audio();
             let sonifyLove;
             let sonifyHaha;
             let sonifyWow;
             let sonifySad;
             let sonifyAngry;
-            let soundON;
+            let soundON = false;
             let sounds=[
                 {name: "Simple"},
-                {name: "Instrument"}
+                {name: "Instrument"},
+                {name: "Sounds"}
             ];
 
             let removePolysynth = function(){
@@ -110,36 +112,110 @@ angular.module('sonificationAPP.services.sounds', [])
                 },
                 playSoundsV2: function(love, haha, wow, sad, angry, reaction){
                     let trendReaction;
+                    let ReactionsInPercent;
+                    if (soundON && !currentsong.paused){
+                        currentsong.pause();
+                    }
                     soundON = true;
 
 
 
                     if (reaction != null){
                         trendReaction = reaction;
+                        ReactionsInPercent = {
+                            love:1,
+                            haha:1,
+                            wow:1,
+                            sad:1,
+                            angry:1
+                        };
                     }
                     else {
                         trendReaction = reactionTrend(love, haha, wow, sad, angry);
+                        ReactionsInPercent = reactionsInPercent(love, haha, wow, sad, angry);
                     }
                     switch (trendReaction) {
                         case "love":
-                            //spiele sound ab
-                            console.log("geht");
+                            currentsong = new Audio ("../../sounds/love_strings.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.love;
                             break;
                         case "haha":
-                            //spiele sound ab
+                            currentsong = new Audio ("../../sounds/haha_flute.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.haha;
                             break;
                         case "wow":
-                            //spiele sound ab
+                            currentsong = new Audio ("../../sounds/wow_trumpet.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.wow;
                             break;
                         case "sad":
-                            //spiele sound ab
+                            currentsong = new Audio ("../../sounds/sad_cello.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.sad;
                             break;
                         case "angry":
-                            //spiele sound ab
+                            currentsong = new Audio ("../../sounds/angry_horns.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.angry;
                             break;
                         default:
                     }
             },
+                playSoundsV3: function(love, haha, wow, sad, angry, reaction){
+                    let trendReaction;
+                    let ReactionsInPercent;
+                    if (soundON && !currentsong.paused){
+                        currentsong.pause();
+                    }
+                    soundON = true;
+
+
+
+                    if (reaction != null){
+                        trendReaction = reaction;
+                        ReactionsInPercent = {
+                            love:1,
+                            haha:1,
+                            wow:1,
+                            sad:1,
+                            angry:1
+                        };
+                    }
+                    else {
+                        trendReaction = reactionTrend(love, haha, wow, sad, angry);
+                        ReactionsInPercent = reactionsInPercent(love, haha, wow, sad, angry);
+                    }
+                    switch (trendReaction) {
+                        case "love":
+                            currentsong = new Audio ("../../sounds/wow_sound.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.love;
+                            break;
+                        case "haha":
+                            currentsong = new Audio ("../../sounds/wow_sound.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.haha;
+                            break;
+                        case "wow":
+                            currentsong = new Audio ("../../sounds/wow_sound.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.wow;
+                            break;
+                        case "sad":
+                            currentsong = new Audio ("../../sounds/wow_sound.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.sad;
+                            break;
+                        case "angry":
+                            currentsong = new Audio ("../../sounds/wow_sound.mp3");
+                            currentsong.play();
+                            currentsong.volume = ReactionsInPercent.angry;
+                            break;
+                        default:
+                    }
+                },
 
 
             }

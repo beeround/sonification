@@ -27,12 +27,24 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
                     break;
+                case "Sounds":
+                    soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
+                    break;
             }
 
         };
         $scope.sonify = function (love, haha, wow, sad, angry) {
-
-            soundService.playSoundsV1(love, haha, wow, sad, angry, null)
+            switch($scope.data.selectedSound) {
+                case "Simple":
+                    soundService.playSoundsV1(love, haha, wow, sad, angry, null);
+                    break;
+                case "Instrument":
+                    soundService.playSoundsV2(love, haha, wow, sad, angry, null);
+                    break;
+                case "Sounds":
+                    soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
+                    break;
+            }
 
         };
 
@@ -97,7 +109,6 @@ angular.module('sonificationAPP.controllers.main', [])
             } else if (angry > love && angry > haha && angry > wow && angry > sad) {
                 value = angry - (0.9 * sad) + (0.1 * haha) + (0.1 * sad) + (0.1 * wow);
             }
-            console.log(value);
             return value;
         }
     })
