@@ -38,6 +38,23 @@ ul.col {
   padding: 0;
 
 }
+a {
+  color: $brand-primary;
+  transition: all 1s;
+}
+
+// BUTTON
+
+.btn {
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: $brand-primary;
+  border-color: $brand-primary;
+}
+.btn-primary:hover {
+  background-color: $brand-dark;
+}
 .bg-faded {
   background-color: #131b21;
 
@@ -164,6 +181,7 @@ li{
     color: $white;
   }
 
+
 }
 
 
@@ -219,5 +237,16 @@ li{
 .collapsed {
   display: block;
 }
-.collapse {
+
+
+
+//Input
+.form-control {
+  background-color: $brand-dark;
+  color: $grey;
+}
+.form-control:focus {
+  background-color: $brand-darken;
+  border-color: $brand-primary;
+  color: $brand-primary;
 }

@@ -131,6 +131,10 @@ app.post('/user/activity', passportConfig.isAuthenticated,  userController.postS
 app.get('/user/activity', passportConfig.isAuthenticated,  userController.getSearchActivity);
 app.get('/user/get/favorites', passportConfig.isAuthenticated,  userController.getFavorites);
 app.post('/user/add/favorite', passportConfig.isAuthenticated,  userController.addFavorite);
+app.post('/user/change/selectedSoundSkin', passportConfig.isAuthenticated,  userController.selectSoundSkin);
+app.get('/user/get/selectedSoundSkin', passportConfig.isAuthenticated,  userController.getSoundSkin);
+
+
 app.put('/user/remove/favorite', passportConfig.isAuthenticated,  userController.removeFavorite);
 
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);

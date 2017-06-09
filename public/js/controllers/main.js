@@ -12,11 +12,20 @@ angular.module('sonificationAPP.controllers.main', [])
 
     .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout, soundService) {
         $scope.sounds = soundService.getSounds();
-        $scope.data = {selectedSound:soundService.getSounds()[0].name};
+
+        $http.get('/user/get/selectedSoundSkin').then(result => {
+            $scope.data = {selectedSound:result.data};
+        });
 
         $scope.changeSelectedSound = function () {
             // Datenbank anbindung einfuegen
-        }
+            let data = {
+                selectedSoundSkin : $scope.data.selectedSound
+            };
+
+            $http.post('/user/change/selectedSoundSkin', data);
+        };
+
         $scope.sonifyByReaction = function (reaction) {
             switch($scope.data.selectedSound){
                 case "Simple":

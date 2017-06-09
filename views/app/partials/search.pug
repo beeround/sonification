@@ -13,16 +13,16 @@ h1 Suche
                     .col-md-2
                         button.btn.btn-primary(type='submit') search
 
-        .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
-            h5 Letzte Suchanfragen
-            .activity(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")
-                a(ng-href="/app/search/{{activity.fbID}}")
-                    | {{activity.name}}
-                    i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}
+        .col-md-12
+            .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
+                h5 Letzte Suchanfragen
+                .activity(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")
+                    a(ng-href="/app/search/{{activity.fbID}}")
+                        | {{activity.name}}
+                        i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}
 
         .col-md-12(ng-show="searchResults")
             h3 Search Results
-
             span.btn.btn-sm.btn-primary(ng-show="currentWindow != 'SearchList'", ng-click="showWindow('SearchList')") Show search results
             .search(ng-show="currentWindow == 'SearchList'")
                 .searchResult(ng-repeat="search in searchResults")

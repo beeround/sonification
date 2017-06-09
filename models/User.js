@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
     tokens: Array,
     favorites: Array,
     searchQueries: Array,
+    selectedSoundSkin: String,
 
     profile: {
         name: String,
