@@ -66,41 +66,26 @@ angular.module('sonificationAPP.controllers.main', [])
 
         };
 
+        google.charts.load("current", {packages:["corechart"]});
 
+       $scope.drawChart = function (love, haha, wow, sad, angry, id) {
+            let data = google.visualization.arrayToDataTable([
+                ['Reaction', ''],
+                ['Love',     love],
+                ['haha',      haha],
+                ['wow',  wow],
+                ['sad', sad],
+                ['angry',    angry]
+            ]);
+            let options = {
 
-        $scope.myChartObject = {};
+                title: 'Test Titel',
+                pieHole: 0.4,
+            };
 
-        $scope.myChartObject.type = "PieChart";
-
-        $scope.onions = [
-            {v: "Onions"},
-            {v: 3},
-        ];
-
-        $scope.myChartObject.data = {"cols": [
-            {id: "t", label: "Topping", type: "string"},
-            {id: "s", label: "Slices", type: "number"}
-        ], "rows": [
-            {c: [
-                {v: "Mushrooms"},
-                {v: 3},
-            ]},
-            {c: $scope.onions},
-            {c: [
-                {v: "Olives"},
-                {v: 31}
-            ]},
-            {c: [
-                {v: "Zucchini"},
-                {v: 1},
-            ]},
-            {c: [
-                {v: "Pepperoni"},
-                {v: 2},
-            ]}
-        ]};
-
-
+            let chart = new google.visualization.PieChart(document.getElementById("myChart" + id));
+            chart.draw(data, options);
+        };
 
         /*$scope.drawChart = function (love, haha, wow, sad, angry, id) {
             let ctx = document.getElementById("myChart" + id);
