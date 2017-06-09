@@ -11,14 +11,12 @@ angular.module('sonificationAPP.controllers.main', [])
     })
 
     .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout, soundService) {
-        $scope.goToCompare = function () {
-            $location.path('/app/compare');
-        };
         $scope.sounds = soundService.getSounds();
+        $scope.data = {selectedSound:soundService.getSounds()[0].name};
 
         $scope.changeSelectedSound = function () {
+            // Datenbank anbindung einfuegen
         }
-        $scope.data = {selectedSound:soundService.getSounds()[0].name};
         $scope.sonifyByReaction = function (reaction) {
             switch($scope.data.selectedSound){
                 case "Simple":
@@ -29,6 +27,9 @@ angular.module('sonificationAPP.controllers.main', [])
                     break;
                 case "Sounds":
                     soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Animals":
+                    soundService.playSoundsV4(0, 0, 0, 0, 0, reaction);
                     break;
             }
 
@@ -42,15 +43,39 @@ angular.module('sonificationAPP.controllers.main', [])
                     soundService.playSoundsV2(love, haha, wow, sad, angry, null);
                     break;
                 case "Sounds":
-                    soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
+                    soundService.playSoundsV3(love, haha, wow, sad, angry, null);
+                    break;
+                case "Animals":
+                    soundService.playSoundsV4(love, haha, wow, sad, angry, null);
                     break;
             }
 
         };
+/*
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work',     11],
+                ['Eat',      2],
+                ['Commute',  2],
+                ['Watch TV', 2],
+                ['Sleep',    7]
+            ]);
 
+            var options = {
+                title: 'My Daily Activities',
+                pieHole: 0.4,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+*/
         $scope.drawChart = function (love, haha, wow, sad, angry, id) {
             let ctx = document.getElementById("myChart" + id);
-
+            console.log(love,haha,wow,sad,angry,id);
             let myChart = new Chart(ctx, {
 
                 type: 'polarArea',
@@ -80,7 +105,6 @@ angular.module('sonificationAPP.controllers.main', [])
             });
 
         };
-
         $scope.reactionTrendValue = function (love, wow, haha, sad, angry) {
             let value;
 
