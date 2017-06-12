@@ -102,15 +102,15 @@ div(ng-controller="dashboardCtrl")
                         .col-md-3
                             ul.bar-diagramm
                                 li
-                                    div(style="background-color:#ffa3d3; width: 40%; height: 100%;")
+                                    div(style="background-color:#ffa3d3; width: {{fav.reactionProzent.love}}%; height: 100%;")
                                 li
-                                    div(style="background-color:#fffd00;width: 40%; height: 100%;")
+                                    div(style="background-color:#fffd00;width: {{fav.reactionProzent.haha}}%; height: 100%;")
                                 li
-                                    div(style="background-color:#38dacd;width: 40%; height: 100%;")
+                                    div(style="background-color:#38dacd;width: {{fav.reactionProzent.wow}}%; height: 100%;")
                                 li
-                                    div(style="background-color:#949494;width: 40%; height: 100%;")
+                                    div(style="background-color:#949494;width: {{fav.reactionProzent.sad}}%; height: 100%;")
                                 li
-                                    div(style="background-color:#9a0400;width: 40%; height: 100%;")
+                                    div(style="background-color:#9a0400;width: {{fav.reactionProzent.angry}}%; height: 100%;")
 
 
     #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')

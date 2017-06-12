@@ -222,6 +222,8 @@ angular.module('sonificationAPP.controllers.main', [])
                 })
             }}
 
+
+
         function getAllReactions(fav, index) {
             let tempAllReactions = {
                 total_love: 0,
@@ -230,6 +232,14 @@ angular.module('sonificationAPP.controllers.main', [])
                 total_sad: 0,
                 total_angry: 0
             };
+            let valueAllReaction;
+            let reactionProzent ={
+                love: 0,
+                haha: 0,
+                wow: 0,
+                sad: 0,
+                angry: 0
+            }
             fav.posts.data.map((data) => {
 
 
@@ -241,7 +251,16 @@ angular.module('sonificationAPP.controllers.main', [])
                 data.total_reaction = reactionTrend(data.love.summary.total_count, data.haha.summary.total_count, data.wow.summary.total_count, data.sad.summary.total_count, data.angry.summary.total_count);
 
             });
+
+            valueAllReaction = tempAllReactions.total_love + tempAllReactions.total_haha +tempAllReactions.total_wow +tempAllReactions.total_sad +tempAllReactions.total_angry;
+            reactionProzent.love = tempAllReactions.total_love/valueAllReaction*100;
+            reactionProzent.haha = tempAllReactions.total_haha/valueAllReaction*100;
+            reactionProzent.wow = tempAllReactions.total_wow/valueAllReaction*100;
+            reactionProzent.sad = tempAllReactions.total_sad/valueAllReaction*100;
+            reactionProzent.angry = tempAllReactions.total_angry/valueAllReaction*100;
+
             fav.allReactions = tempAllReactions;
+            fav.reactionProzent = reactionProzent;
             fav.total_reaction = reactionTrend(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
             fav.total_reactionvalue = $scope.reactionTrendValue(tempAllReactions.total_love,tempAllReactions.total_haha,tempAllReactions.total_wow,tempAllReactions.total_sad,tempAllReactions.total_angry);
 
