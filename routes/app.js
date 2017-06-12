@@ -29,4 +29,5 @@ router.get('/partials/:view', passportConfig.isAuthenticated, function(req, res)
 
 });
 
+
 module.exports = router;

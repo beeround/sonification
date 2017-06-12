@@ -61,50 +61,51 @@ h1 Suche
 
     .feed(ng-show="currentWindow == 'Feed'")
         .row
-            .col-md-8
+            .col-md-9
                 img(ng-src="{{fbData[0].from.cover.source}}")
-            .col-md-4
-                p Start: {{currentDate.start}} - End: {{currentDate.end}}
-                .form-group
-                    label Zeitraum wählen
-                    input.form-control.date-picker(date-range-picker type='text', ng-model='datePicker.date', options="opts", placeholder="Select date range")
+                .row.feedsettings
+                    .col-md-3
+                        label Zeitraum:
+                        input.form-control.date-picker(date-range-picker type='text', ng-model='datePicker.date', options="opts", placeholder="Select date range")
+                    .col-md-3.limit
+                        p Limit:
+                        span(ng-click="setLimit(10)", ng-class="{'active': limit == 10}") 10
+                        span(ng-click="setLimit(25)", ng-class="{'active': limit == 25}") 25
+                        span(ng-click="setLimit(50)", ng-class="{'active': limit == 50}") 50
+                        span(ng-click="setLimit(100)", ng-class="{'active': limit == 100}") 100
+                    .col-md-6.reactions
+                        p Alle Reactions im Zeitraum und Limit
+                        ul
+                            li.icon.love {{allReactions.total_love}}
+                            li.icon.haha {{allReactions.total_haha}}
+                            li.icon.wow {{allReactions.total_wow}}
+                            li.icon.sad {{allReactions.total_sad}}
+                            li.icon.angry {{allReactions.total_angry}}
 
+            .col-md-3.fbinfo(hl-sticky="", offset-top="100")
                 img(ng-src="{{fbData[0].from.picture.data.url}}")
-                p
-                    a(href="{{fbData[0].from.link}}" target="blank") {{fbData[0].from.name}}
-
-        .row
-            .col-md-6
-
-
-            .col-md-6.limit
-
-                span Limit:
-                span(ng-click="setLimit(10)", ng-class="{'active': limit == 10}") 10
-                span(ng-click="setLimit(25)", ng-class="{'active': limit == 25}") 25
-                span(ng-click="setLimit(50)", ng-class="{'active': limit == 50}") 50
-                span(ng-click="setLimit(100)", ng-class="{'active': limit == 100}") 100
-
-
-        .row(ng-show="fbData.length > 0")
-            .col-md-2
-
-                span.btn.btn-warning.btn-sm(ng-click="addToFavorites()", ng-show="!isFav") Favorisieren
-                span.btn.btn-danger.btn-sm(ng-click="removeFavorite()", ng-show="isFav") Von Favoritenliste löschen
-
-
+                h4 {{fbData[0].from.name}}
                 p.icon.like {{fbData[0].from.fan_count}}
-                p Alle Reactions im Zeitraum und Limit
-                ul
-                    li.icon.love {{allReactions.total_love}}
-                    li.icon.haha {{allReactions.total_haha}}
-                    li.icon.wow {{allReactions.total_wow}}
-                    li.icon.sad {{allReactions.total_sad}}
-                    li.icon.angry {{allReactions.total_angry}}
-            .col-md-10
+
+                p.fav(ng-click="addToFavorites()", ng-show="!isFav")
+                    i.fa.fa-heart-o
+                    | Favorisieren
+                p.fav.liked(ng-click="removeFavorite()", ng-show="isFav")
+                    i.fa.fa-heart
+                    | Von Favoritenliste entfernen
+
+                br
+                a.btn.btn-primary(href="{{fbData[0].from.link}}" target="blank") Zur Facebook Seite
+
+
+        .row.timeline(ng-show="fbData.length > 0")
+
+            .col-md-9
+                h3 Feed
+                hr
                 .row(ng-repeat=" fb in fbData", emit-last-repeater-element )
 
-                    .col-md-6
+                    .col-md-8
                         .post
                             p.small {{fb.created_time | date:'dd.MM.yyyy - HH:mm'}} Uhr
                             p {{fb.message}}
@@ -134,8 +135,10 @@ h1 Suche
                                     h5 Angry
                                     p {{fb.angry.summary.total_count}}
                                 hr
-                    .col-md-6
+                    .col-md-4
                         div(ng-attr-id="myChart{{$index}}")
+
+
         .row(ng-show="fbData.length == 0")
 
             p Keine Daten gefunden! Bitte ändere den Zeitraum
