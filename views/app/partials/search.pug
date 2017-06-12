@@ -1,25 +1,32 @@
-h1 Suche
 
 .section(ng-controller="fbCtrl")
 
     .row
-        .col-md-12
+
+        .col-md-2
+        .col-md-8
+            h1 Suche
 
             form(ng-submit="searchUser()")
                 .row
-                    .col-md-5
+                    .col-md-10
                         .form-group
                             input.form-control(type='text', required, ng-model="query.name" placeholder='Facebook page name')
                     .col-md-2
                         button.btn.btn-primary(type='submit') suchen
+        .col-md-2
 
-        .col-md-12
+
+        .col-md-2
+        .col-md-8
             .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
                 h5 Letzte Suchanfragen
                 .activity(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")
                     a(ng-href="/app/search/{{activity.fbID}}")
                         | {{activity.name}}
                         i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}
+        .col-md-2
+
 
         .col-md-12(ng-show="searchResults", style="margin-top:30px")
             h3

@@ -1,22 +1,13 @@
 footer
   .container
     .row
-      .col-md-6
-        ul.footernavi.pull-left
-          if !user
-            li(class=(title == 'Login') ? 'active' : undefined)
-              a(href='/login') Login
-            li(class=(title == 'Create Account') ? 'active' : undefined)
-              a(href='/signup') Create Account
-
-
-
-      .col-md-6
+      .col-md-12
         ul.footernavi.pull-right
           li
-            a.m-r-2(href="/imprint") Imprint
-          li
             span © 2017 SonificationApp. All Rights Reserved
+
+          li.text-right
+            a(href="/imprint") Imprint
 
 
 

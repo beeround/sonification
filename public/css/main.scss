@@ -7,6 +7,12 @@
 
 html, body {
   background-color: $brand-darken;
+
+}
+body {
+  min-height: 100vh;
+  position: relative;
+
 }
 h1,h2,h3,h4,h5,p,li,label {
   color: $white;
@@ -159,8 +165,9 @@ header {
 }
 
 .limit {
-  .active {
+  .active, span:hover {
     font-weight: bold;
+    color: $brand-primary;
   }
   span {
     color: white;
@@ -330,3 +337,22 @@ hr {
   }
 }
 
+
+
+//FOOTER
+footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+
+  .container {
+    margin-top: 0;
+  }
+
+  .footernavi {
+    li {
+      display: inline;
+      margin-left:20px;
+    }
+  }
+}
