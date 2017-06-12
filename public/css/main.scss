@@ -81,6 +81,14 @@ h1,h2,h3,h4,h5,p,li,label {
   }
 }
 
+.search-logo{
+  margin-bottom: 20px;
+
+  img{
+    width: 100%;
+    height: auto;
+  }
+}
 .container {
   margin-top: 120px;
 }
@@ -319,13 +327,21 @@ li{
 .form-control {
   background-color: $brand-dark;
   color: $grey;
+  border-color: $brand-primary;
 }
 .form-control:focus {
   background-color: $brand-darken;
-  border-color: $brand-primary;
   color: $brand-primary;
+  border-color: $brand-primary;
 }
 
+.last-search a{
+  color: $white;
+}
+
+.dashboard-search-button{
+  border-radius: 5px;
+}
 .legend {
   margin: 0 5px;
 }
@@ -333,6 +349,10 @@ hr {
   border-color: $grey;
 }
 
+.last-search{
+  padding-top: 10px;
+  padding-left: 0px;
+}
 
 //Search
 

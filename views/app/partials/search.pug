@@ -2,29 +2,31 @@
 .section(ng-controller="fbCtrl")
 
     .row
-
         .col-md-2
         .col-md-8
-            h1 Suche
-
+            .text-center.search-logo
+                img(src="/img/socialsound_logo.png")
             form(ng-submit="searchUser()")
                 .row
-                    .col-md-10
-                        .form-group
-                            input.form-control(type='text', required, ng-model="query.name" placeholder='Facebook page name')
-                    .col-md-2
-                        button.btn.btn-primary(type='submit') suchen
+                    div.input-group
+                        input.form-control(type='text', required, ng-model="query.name" placeholder='Facebook Seite eingeben...')
+                        span.input-group-btn
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-search
         .col-md-2
 
-
         .col-md-2
-        .col-md-8
-            .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
-                h5 Letzte Suchanfragen
-                .activity(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")
-                    a(ng-href="/app/search/{{activity.fbID}}")
-                        | {{activity.name}}
-                        i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}
+        .col-md-8.last-search
+            button.btn.btn-default.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion')
+                i.fa.fa-caret-down
+
+            .collapse.box(id="index{{$index}}")
+                .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
+                    h5 Letzte Suchanfragen
+                    .activity.last-search(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")
+                        a(ng-href="/app/search/{{activity.fbID}}")
+                            | {{activity.name}}
+                            i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}
         .col-md-2
 
 
