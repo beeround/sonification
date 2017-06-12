@@ -59,7 +59,7 @@ h1 Suche
 
 
 
-    .feed(ng-show="currentWindow == 'Feed'")
+    .feed(ng-if="currentWindow == 'Feed'")
         .row
             .col-md-9
                 img(ng-src="{{fbData[0].from.cover.source}}")
