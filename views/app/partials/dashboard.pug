@@ -57,31 +57,51 @@ div(ng-controller="dashboardCtrl")
 
 
                 .collapse.box(id="index{{$index}}")
-                    .row
-                        .col-md-2
+                    .row.poststats_headline
+                        .col-md-5
                             p Letzten 50 Posts
                         .col-md-7
                             p Letzten 5 Postings
-                        .col-md-3
-                            p Test
-                    .row
-                        .col-md-2
-                            ul
+
+                    .row.poststats
+                        .col-md-5
+                            ul.reaction
                                 li
-                                    i.icon.love
-                                    span {{fav.allReactions.total_love| number:0}}
+                                    .col-md-2
+                                        span.love {{fav.allReactions.total_love| number:0}}
+                                    .col-md-1
+                                        i.icon.love
+                                    .col-md-8
+                                        div.love(style="width: {{fav.reactionProzent.love}}%;")
                                 li
-                                    i.icon.haha
-                                    span {{fav.allReactions.total_haha| number:0}}
+                                    .col-md-2
+                                        span.haha {{fav.allReactions.total_haha| number:0}}
+                                    .col-md-1
+                                        i.icon.haha
+                                    .col-md-8
+                                        div.haha(style="width: {{fav.reactionProzent.haha}}%;")
                                 li
-                                    i.icon.wow
-                                    span {{fav.allReactions.total_wow| number:0}}
+                                    .col-md-2
+                                        span.wow {{fav.allReactions.total_wow| number:0}}
+                                    .col-md-1
+                                        i.icon.wow
+                                    .col-md-8
+                                        div.wow(style="width: {{fav.reactionProzent.wow}}%;")
                                 li
-                                    i.icon.sad
-                                    span {{fav.allReactions.total_sad | number:0}}
+                                    .col-md-2
+                                        span.sad {{fav.allReactions.total_sad| number:0}}
+                                    .col-md-1
+                                        i.icon.sad
+                                    .col-md-8
+                                        div.sad(style="width: {{fav.reactionProzent.sad}}%;")
                                 li
-                                    i.icon.angry
-                                    span {{fav.allReactions.total_angry| number:0}}
+                                    .col-md-2
+                                        span.angry {{fav.allReactions.total_angry| number:0}}
+                                    .col-md-1
+                                        i.icon.angry
+                                    .col-md-8
+                                        div.angry(style="width: {{fav.reactionProzent.angry}}%;")
+
                         .col-md-7
                             ul
                                 li
@@ -99,18 +119,7 @@ div(ng-controller="dashboardCtrl")
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
                                     a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 50 }}{{fav.posts.data[4].message.length > 50 ? '...' : ''}}{{fav.posts.data[4].message.length > 1 ? '' : 'Zum Post'}}
-                        .col-md-3
-                            ul.bar-diagramm
-                                li
-                                    div(style="background-color:#ffa3d3; width: {{fav.reactionProzent.love}}%; height: 100%;")
-                                li
-                                    div(style="background-color:#fffd00;width: {{fav.reactionProzent.haha}}%; height: 100%;")
-                                li
-                                    div(style="background-color:#38dacd;width: {{fav.reactionProzent.wow}}%; height: 100%;")
-                                li
-                                    div(style="background-color:#949494;width: {{fav.reactionProzent.sad}}%; height: 100%;")
-                                li
-                                    div(style="background-color:#9a0400;width: {{fav.reactionProzent.angry}}%; height: 100%;")
+
 
 
     #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')

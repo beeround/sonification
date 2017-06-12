@@ -18,9 +18,65 @@ h1,h2,h3,h4,h5,p,li,label {
   color: $white;
 }
 
-.bar-diagramm > li{
-  margin: 8px 0;
-  height: 24px;
+.reaction li{
+  display: flex;
+}
+
+.reaction span{
+  text-align: right;
+  //geht net go karsten
+}
+
+.reaction i{
+  background-position-x: center;
+}
+
+.reaction{
+  li {
+    margin: 8px 0;
+    height: 24px;
+
+    .col-md-8{
+      background-color:$brand-darken;
+    }
+    .col-md-1,.col-md-2,.col-md-8{
+      padding: 0px;
+    }
+
+    div{
+      height: 100%;
+    }
+    div.love{
+      background-color:#ffa3d3;
+    }
+    div.haha{
+      background-color:#fffd00;
+    }
+    div.wow{
+      background-color:#38dacd;
+    }
+    div.sad{
+      background-color:#949494;
+    }
+    div.angry{
+      background-color:#9a0400;
+    }
+    span.love {
+      color: #ffa3d3
+    }
+    span.haha {
+      color: #fffd00
+    }
+    span.wow {
+      color: #38dacd
+    }
+    span.sad {
+      color: #949494
+    }
+    span.angry {
+      color: #9a0400
+    }
+  }
 }
 
 .container {
@@ -218,28 +274,28 @@ li{
 .icon:active{
   cursor: url("../img/cursor/hammerdown.cur"), auto;
 }
-.icon.large{
-  font-size:2em;
+.icon.large {
+  font-size: 2em;
 }
-
-.like{
+.icon.like {
   background-image: url("../img/icons/facebook-like.svg");
 }
-.love{
+.icon.love {
   background-image: url("../img/icons/facebook-love.svg");
 }
-.haha{
+.icon.haha {
   background-image: url("../img/icons/facebook-haha.svg");
 }
-.wow{
+.icon.wow {
   background-image: url("../img/icons/facebook-wow.svg");
 }
-.sad{
+.icon.sad {
   background-image: url("../img/icons/facebook-sad.svg");
 }
-.angry{
+.icon.angry {
   background-image: url("../img/icons/facebook-angry.svg");
 }
+
 .noreaction{
   background-image: url("../img/icons/facebook-noreaction.svg");
 }
