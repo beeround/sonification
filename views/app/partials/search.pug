@@ -142,7 +142,22 @@
                                     p {{fb.angry.summary.total_count}}
                                 hr
                     .col-md-4
-                        div(ng-attr-id="myChart{{$index}}")
+                        ul.reaction
+                            li
+                                .col-md-8
+                                    div.love(style="width: {{fb.reactionProzent.love}}%;")
+                            li
+                                .col-md-8
+                                    div.haha(style="width: {{fav.reactionProzent.haha}}%;")
+                            li
+                                .col-md-8
+                                    div.wow(style="width: {{fav.reactionProzent.wow}}%;")
+                            li
+                                .col-md-8
+                                    div.sad(style="width: {{fav.reactionProzent.sad}}%;")
+                            li
+                                .col-md-8
+                                    div.angry(style="width: {{fav.reactionProzent.angry}}%;")
 
 
         .row(ng-show="fbData.length == 0")

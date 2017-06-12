@@ -49,25 +49,25 @@ div(ng-controller="dashboardCtrl")
                             p {{fav.date | date:'dd.MM.yyyy'}}
                         .col-md-2
                             .row.pull-right
-                                a.btn.btn-info.btn-sm(ng-href='/app/search/{{fav.id}}', style="margin-right:15px")
-                                    i.fa.fa-external-link
                                 button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)', style="margin-right:10px")
                                     i.fa.fa-minus
                                 button.btn.btn-primary.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px")
                                     i.fa.fa-caret-down
+                                a.btn.btn-info.btn-sm(ng-href='/app/search/{{fav.id}}', style="margin-right:15px")
+                                    i.fa.fa-external-link
 
 
 
 
                 .collapse.box(id="index{{$index}}")
                     .row.poststats_headline
-                        .col-md-6
+                        .col-md-5
                             p Letzten 50 Posts
-                        .col-md-6
+                        .col-md-7
                             p Letzten 5 Postings
 
                     .row.poststats
-                        .col-md-6
+                        .col-md-5
                             ul.reaction
                                 li
                                     .col-md-2
@@ -105,7 +105,7 @@ div(ng-controller="dashboardCtrl")
                                     .col-md-8
                                         div.angry(style="width: {{fav.reactionProzent.angry}}%;")
 
-                        .col-md-6
+                        .col-md-7
                             ul
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
