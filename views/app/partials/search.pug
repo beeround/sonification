@@ -16,11 +16,11 @@
         .col-md-2
 
         .col-md-2
-        .col-md-8
+        .col-md-8.last-search
             .collapse.box.hide(id="lastsearchs")
-                .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
-                    h5 Letzte Suchanfragen
+                p(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
                     .activity.last-search(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")
+                        i.fa.fa-search &nbsp;&nbsp;
                         a(ng-href="/app/search/{{activity.fbID}}")
                             | {{activity.name}}
                             i.small  {{activity.date | date:'dd.MM.yyyy - HH:mm'}}

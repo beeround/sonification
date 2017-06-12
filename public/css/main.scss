@@ -1,70 +1,71 @@
 @import "themes/default/variables";
-
 //@import "lib/bootstrap/bootstrap";
 @import "lib/font-awesome/font-awesome";
-
 @import "themes/default/default";
 
 html, body {
   background-color: $brand-darken;
 
 }
+
 body {
   min-height: 100vh;
   position: relative;
 
 }
-h1,h2,h3,h4,h5,p,li,label {
+
+h1, h2, h3, h4, h5, p, li, label {
   color: $white;
 }
 
-.hide{
+.hide {
   display: none;
 }
-.reaction li{
+
+.reaction li {
   display: flex;
 }
 
-.reaction span{
+.reaction span {
   text-align: right;
   //geht net go karsten
 }
 
-.reaction i{
+.reaction i {
   background-position-x: center;
 }
 
-.reaction{
+.reaction {
   li {
     margin: 8px 0;
     height: 24px;
 
-    .col-md-8{
-      background-color:$brand-darken;
+    .col-md-8 {
+      background-color: $brand-darken;
       margin-left: 9px;
     }
-    .col-md-1,.col-md-2,.col-md-8{
+    .col-md-1, .col-md-2, .col-md-8 {
       padding: 0px;
     }
 
-    div{
+    div {
       height: 100%;
       text-align: right;
     }
-    div.love{
-      background-color:$chart-color-love;
+    div.love {
+      background-color: $chart-color-love;
     }
-    div.haha{
-      background-color:$chart-color-haha;
+    div.haha {
+      background-color: $chart-color-haha;
     }
-    div.wow{
-      background-color:$chart-color-wow;
+    div.wow {
+      background-color: $chart-color-wow;
     }
-    div.sad{
-      background-color:$chart-color-sad;
+    div.sad {
+      background-color: $chart-color-sad;
     }
-    div.angry{
-      background-color:$chart-color-angry;
+    div.angry {
+      background-color: $chart-color-angry;
     }
     span.love {
       color: $chart-color-love;
@@ -76,7 +77,7 @@ h1,h2,h3,h4,h5,p,li,label {
       color: $chart-color-wow;
     }
     span.sad {
-      color:$chart-color-sad;
+      color: $chart-color-sad;
     }
     span.angry {
       color: $chart-color-angry;
@@ -84,18 +85,18 @@ h1,h2,h3,h4,h5,p,li,label {
   }
 }
 
-.search-logo{
+.search-logo {
   margin-bottom: 20px;
 
-  img{
+  img {
     width: 100%;
     height: auto;
   }
 }
+
 .container {
   margin-top: 120px;
 }
-
 
 h1 {
   font-size: 30px;
@@ -112,17 +113,18 @@ ul {
   margin: 0;
   padding: 0;
 }
+
 ul.col {
   margin: 0;
   padding: 0;
 
 }
 
-
 a {
   color: $brand-primary;
   transition: all 1s;
 }
+
 a:hover {
   color: $grey;
 }
@@ -132,35 +134,39 @@ a:hover {
 .btn {
   cursor: pointer;
 }
+
 .btn-primary {
   background-color: $brand-primary;
   border-color: $brand-primary;
 }
+
 .btn-primary:hover {
   background-color: $brand-dark;
 }
+
 .bg-faded {
   background-color: #131b21;
 
-  a,span {
-    color: $grey!important;
+  a, span {
+    color: $grey !important;
   }
 
   a:hover {
-    text-decoration: underline!important;
+    text-decoration: underline !important;
   }
   .active a {
-    text-decoration: underline!important;
+    text-decoration: underline !important;
   }
 
   .dropdown-menu {
-    background-color: $brand-dark!important;
+    background-color: $brand-dark !important;
 
     .dropdown-item:hover {
-      background: none!important;
+      background: none !important;
     }
   }
 }
+
 header {
   position: fixed;
   top: 0;
@@ -196,7 +202,6 @@ header {
   }
 }
 
-
 // SEARCH
 .searchResult {
   margin-bottom: 20px;
@@ -209,6 +214,7 @@ header {
     margin-right: 15px;
   }
 }
+
 .searchResult.box {
   margin-bottom: 5px;
 }
@@ -217,6 +223,7 @@ header {
 .feed {
   margin-top: 40px;
 }
+
 .post {
   padding: 10px;
   margin-bottom: 10px;
@@ -226,9 +233,11 @@ header {
     width: 100%;
   }
 }
+
 .uid {
   display: none;
 }
+
 .activity {
   width: 100%;
 }
@@ -245,15 +254,16 @@ header {
   }
 }
 
-ul{
+ul {
   padding-left: 0;
-  list-style:none;
+  list-style: none;
 }
-li{
+
+li {
   margin: 8px 0;
 }
 
-.box{
+.box {
   background-color: $brand-dark;
   padding: 20px;
   margin: 0 5px;
@@ -264,67 +274,70 @@ li{
     line-height: 1.5;
   }
 
-  li,p,span{
+  li, p, span {
     color: $white;
   }
 
 }
 
-
 // Icons
 
-
-
-.icon{
+.icon {
   background-size: contain;
-  padding:0 0 0 40px;
+  padding: 0 0 0 40px;
   background-repeat: no-repeat;
 
 }
-.icon:hover{
+
+.icon:hover {
   cursor: url("../img/cursor/hammer.cur"), auto;
 }
-.icon:active{
+
+.icon:active {
   cursor: url("../img/cursor/hammerdown.cur"), auto;
 }
+
 .icon.large {
   font-size: 2em;
 }
+
 .icon.like {
   background-image: url("../img/icons/facebook-like.svg");
 }
+
 .icon.love {
   background-image: url("../img/icons/facebook-love.svg");
 }
+
 .icon.haha {
   background-image: url("../img/icons/facebook-haha.svg");
 }
+
 .icon.wow {
   background-image: url("../img/icons/facebook-wow.svg");
 }
+
 .icon.sad {
   background-image: url("../img/icons/facebook-sad.svg");
 }
+
 .icon.angry {
   background-image: url("../img/icons/facebook-angry.svg");
 }
 
-.noreaction{
+.noreaction {
   background-image: url("../img/icons/facebook-noreaction.svg");
 }
 
-.fade.in{
+.fade.in {
   opacity: 1;
   transition: all 1s;
 }
-
 
 //Accordion
 .collapsed {
   display: block;
 }
-
-
 
 //Input
 .form-control {
@@ -332,32 +345,39 @@ li{
   color: $grey;
   border-color: $brand-primary;
 }
+
 .form-control:focus {
   background-color: $brand-darken;
   color: $brand-primary;
   border-color: $brand-primary;
 }
 
-.last-search a{
-  color: $white;
-}
 
-.dashboard-search-button{
+
+.dashboard-search-button {
   border-radius: 5px;
 }
+
 .legend {
   margin: 0 5px;
 }
+
 hr {
   border-color: $grey;
 }
 
-.last-search{
-  padding-top: 10px;
-  padding-left: 0px;
+//Search
+
+.last-search {
+  background-color: $brand-dark;
+  a {
+    color: $white;
+  }
+  .fa-search{
+    color: $input-bg;
+  }
 }
 
-//Search
 
 .darken {
   background-color: #131b21;
@@ -398,13 +418,12 @@ hr {
         display: inline;
         margin-right: 20px;
       }
-      .icon{
-        padding:0 0 0 25px;
+      .icon {
+        padding: 0 0 0 25px;
       }
 
     }
   }
-
 
   .timeline {
     h3 {
@@ -412,13 +431,10 @@ hr {
     }
   }
 
-
   img {
     width: 100%;
   }
 }
-
-
 
 //FOOTER
 footer {
@@ -433,7 +449,7 @@ footer {
   .footernavi {
     li {
       display: inline;
-      margin-left:20px;
+      margin-left: 20px;
     }
   }
 }
