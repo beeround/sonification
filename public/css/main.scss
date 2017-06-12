@@ -38,6 +38,7 @@ h1,h2,h3,h4,h5,p,li,label {
 
     .col-md-8{
       background-color:$brand-darken;
+      margin-left: 9px;
     }
     .col-md-1,.col-md-2,.col-md-8{
       padding: 0px;
@@ -45,36 +46,37 @@ h1,h2,h3,h4,h5,p,li,label {
 
     div{
       height: 100%;
+      text-align: right;
     }
     div.love{
-      background-color:#ffa3d3;
+      background-color:$chart-color-love;
     }
     div.haha{
-      background-color:#fffd00;
+      background-color:$chart-color-haha;
     }
     div.wow{
-      background-color:#38dacd;
+      background-color:$chart-color-wow;
     }
     div.sad{
-      background-color:#949494;
+      background-color:$chart-color-sad;
     }
     div.angry{
-      background-color:#9a0400;
+      background-color:$chart-color-angry;
     }
     span.love {
-      color: #ffa3d3
+      color: $chart-color-love;
     }
     span.haha {
-      color: #fffd00
+      color: $chart-color-haha;
     }
     span.wow {
-      color: #38dacd
+      color: $chart-color-wow;
     }
     span.sad {
-      color: #949494
+      color:$chart-color-sad;
     }
     span.angry {
-      color: #9a0400
+      color: $chart-color-angry;
     }
   }
 }

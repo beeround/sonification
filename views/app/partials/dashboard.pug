@@ -37,8 +37,9 @@ div(ng-controller="dashboardCtrl")
                 .collapsed.box
                     .row
                         .col-md-4
-                            img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}" width="30" height="30")
-                            | {{fav.name}}
+                            a(ng-href="/app/search/{{fav.id}}")
+                                img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}" width="30" height="30")
+                                | {{fav.name}}
                         .col-md-2
                             p.icon.like {{fav.fan_count| number:0}}
                         .col-md-2
@@ -48,6 +49,8 @@ div(ng-controller="dashboardCtrl")
                             p {{fav.date | date:'dd.MM.yyyy'}}
                         .col-md-2
                             .row.pull-right
+                                a.btn.btn-info.btn-sm(ng-href='/app/search/{{fav.id}}', style="margin-right:15px")
+                                    i.fa.fa-external-link
                                 button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)', style="margin-right:10px")
                                     i.fa.fa-minus
                                 button.btn.btn-primary.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px")
@@ -58,13 +61,13 @@ div(ng-controller="dashboardCtrl")
 
                 .collapse.box(id="index{{$index}}")
                     .row.poststats_headline
-                        .col-md-5
+                        .col-md-6
                             p Letzten 50 Posts
-                        .col-md-7
+                        .col-md-6
                             p Letzten 5 Postings
 
                     .row.poststats
-                        .col-md-5
+                        .col-md-6
                             ul.reaction
                                 li
                                     .col-md-2
@@ -102,7 +105,7 @@ div(ng-controller="dashboardCtrl")
                                     .col-md-8
                                         div.angry(style="width: {{fav.reactionProzent.angry}}%;")
 
-                        .col-md-7
+                        .col-md-6
                             ul
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
