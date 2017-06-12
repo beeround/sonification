@@ -9,18 +9,15 @@
             form(ng-submit="searchUser()")
                 .row
                     div.input-group
-                        input.form-control(type='text', required, ng-model="query.name" placeholder='Facebook Seite eingeben...')
+                        input.form-control(type='text', required, ng-focus="openCollapse('lastsearchs')", ng-blur="closeCollapse('lastsearchs')",ng-model="query.name" placeholder='Facebook Seite eingeben...')
                         span.input-group-btn
                             button.btn.btn-primary(type='submit')
                                 i.fa.fa-search
         .col-md-2
 
         .col-md-2
-        .col-md-8.last-search
-            button.btn.btn-default.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion')
-                i.fa.fa-caret-down
-
-            .collapse.box(id="index{{$index}}")
+        .col-md-8
+            .collapse.box.hide(id="lastsearchs")
                 .lastSearch(ng-hide="(currentWindow == 'SearchList' || currentWindow == 'Feed')")
                     h5 Letzte Suchanfragen
                     .activity.last-search(ng-repeat="activity in lastSearchActivity | orderBy:'-' | limitTo : 4")

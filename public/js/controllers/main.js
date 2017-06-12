@@ -521,6 +521,16 @@ angular.module('sonificationAPP.controllers.main', [])
             })
         }
 
+        $scope.openCollapse = function (id) {
+            $('#'+id).attr('class', 'show');
+            $('#'+id).removeClass('hide');
+        }
+        $scope.closeCollapse = function (id) {
+            $('#'+id).removeClass('show');
+            $('#'+id).attr('class', 'hide');
+            console.log("hallo");
+        }
+
     })
 
     .controller('compareCtrl', function ($scope, $http, $timeout) {
