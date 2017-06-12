@@ -190,12 +190,12 @@ angular.module('sonificationAPP.controllers.main', [])
 
         });
 
-        $scope.drawChartDashboard = function (fav, index) {
+        /*$scope.drawChartDashboard = function (fav, index) {
 
             $timeout(function (){
                 $scope.drawChart(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry, index);
             },0);
-        }
+        }*/
 
         $scope.removeFav = "hallo";
         $scope.tempdIndex = null;
@@ -319,7 +319,15 @@ angular.module('sonificationAPP.controllers.main', [])
         $scope.$on('DrawCharts', function () {
             $timeout(function () {
                 $scope.fbData.map((fb, index) => {
-                    $scope.drawChart(fb.love.summary.total_count, fb.haha.summary.total_count, fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count, index)
+                    let valueAllReaction;
+                     let reactionProzent ={ };
+                    valueAllReaction = $scope.allReactions.total_love + $scope.allReactions.total_haha + $scope.allReactions.total_wow + $scope.allReactions.total_sad + $scope.allReactions.total_angry;
+                    reactionProzent.love = fb.love.summary.total_count/valueAllReaction*100;
+                    reactionProzent.haha = fb.haha.summary.total_count/valueAllReaction*100;
+                    reactionProzent.wow = fb.wow.summary.total_count/valueAllReaction*100;
+                    reactionProzent.sad = fb.sad.summary.total_count/valueAllReaction*100;
+                    reactionProzent.angry = fb.angry.summary.total_count/valueAllReaction*100;
+                    fb.reactionProzent = reactionProzent;
                 })
             }, 0)
 
@@ -512,13 +520,14 @@ angular.module('sonificationAPP.controllers.main', [])
 
         function getAllReactions(posts) {
             posts.map((data, index) => {
-
                 $scope.allReactions.total_love = $scope.allReactions.total_love + data.love.summary.total_count;
                 $scope.allReactions.total_haha = $scope.allReactions.total_haha + data.haha.summary.total_count;
                 $scope.allReactions.total_wow = $scope.allReactions.total_wow + data.wow.summary.total_count;
                 $scope.allReactions.total_sad = $scope.allReactions.total_sad + data.sad.summary.total_count;
                 $scope.allReactions.total_angry = $scope.allReactions.total_angry + data.angry.summary.total_count;
+
             })
+
         }
 
         $scope.openCollapse = function (id) {
@@ -526,9 +535,11 @@ angular.module('sonificationAPP.controllers.main', [])
             $('#'+id).removeClass('hide');
         }
         $scope.closeCollapse = function (id) {
-            $('#'+id).removeClass('show');
-            $('#'+id).attr('class', 'hide');
-            console.log("hallo");
+            $timeout(function () {
+                $('#'+id).removeClass('show');
+                $('#'+id).attr('class', 'hide');
+            },200);
+
         }
 
     })
