@@ -321,13 +321,14 @@ angular.module('sonificationAPP.controllers.main', [])
                 $scope.fbData.map((fb, index) => {
                     let valueAllReaction;
                      let reactionProzent ={ };
-                    valueAllReaction = $scope.allReactions.total_love + $scope.allReactions.total_haha + $scope.allReactions.total_wow + $scope.allReactions.total_sad + $scope.allReactions.total_angry;
+                    valueAllReaction = fb.love.summary.total_count + fb.haha.summary.total_count + fb.wow.summary.total_count + fb.sad.summary.total_count + fb.angry.summary.total_count;
                     reactionProzent.love = fb.love.summary.total_count/valueAllReaction*100;
                     reactionProzent.haha = fb.haha.summary.total_count/valueAllReaction*100;
                     reactionProzent.wow = fb.wow.summary.total_count/valueAllReaction*100;
                     reactionProzent.sad = fb.sad.summary.total_count/valueAllReaction*100;
                     reactionProzent.angry = fb.angry.summary.total_count/valueAllReaction*100;
                     fb.reactionProzent = reactionProzent;
+                    console.log(fb.love.summary.total_count);
                 })
             }, 0)
 
@@ -407,11 +408,9 @@ angular.module('sonificationAPP.controllers.main', [])
                 end: $scope.currentDate.end,
                 limit: $scope.limit
             };
-            console.log(data);
 
             $http.post('/api/post/fb/posts', data).then(posts => {
                 $scope.fbData = posts.data;
-                console.log($scope.fbData);
 
                 // IF No DATA is available
                 if (posts.data.length == 0) {
