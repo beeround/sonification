@@ -39,6 +39,9 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
                     break;
+                case "Instrument V2":
+                    soundService.playSoundsV5(0, 0, 0, 0, 0, reaction);
+                    break;
                 case "Sounds":
                     soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
                     break;
@@ -56,6 +59,9 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV2(love, haha, wow, sad, angry, null);
                     break;
+                case "Instrument V2":
+                    soundService.playSoundsV5(love, haha, wow, sad, angry, null);
+                    break;
                 case "Sounds":
                     soundService.playSoundsV3(love, haha, wow, sad, angry, null);
                     break;
@@ -71,11 +77,11 @@ angular.module('sonificationAPP.controllers.main', [])
        $scope.drawChart = function (love, haha, wow, sad, angry, id) {
             let data = google.visualization.arrayToDataTable([
                 ['Reaction', ''],
-                ['Love',     love],
-                ['haha',      haha],
-                ['wow',  wow],
+                ['Love', love],
+                ['haha', haha],
+                ['wow', wow],
                 ['sad', sad],
-                ['angry',    angry]
+                ['angry', angry]
             ]);
             let options = {
 

@@ -8,6 +8,7 @@ angular.module('sonificationAPP.services.sounds', [])
             let currentsong_wow = new Audio();
             let currentsong_sad = new Audio();
             let currentsong_angry = new Audio();
+            let sonify = {"love": new Audio(), "haha": new Audio(), "wow": new Audio(), "sad": new Audio(), "angry": new Audio()};
             let sonifyLove = new Tone;
             let sonifyHaha = new Tone;
             let sonifyWow = new Tone;
@@ -17,6 +18,7 @@ angular.module('sonificationAPP.services.sounds', [])
             let sounds=[
                 {name: "Simple"},
                 {name: "Instrument"},
+                {name: "Instrument V2"},
                 {name: "Sounds"},
                 {name: "Animals"}
             ];
@@ -327,6 +329,114 @@ angular.module('sonificationAPP.services.sounds', [])
                         default:
                     }
                 },
+                playSoundsV5: function(love, haha, wow, sad, angry, reaction){
+                    sonify.love = new Audio ("../../sounds/instrument_v2/love_strings_short.mp3");
+                    sonify.haha = new Audio ("../../sounds/instrument_v2/haha_flute_short.mp3");
+                    sonify.wow = new Audio ("../../sounds/instrument_v2/wow_trumpet_short.mp3");
+                    sonify.sad = new Audio ("../../sounds/instrument_v2/sad_bassoons_short.mp3");
+                    sonify.angry = new Audio ("../../sounds/instrument_v2/angry_horns_short.mp3");
+
+                    if (soundON == true) {
+                        removePolysynth();
+                        breaksounds();
+                    }
+                    soundON = true;
+
+                    let arrayReactions = [
+                        {"name": "love","value" : love, "timeMS": 3458, "valueVolume": 1},
+                        {"name": "wow","value" : wow, "timeMS": 979, "valueVolume": 1},
+                        {"name": "haha","value" : haha, "timeMS": 1792, "valueVolume": 1},
+                        {"name": "sad","value" : sad, "timeMS": 3854, "valueVolume": 1},
+                        {"name": "angry","value" : angry, "timeMS": 2896, "valueVolume": 1}
+                    ];
+                    sortReactions(arrayReactions);
+
+                    if (reaction != null){
+                        switch (reaction) {
+                            case "love":
+                                currentsong = new Audio ("../../sounds/instrument_v2/love_strings_short.mp3");
+                                currentsong.play();
+                                break;
+                            case "haha":
+                                currentsong = new Audio ("../../sounds/instrument_v2/haha_flute_short.mp3");
+                                currentsong.play();
+                                break;
+                            case "wow":
+                                currentsong = new Audio ("../../sounds/instrument_v2/wow_trumpet_short.mp3");
+                                currentsong.play();
+                                break;
+                            case "sad":
+                                currentsong = new Audio ("../../sounds/instrument_v2/sad_bassoons_short.mp3");
+                                currentsong.play();
+                                break;
+                            case "angry":
+                                currentsong = new Audio ("../../sounds/instrument_v2/angry_horns_short.mp3");
+                                currentsong.play();
+                                break;
+                        }
+                    }
+                    else {
+
+
+
+
+                        let reactionValue = reactionsInPercent(love,haha,wow,sad,angry);
+                        switch(reactionTrend(love, haha, wow, sad, angry)){
+                            case "love":
+                                reactionValue.haha = reactionValue.haha/ reactionValue.love;
+                                reactionValue.wow = reactionValue.wow/ reactionValue.love;
+                                reactionValue.sad = reactionValue.sad/ reactionValue.love;
+                                reactionValue.angry = reactionValue.angry/ reactionValue.love;
+                                reactionValue.love = 1;
+                                break;
+                            case "haha":
+                                reactionValue.love = reactionValue.love/ reactionValue.haha;
+                                reactionValue.wow = reactionValue.wow/ reactionValue.haha;
+                                reactionValue.sad = reactionValue.sad/ reactionValue.haha;
+                                reactionValue.angry = reactionValue.angry/ reactionValue.haha;
+                                reactionValue.haha = 1;
+                                break;
+                            case "wow":
+                                reactionValue.haha = reactionValue.haha/ reactionValue.wow;
+                                reactionValue.love = reactionValue.love/ reactionValue.wow;
+                                reactionValue.sad = reactionValue.sad/ reactionValue.wow;
+                                reactionValue.angry = reactionValue.angry/ reactionValue.wow;
+                                reactionValue.wow = 1;
+                                break;
+                            case "sad":
+                                reactionValue.haha = reactionValue.haha/ reactionValue.sad;
+                                reactionValue.wow = reactionValue.wow/ reactionValue.sad;
+                                reactionValue.love = reactionValue.love/ reactionValue.sad;
+                                reactionValue.angry = reactionValue.angry/ reactionValue.sad;
+                                reactionValue.sad = 1;
+                                break;
+                            case "angry":
+                                reactionValue.haha = reactionValue.haha/ reactionValue.angry;
+                                reactionValue.wow = reactionValue.wow/ reactionValue.angry;
+                                reactionValue.sad = reactionValue.sad/ reactionValue.angry;
+                                reactionValue.love = reactionValue.love/ reactionValue.angry;
+                                reactionValue.angry = 1;
+                                break;
+                        };
+                        let i = 0;
+                        let timetmp = 0;
+                        for (let reaction of arrayReactions) {
+                            (function() {
+                                console.log("warte " + timetmp + " ms auf " + reaction.name)
+                                setTimeout(function(){
+                                    sonify[reaction.name].play(); /*play music by Reaction*/
+                                    sonify[reaction.name].volume = reactionValue[reaction.name];
+                                    console.log("spiele " + reaction.name);
+                                    }, (timetmp));
+                                timetmp = timetmp + reaction.timeMS;
+                            })(i);
+                            i++;
+
+
+                        }
+
+                    }
+                }
 
 
 

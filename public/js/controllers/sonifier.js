@@ -19,7 +19,13 @@ function reactionsInPercent(love, haha, wow, sad, angry) {
   };
   return reactionsInPercent;
 }
-
+function sortReactions (arrayReactions) {
+arrayReactions.sort(function (a, b) {
+    if (a.value < b.value) return -1;
+    if (a.value > b.value) return 1;
+    return 0;
+});
+}
 function percentToMidiValue(reactionsInPercent) {
   var midiValues = {
     love: reactionsInPercent.love * 255,
@@ -27,7 +33,7 @@ function percentToMidiValue(reactionsInPercent) {
     haha: reactionsInPercent.haha * 255,
     sad: reactionsInPercent.sad * 255,
     angry: reactionsInPercent.angry * 255
-  }
+  };
   return midiValues;
 }
 
