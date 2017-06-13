@@ -11,6 +11,12 @@ angular.module('sonificationAPP.controllers.main', [])
     })
 
     .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout, soundService) {
+
+        $scope.stopPlaying = function () {
+            soundService.stopPlaying();
+            console.log("geht nich");
+        };
+
         $scope.sounds = soundService.getSounds();
 
         $http.get('/user/get/selectedSoundSkin').then(result => {

@@ -436,6 +436,10 @@ angular.module('sonificationAPP.services.sounds', [])
                         }
 
                     }
+                },
+                stopPlaying: function(){
+                    removePolysynth();
+                    breaksounds();
                 }
 
 
