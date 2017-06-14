@@ -1,8 +1,20 @@
 section(ng-controller="settingsCtrl")
-    h1 Settings
+    h1 Einstellungen
     .row
-        .col-md-6
-            ul
+        .col-md-12
+            h4 1 Schritt
+            p Wähle dein gewünschtes Instrument:
+
+        .col-md-12
+            form.form-horizontal
+                fieldset
+                    select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
+                            option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
+
+        .col-md-12
+            h4 2 Schritt
+            p Klicke nacheinander auf die Symbole um einen Sound zu erhalten und das gewählte Instrument zu testen:
+            ul.nav.nav-pills.emoticons-settings
                 li
                     i.icon.large.love(ng-click="sonifyByReaction('love')")
                 li
@@ -13,11 +25,4 @@ section(ng-controller="settingsCtrl")
                     i.icon.large.sad(ng-click="sonifyByReaction('sad')")
                 li
                     i.icon.large.angry(ng-click="sonifyByReaction('angry')")
-        .col-md-6
-            form.form-horizontal
-                fieldset
-                        .col-md-6
-                            select#selectbasic.form-control(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
-                                option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
-
 
