@@ -22,33 +22,53 @@ div(ng-controller="dashboardCtrl")
 
 
 
-    .row(style="margin-top:30px" ng-show="favData")
-        .col-md-4
-            h5 Favorit
-        .col-md-2
-            h5 Likes
-        .col-md-2
-            h5 Trend
-        .col-md-2
-            h5 Hinzugefügt am
-        .col-md-2
-    .row
+
+    .row(style="margin-top:30px")
         ul.col#accordion
             li(ng-repeat="fav in favData", ng-hide="$index == removeFav.index")
                 .collapsed.box
-                    .row
-                        .col-md-4
-                            a(ng-href="/app/search/{{fav.id}}")
-                                img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}" width="30" height="30")
-                                | {{fav.name}}
-                        .col-md-2
-                            p.icon.like {{fav.fan_count| number:0}}
-                        .col-md-2
+                    .row.sonifier
+                        .col-md-3.image
+                            img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}")
+                            .playSong
+                                i.fa.fa-play-circle
+                                span SocialSound
+                        .col-md-7
+                            .row
+                                .col-md-12
+                                    h3 {{fav.name}}
+                                .col-md-12.chart
+                                    .row.chart-inner
+                                        .col
+                                            .bar.love(style="height: calc({{fav.reactionProzent.love}}% + 30px);")
+                                            span.love {{fav.allReactions.total_love| number:0}}
+                                        .col
+                                            .bar.haha(style="height: calc({{fav.reactionProzent.haha}}% + 30px);")
+                                            span.haha {{fav.allReactions.total_haha| number:0}}
+
+                                        .col
+                                            .bar.wow(style="height: calc({{fav.reactionProzent.wow}}% + 30px);")
+                                            span.wow {{fav.allReactions.total_wow| number:0}}
+
+                                        .col
+                                            .bar.sad(style="height: calc({{fav.reactionProzent.sad}}% + 30px);")
+                                            span.sad {{fav.allReactions.total_sad| number:0}}
+
+                                        .col
+                                            .bar.angry(style="height: calc({{fav.reactionProzent.angry}}% + 30px);")
+                                            span.angry {{fav.allReactions.total_angry| number:0}}
+
+
+
+
+
+                            //p.icon.like {{fav.fan_count| number:0}}
+                        //.col-md-2
                             i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
                             span {{fav.total_reactionvalue*100| number:2}}%
                         .col-md-2
                             p {{fav.date | date:'dd.MM.yyyy'}}
-                        .col-md-2
+                        //.col-md-2
                             .row.pull-right
                                 button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)', style="margin-right:10px")
                                     i.fa.fa-minus
@@ -138,3 +158,5 @@ div(ng-controller="dashboardCtrl")
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Abbrechen
                     button.btn.btn-danger.btn-sm(ng-click="removeFavorite()") Ja, entfernen
+
+include ../../layout/angular-footer

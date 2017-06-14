@@ -79,7 +79,7 @@ function getFavData(id) {
 
             FB.setAccessToken(res.access_token);
 
-            FB.api(pageId+'?fields=name,link,cover{source},fan_count,picture{url},posts.limit(50){message,permalink_url,reactions.type(LOVE).limit(0).summary(true).as(love),reactions.type(HAHA).limit(0).summary(total_count).as(haha),reactions.type(SAD).limit(0).summary(total_count).as(sad),reactions.type(ANGRY).limit(0).summary(total_count).as(angry),reactions.type(WOW).limit(0).summary(total_count).as(wow),created_time}', function (res) {
+            FB.api(pageId+'?fields=name,link,cover{source},fan_count,picture.width(800){url},posts.limit(50){message,permalink_url,reactions.type(LOVE).limit(0).summary(true).as(love),reactions.type(HAHA).limit(0).summary(total_count).as(haha),reactions.type(SAD).limit(0).summary(total_count).as(sad),reactions.type(ANGRY).limit(0).summary(total_count).as(angry),reactions.type(WOW).limit(0).summary(total_count).as(wow),created_time}', function (res) {
                 if(!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
                     return;

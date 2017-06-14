@@ -274,6 +274,9 @@ li {
     line-height: 1.5;
   }
 
+  img {
+    width: 100%;
+  }
   li, p, span {
     color: $white;
   }
@@ -451,6 +454,102 @@ footer {
       display: inline;
       margin-left: 20px;
     }
+  }
+}
+
+// CHART
+.sonifier {
+  background-image: url("../img/soundwaves_white.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 20px;
+
+  .playSong {
+    background-color: $brand-darken;
+    padding: 10px 15px;
+    transition: 1s all;
+    cursor: pointer;
+
+    * {
+      font-size: 24px;
+    }
+    i {
+      margin-right: 15px;
+    }
+  }
+  .playSong:hover {
+    background-color: $brand-primary;
+  }
+
+
+}
+.chart {
+  height: 200px;
+  position: relative;
+  margin-top: 50px;
+
+  .chart-inner {
+    height: 100%;
+    position: absolute;
+    bottom:0;
+
+    .col {
+      text-align: center;
+      margin: 0 50px;
+
+      span {
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+
+      }
+    }
+
+    .bar {
+      width: 30px;
+      border-radius: 15px;
+      min-height: 30px;
+      position: absolute;
+      bottom: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+
+    }
+    .bar.love {
+      background-color: $chart-color-love;
+      background-image: url("../img/icons/facebook-love.svg");
+    }
+
+    .bar.haha {
+      background-color: $chart-color-haha;
+      background-image: url("../img/icons/facebook-haha.svg");
+    }
+
+    .bar.wow {
+      background-color: $chart-color-wow;
+      background-image: url("../img/icons/facebook-wow.svg");
+    }
+
+    .bar.sad {
+      background-color: $chart-color-sad;
+      background-image: url("../img/icons/facebook-sad.svg");
+    }
+
+    .bar.angry {
+      background-color: $chart-color-angry;
+      background-image: url("../img/icons/facebook-angry.svg");
+    }
+
+
   }
 }
 

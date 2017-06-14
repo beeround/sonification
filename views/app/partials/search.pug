@@ -88,7 +88,7 @@
                             li.icon.sad {{allReactions.total_sad}}
                             li.icon.angry {{allReactions.total_angry}}
 
-            .col-md-3.fbinfo(hl-sticky="", offset-top="100")
+            .col-md-3.fbinfo(hl-sticky="", offset-top="150")
                 img(ng-src="{{fbData[0].from.picture.data.url}}")
                 h4 {{fbData[0].from.name}}
                 p.icon.like {{fbData[0].from.fan_count}}
@@ -163,3 +163,5 @@
         .row(ng-show="fbData.length == 0")
 
             p Keine Daten gefunden! Bitte ändere den Zeitraum
+
+include ../../layout/angular-footer
