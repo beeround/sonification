@@ -20,9 +20,9 @@ angular.module('sonificationAPP.services.sounds', [])
                 {name: "Simple"},
                 {name: "Instrument"},
                 {name: "Instrument + Reihenfolge"},
-                {name: "Sounds"},
                 {name: "Animals"}
             ];
+
 
             let removePolysynth = function(){
                 sonifyLove.dispose();
@@ -236,60 +236,6 @@ angular.module('sonificationAPP.services.sounds', [])
 
                     }
             },
-                playSoundsV3: function(love, haha, wow, sad, angry, reaction){
-                    let trendReaction;
-                    let reactionValue;
-                    if (soundON == true) {
-                        breaksounds();
-                        removePolysynth();
-                    }
-                    soundON = true;
-
-
-
-                    if (reaction != null){
-                        trendReaction = reaction;
-                        reactionValue = {
-                            love:1,
-                            haha:1,
-                            wow:1,
-                            sad:1,
-                            angry:1
-                        };
-                    }
-                    else {
-                        trendReaction = reactionTrend(love, haha, wow, sad, angry);
-                        reactionValue = reactionsInPercent(love, haha, wow, sad, angry);
-                    }
-                    switch (trendReaction) {
-                        case "love":
-                            currentsong = new Audio ("../../sounds/harfe.mp3");
-                            currentsong.play();
-                            currentsong.volume = reactionValue.love;
-                            break;
-                        case "haha":
-                            currentsong = new Audio ("../../sounds/harfe.mp3");
-                            currentsong.play();
-                            currentsong.volume = reactionValue.haha;
-                            break;
-                        case "wow":
-                            currentsong = new Audio ("../../sounds/sound/wow_sound.mp3");
-                            currentsong.play();
-                            currentsong.volume = reactionValue.wow;
-                            break;
-                        case "sad":
-                            currentsong = new Audio ("../../sounds/harfe.mp3");
-                            currentsong.play();
-                            currentsong.volume = reactionValue.sad;
-                            break;
-                        case "angry":
-                            currentsong = new Audio ("../../sounds/harfe.mp3");
-                            currentsong.play();
-                            currentsong.volume = reactionValue.angry;
-                            break;
-                        default:
-                    }
-                },
                 playSoundsV4: function(love, haha, wow, sad, angry, reaction){
                     let trendReaction;
                     let reactionsValue;
@@ -317,7 +263,7 @@ angular.module('sonificationAPP.services.sounds', [])
                     }
                     switch (trendReaction) {
                         case "love":
-                            currentsong = new Audio ("../../sounds/harfe.mp3");
+                            currentsong = new Audio ("../../sounds/animals/haha_goat.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.love;
                             break;
@@ -332,7 +278,7 @@ angular.module('sonificationAPP.services.sounds', [])
                             currentsong.volume = reactionsValue.wow;
                             break;
                         case "sad":
-                            currentsong = new Audio ("../../sounds/harfe.mp3");
+                            currentsong = new Audio ("../../sounds/animals/sad_dog.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.sad;
                             break;

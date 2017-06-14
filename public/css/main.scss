@@ -5,6 +5,7 @@
 
 html, body {
   background-color: $brand-darken;
+  margin-bottom: 20px;
 
 }
 
@@ -440,6 +441,27 @@ hr {
 }
 
 //FOOTER
+
+.ng-footer{
+    position: fixed;
+    bottom:0px;
+    left:0px;
+    background-color: #131b21;
+    .container{
+      padding: 5px 15px 5px 0;
+    .selectbox{
+      width: 100%;
+      margin-bottom: 0px;
+    }
+    .col-md-5{
+      padding-top: 8px;
+    }
+    .form-control{
+      font-size: 13px;
+    }
+
+  }
+}
 footer {
   position: absolute;
   bottom: 10px;

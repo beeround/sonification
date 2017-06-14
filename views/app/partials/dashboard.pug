@@ -1,6 +1,5 @@
 div(ng-controller="dashboardCtrl")
     h1 Dashboard
-    button.btn-primary
 
     .row
         .col.box
@@ -143,8 +142,6 @@ div(ng-controller="dashboardCtrl")
                                 li
                                     i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
                                     a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 50 }}{{fav.posts.data[4].message.length > 50 ? '...' : ''}}{{fav.posts.data[4].message.length > 1 ? '' : 'Zum Post'}}
-
-
 
     #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')
         .modal-dialog(role='document')

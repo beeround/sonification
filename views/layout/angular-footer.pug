@@ -1,8 +1,32 @@
-footer
+footer.ng-footer
   .container
     .row
-      .col-md-12
+
+      .col-md-5
+       ul.footernavi
+          li
+            i.icon.love(ng-click="stopPlaying()")
+          li
+            i.icon.love(ng-click="sonifyByReaction('love')")
+          li
+            i.icon.haha(ng-click="sonifyByReaction('haha')")
+          li
+            i.icon.wow(ng-click="sonifyByReaction('wow')")
+          li
+            i.icon.sad(ng-click="sonifyByReaction('sad')")
+          li
+            i.icon.angry(ng-click="sonifyByReaction('angry')")
+      .col-md-2
+        form.form-horizontal
+          fieldset
+            select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
+              option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
+      .col-md-5
         ul.footernavi.pull-right
+          li
+
+          li
+
           li
             span © 2017 SonificationApp. All Rights Reserved
 

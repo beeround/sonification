@@ -14,6 +14,7 @@ angular.module('sonificationAPP.controllers.main', [])
 
         $scope.stopPlaying = function () {
             soundService.stopPlaying();
+            console.log("stop music");
         };
 
         $scope.sounds = soundService.getSounds();
@@ -47,9 +48,6 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument + Reihenfolge":
                     soundService.playSoundsV5(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Sounds":
-                    soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
-                    break;
                 case "Animals":
                     soundService.playSoundsV4(0, 0, 0, 0, 0, reaction);
                     break;
@@ -66,9 +64,6 @@ angular.module('sonificationAPP.controllers.main', [])
                     break;
                 case "Instrument + Reihenfolge":
                     soundService.playSoundsV5(love, haha, wow, sad, angry, null);
-                    break;
-                case "Sounds":
-                    soundService.playSoundsV3(love, haha, wow, sad, angry, null);
                     break;
                 case "Animals":
                     soundService.playSoundsV4(love, haha, wow, sad, angry, null);
