@@ -14,7 +14,6 @@ angular.module('sonificationAPP.controllers.main', [])
 
         $scope.stopPlaying = function () {
             soundService.stopPlaying();
-            console.log("geht nich");
         };
 
         $scope.sounds = soundService.getSounds();
@@ -45,7 +44,7 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Instrument V2":
+                case "Instrument + Reihenfolge":
                     soundService.playSoundsV5(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Sounds":
@@ -65,7 +64,7 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV2(love, haha, wow, sad, angry, null);
                     break;
-                case "Instrument V2":
+                case "Instrument + Reihenfolge":
                     soundService.playSoundsV5(love, haha, wow, sad, angry, null);
                     break;
                 case "Sounds":

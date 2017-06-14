@@ -15,10 +15,11 @@ angular.module('sonificationAPP.services.sounds', [])
             let sonifySad = new Tone;
             let sonifyAngry = new Tone;
             let soundON = false;
+            let arrayReactions;
             let sounds=[
                 {name: "Simple"},
                 {name: "Instrument"},
-                {name: "Instrument V2"},
+                {name: "Instrument + Reihenfolge"},
                 {name: "Sounds"},
                 {name: "Animals"}
             ];
@@ -30,14 +31,28 @@ angular.module('sonificationAPP.services.sounds', [])
                 sonifySad.dispose();
                 sonifyAngry.dispose();
                 soundON = false;
+
             };
             let breaksounds = function(){
                 currentsong.pause();
                 currentsong_love.pause();
+                currentsong_wow.pause();
                 currentsong_haha.pause();
                 currentsong_sad.pause();
                 currentsong_angry.pause();
                 soundON = false;
+                sonify.love.pause();
+                sonify.haha.pause();
+                sonify.wow.pause();
+                sonify.sad.pause();
+                sonify.angry.pause();
+                if(typeof arrayReactions !== 'undefined'){
+                    clearTimeout(arrayReactions[0].timeout);
+                    clearTimeout(arrayReactions[1].timeout);
+                    clearTimeout(arrayReactions[2].timeout);
+                    clearTimeout(arrayReactions[3].timeout);
+                    clearTimeout(arrayReactions[4].timeout);
+                }
             };
 
             return {
@@ -342,12 +357,12 @@ angular.module('sonificationAPP.services.sounds', [])
                     }
                     soundON = true;
 
-                    let arrayReactions = [
-                        {"name": "love","value" : love, "timeMS": 3458, "valueVolume": 1},
-                        {"name": "wow","value" : wow, "timeMS": 979, "valueVolume": 1},
-                        {"name": "haha","value" : haha, "timeMS": 1792, "valueVolume": 1},
-                        {"name": "sad","value" : sad, "timeMS": 3854, "valueVolume": 1},
-                        {"name": "angry","value" : angry, "timeMS": 2896, "valueVolume": 1}
+                    arrayReactions = [
+                        {"name": "love","value" : love, "timeMS": 3458, "valueVolume": 1, "timeout": 0},
+                        {"name": "wow","value" : wow, "timeMS": 979, "valueVolume": 1, "timeout": 0},
+                        {"name": "haha","value" : haha, "timeMS": 1792, "valueVolume": 1, "timeout": 0},
+                        {"name": "sad","value" : sad, "timeMS": 3854, "valueVolume": 1, "timeout": 0},
+                        {"name": "angry","value" : angry, "timeMS": 2896, "valueVolume": 1, "timeout": 0}
                     ];
                     sortReactions(arrayReactions);
 
@@ -423,7 +438,7 @@ angular.module('sonificationAPP.services.sounds', [])
                         for (let reaction of arrayReactions) {
                             (function() {
                                 console.log("warte " + timetmp + " ms auf " + reaction.name)
-                                setTimeout(function(){
+                                reaction.timeout = setTimeout(function(){
                                     sonify[reaction.name].play(); /*play music by Reaction*/
                                     sonify[reaction.name].volume = reactionValue[reaction.name];
                                     console.log("spiele " + reaction.name);
@@ -431,6 +446,8 @@ angular.module('sonificationAPP.services.sounds', [])
                                 timetmp = timetmp + reaction.timeMS;
                             })(i);
                             i++;
+
+
 
 
                         }
