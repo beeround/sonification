@@ -168,7 +168,7 @@ angular.module('sonificationAPP.controllers.main', [])
         }
     })
 
-    .controller('dashboardCtrl', function ($scope, $http, $timeout) {
+    .controller('dashboardCtrl', function ($scope, $http, $timeout, $window) {
 
         //TODO Reload after Fav Delete
         //GET FAV
@@ -220,13 +220,13 @@ angular.module('sonificationAPP.controllers.main', [])
                     fbID: $scope.removeFav.id,
 
                 };
-                $scope.removeFav.index = $scope.tempdIndex;
                 $('#ModalRemoveFav').modal('hide');
 
                 $http.put('/user/remove/favorite', data).then(function () {
                     $scope.isFav = false;
+                    $window.location.reload();
                 })
-            }}
+            }};
 
 
 

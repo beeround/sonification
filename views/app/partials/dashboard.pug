@@ -29,16 +29,16 @@ div(ng-controller="dashboardCtrl")
                     .row.sonifier
                         .col-md-3.image.actions
                             img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}")
-                            //.playSong(ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
-                                i.fa.fa-play-circle
-                                span SocialSound
-                            p.playSong
+
+                            p.playSong(ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
                                 i.fa.fa-play-circle
                                 span Sound wiedergeben
-                            p
+
+                            p(ng-click='openModal(fav, $index)')
                                 i.fa.fa-remove
                                 span Favorit entfernen
-                            p
+
+                            a(ng-href='/app/search/{{fav.id}}')
                                 i.fa.fa-link
                                 span Zur Detailansicht
 
@@ -70,26 +70,11 @@ div(ng-controller="dashboardCtrl")
                                             .bar.angry(style="height: calc({{fav.reactionProzent.angry}}% + 30px);")
                                             span.angry {{fav.allReactions.total_angry| number:0}}
 
-
-
-
-
-                            //
-                        //.col-md-2
-                            i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
-                            span {{fav.total_reactionvalue*100| number:2}}%
                         .col-md-2
                             p.small Hinzugefügt am: {{fav.date | date:'dd.MM.yyyy'}}
                             button.btn.btn-primary.btn-sm.openAcc(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px")
                                 i.fa.fa-caret-down
-                        //.col-md-2
-                            .row.pull-right
-                                button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)', style="margin-right:10px")
-                                    i.fa.fa-minus
-                                button.btn.btn-primary.btn-sm(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px")
-                                    i.fa.fa-caret-down
-                                a.btn.btn-info.btn-sm(ng-href='/app/search/{{fav.id}}', style="margin-right:15px")
-                                    i.fa.fa-external-link
+
 
 
 
@@ -136,6 +121,6 @@ div(ng-controller="dashboardCtrl")
                     | Sind sie sicher, dass sie {{removeFav.name}} aus den Favoriten entfernen wollen?
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Abbrechen
-                    button.btn.btn-danger.btn-sm(ng-click="removeFavorite()") Ja, entfernen
+                    button.btn.btn-danger(ng-click="removeFavorite()") Ja, entfernen
 
 include ../../layout/angular-footer

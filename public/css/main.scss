@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, p, li, label {
   color: $white;
 }
 
-p {
+p, a {
   i {
     margin-right: 10px;
   }
@@ -510,10 +510,13 @@ footer {
   }
 
   .actions {
+    a {
+      color: $grey;
+    }
     p {
       cursor: pointer;
     }
-    p:hover {
+    p:hover, a:hover {
       color: $brand-primary;
 
       span {
