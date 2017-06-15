@@ -27,15 +27,28 @@ div(ng-controller="dashboardCtrl")
             li(ng-repeat="fav in favData", ng-hide="$index == removeFav.index")
                 .collapsed.box
                     .row.sonifier
-                        .col-md-3.image
+                        .col-md-3.image.actions
                             img(style="margin-right:30px" ng-src="{{fav.picture.data.url}}")
-                            .playSong
+                            //.playSong(ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
                                 i.fa.fa-play-circle
                                 span SocialSound
+                            p.playSong
+                                i.fa.fa-play-circle
+                                span Sound wiedergeben
+                            p
+                                i.fa.fa-remove
+                                span Favorit entfernen
+                            p
+                                i.fa.fa-link
+                                span Zur Detailansicht
+
                         .col-md-7
                             .row
                                 .col-md-12
-                                    h3 {{fav.name}}
+                                    h3
+                                        | {{fav.name}}
+                                        span.icon.like {{fav.fan_count| number:0}}
+
                                 .col-md-12.chart
                                     .row.chart-inner
                                         .col
@@ -61,12 +74,14 @@ div(ng-controller="dashboardCtrl")
 
 
 
-                            //p.icon.like {{fav.fan_count| number:0}}
+                            //
                         //.col-md-2
                             i.icon(ng-class="{'{{fav.total_reaction}}':fav.total_reaction, 'noreaction': fav.total_reaction == null}" ng-click="sonify(fav.allReactions.total_love, fav.allReactions.total_haha, fav.allReactions.total_wow, fav.allReactions.total_sad, fav.allReactions.total_angry)")
                             span {{fav.total_reactionvalue*100| number:2}}%
                         .col-md-2
-                            p {{fav.date | date:'dd.MM.yyyy'}}
+                            p.small Hinzugefügt am: {{fav.date | date:'dd.MM.yyyy'}}
+                            button.btn.btn-primary.btn-sm.openAcc(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px")
+                                i.fa.fa-caret-down
                         //.col-md-2
                             .row.pull-right
                                 button.btn.btn-danger.btn-sm(ng-click='openModal(fav, $index)', style="margin-right:10px")
@@ -80,69 +95,36 @@ div(ng-controller="dashboardCtrl")
 
 
                 .collapse.box(id="index{{$index}}")
-                    .row.poststats_headline
-                        .col-md-5
-                            p Letzten 50 Posts
-                        .col-md-7
-                            p Letzten 5 Postings
-
                     .row.poststats
-                        .col-md-5
-                            ul.reaction
-                                li
-                                    .col-md-2
-                                        span.love {{fav.allReactions.total_love| number:0}}
-                                    .col-md-1
-                                        i.icon.love
-                                    .col-md-8
-                                        div.love(style="width: {{fav.reactionProzent.love}}%;")
-                                li
-                                    .col-md-2
-                                        span.haha {{fav.allReactions.total_haha| number:0}}
-                                    .col-md-1
-                                        i.icon.haha
-                                    .col-md-8
-                                        div.haha(style="width: {{fav.reactionProzent.haha}}%;")
-                                li
-                                    .col-md-2
-                                        span.wow {{fav.allReactions.total_wow| number:0}}
-                                    .col-md-1
-                                        i.icon.wow
-                                    .col-md-8
-                                        div.wow(style="width: {{fav.reactionProzent.wow}}%;")
-                                li
-                                    .col-md-2
-                                        span.sad {{fav.allReactions.total_sad| number:0}}
-                                    .col-md-1
-                                        i.icon.sad
-                                    .col-md-8
-                                        div.sad(style="width: {{fav.reactionProzent.sad}}%;")
-                                li
-                                    .col-md-2
-                                        span.angry {{fav.allReactions.total_angry| number:0}}
-                                    .col-md-1
-                                        i.icon.angry
-                                    .col-md-8
-                                        div.angry(style="width: {{fav.reactionProzent.angry}}%;")
+                       .col-md-12
+                           .row
+                               .col-md-6
+                                   h5 Anzahl der Reactions
+                               .col-md-6
+                                   h5 Letzte Posts
 
-                        .col-md-7
-                            ul
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[0].total_reaction}}':fav.posts.data[0].total_reaction, 'noreaction': fav.posts.data[0].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[0].permalink_url}}" target="blank") {{fav.posts.data[0].message | limitTo: 50 }}{{fav.posts.data[0].message.length > 50 ? '...' : ''}}{{fav.posts.data[0].message.length > 1 ? '' : 'Zum Post'}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[1].total_reaction}}':fav.posts.data[1].total_reaction, 'noreaction': fav.posts.data[1].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[1].permalink_url}}" target="blank") {{fav.posts.data[1].message | limitTo: 50 }}{{fav.posts.data[1].message.length > 50 ? '...' : ''}}{{fav.posts.data[1].message.length > 1 ? '' : 'Zum Post'}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[2].total_reaction}}':fav.posts.data[2].total_reaction, 'noreaction': fav.posts.data[2].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[2].permalink_url}}" target="blank") {{fav.posts.data[2].message | limitTo: 50 }}{{fav.posts.data[2].message.length > 50 ? '...' : ''}}{{fav.posts.data[2].message.length > 1 ? '' : 'Zum Post'}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[3].total_reaction}}':fav.posts.data[3].total_reaction, 'noreaction': fav.posts.data[3].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[3].permalink_url}}" target="blank") {{fav.posts.data[3].message | limitTo: 50 }}{{fav.posts.data[3].message.length > 50 ? '...' : ''}}{{fav.posts.data[3].message.length > 1 ? '' : 'Zum Post'}}
-                                li
-                                    i.icon(ng-class="{'{{fav.posts.data[4].total_reaction}}':fav.posts.data[4].total_reaction, 'noreaction': fav.posts.data[4].total_reaction == null}")
-                                    a(ng-href="{{fav.posts.data[4].permalink_url}}" target="blank") {{fav.posts.data[4].message | limitTo: 50 }}{{fav.posts.data[4].message.length > 50 ? '...' : ''}}{{fav.posts.data[4].message.length > 1 ? '' : 'Zum Post'}}
-
+                           .row.entry(ng-repeat="i in [0, 1, 2, 3, 4]")
+                               .col-md-6
+                                   .row
+                                       .col-md-1(ng-click="sonify(fav.posts.data[i].love.summary.total_count,fav.posts.data[i].haha.summary.total_count,fav.posts.data[i].wow.summary.total_count,fav.posts.data[i].sad.summary.total_count, fav.posts.data[i].angry.summary.total_count)")
+                                           i.fa.fa-play-circle
+                                       .col-md-2
+                                           i.icon.love
+                                           span {{fav.posts.data[i].love.summary.total_count}}
+                                       .col-md-2
+                                           i.icon.haha
+                                           span {{fav.posts.data[i].haha.summary.total_count}}
+                                       .col-md-2
+                                           i.icon.wow
+                                           span {{fav.posts.data[i].wow.summary.total_count}}
+                                       .col-md-2
+                                           i.icon.sad
+                                           span {{fav.posts.data[i].sad.summary.total_count}}
+                                       .col-md-2
+                                           i.icon.angry
+                                           span {{fav.posts.data[i].angry.summary.total_count}}
+                               .col-md-6
+                                   a(ng-href="{{fav.posts.data[i].permalink_url}}" target="blank") {{fav.posts.data[i].message | limitTo: 60 }}{{fav.posts.data[i].message.length > 60 ? '...' : ''}}{{fav.posts.data[i].message.length > 1 ? '' : 'Zum Post'}}
     #ModalRemoveFav.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalRemoveFav', aria-hidden='true')
         .modal-dialog(role='document')
             .modal-content
