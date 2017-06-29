@@ -232,6 +232,7 @@ header {
 .post {
   padding: 10px;
   margin-bottom: 10px;
+  min-height:310px;
 
   img {
     margin: 10px 0;
@@ -692,11 +693,43 @@ footer {
   margin-bottom: 5px;
 }
 
+.lightbox.red {
+  background-color: #ed5168;
+}
+.lightbox.yellow {
+  background-color: #ffda6b;
+}
+.lightbox {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height:100%;
+  z-index: 999999;
+  transition: all 1s;
 //Compare
 .result-margin{
   margin-bottom: 20px;
 }
 
+  h1 {
+    font-weight: bold;
+    font-size: 120px;
+  }
+
+  h2 {
+    margin-top: -10px;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+
+  .emoji {
+    width: 300px;
+    height:300px;
+    margin: 0 auto;
+  }
+
+}
 .compare-results{
   font-size: 18px;
   h3{

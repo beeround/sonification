@@ -1,7 +1,7 @@
 'use strict';
 angular.module('sonificationAPP.services.sounds', [])
-    .service('soundService', ['$http', '$q', '$timeout',
-        function ($http, $q, $timeout) {
+    .service('soundService', ['$http', '$q', '$timeout', '$rootScope',
+        function ($http, $q, $timeout, $rootScope) {
             let currentsong = new Audio();
             let currentsong_love = new Audio();
             let currentsong_haha = new Audio();
@@ -23,6 +23,26 @@ angular.module('sonificationAPP.services.sounds', [])
                 {name: "Animals"}
             ];
 
+            //sound = lova,haha,wow,sad or angry
+
+            function refreshPlayer (type, love, haha, wow, sad, angry) {
+
+                $rootScope.currentPlay = {
+                    sound : type,
+                    love: love,
+                    wow: wow,
+                    haha: haha,
+                    sad: sad,
+                    angry: angry
+                };
+            };
+
+            //remove sound =
+            function removeCurrentPlaySong (timeoutMS){
+                $timeout(function () {
+                    $rootScope.currentPlay.sound = "";
+                },timeoutMS)
+            }
 
             let removePolysynth = function(){
                 sonifyLove.dispose();
@@ -57,6 +77,9 @@ angular.module('sonificationAPP.services.sounds', [])
 
             return {
 
+                getCurrentPlay: function () {
+
+                },
                 getSounds: function () {
                     return sounds;
                 },
@@ -81,18 +104,28 @@ angular.module('sonificationAPP.services.sounds', [])
                             switch(trendReaction){
                                 case "love":
                                     velocity.love ="1";
+                                    refreshPlayer("love", love, haha, wow, sad,angry);
+                                    removeCurrentPlaySong(2000); //TODO set Time
                                     break;
                                 case "haha":
                                     velocity.haha ="1";
+                                    refreshPlayer("haha", love, haha, wow, sad,angry);
+                                    removeCurrentPlaySong(2000); //TODO set Time
                                     break;
                                 case "wow":
                                     velocity.wow ="1";
+                                    refreshPlayer("wow", love, haha, wow, sad,angry);
+                                    removeCurrentPlaySong(2000); //TODO set Time
                                     break;
                                 case "sad":
                                     velocity.sad ="1";
+                                    refreshPlayer("sad", love, haha, wow, sad,angry);
+                                    removeCurrentPlaySong(2000); //TODO set Time
                                     break;
                                 case "angry":
                                     velocity.angry ="1";
+                                    refreshPlayer("angry", love, haha, wow, sad,angry);
+                                    removeCurrentPlaySong(2000); //TODO set Time
                                     break;
                             }
                         }
@@ -101,6 +134,9 @@ angular.module('sonificationAPP.services.sounds', [])
                         }
                         switch (trendReaction) {
                             case "love":
+                                refreshPlayer("love", love, haha, wow, sad,angry);
+                                removeCurrentPlaySong(2000); //TODO set Time
+
                                 sonifyLove.triggerAttackRelease("D4", "2n", "+0", velocity.love);
                                 sonifyLove.triggerAttackRelease("E4", "2n", "+0.1", velocity.love);
                                 sonifyLove.triggerAttackRelease("G4", "2n", "+0.2", velocity.love);
@@ -108,6 +144,9 @@ angular.module('sonificationAPP.services.sounds', [])
                                 sonifyLove.releaseAll();
                                 break;
                             case "haha":
+                                refreshPlayer("haha", love, haha, wow, sad,angry);
+                                removeCurrentPlaySong(2000); //TODO set Time
+
                                 sonifyHaha.triggerAttackRelease('A5', '8n', '+0', velocity.haha);
                                 sonifyHaha.triggerAttackRelease('GB5', '8n', '+0.1', velocity.haha);
                                 sonifyHaha.triggerAttackRelease('D5', '8n', '+0.2', velocity.haha);
@@ -115,12 +154,18 @@ angular.module('sonificationAPP.services.sounds', [])
                                 sonifyHaha.releaseAll();
                                 break;
                             case "wow":
+                                refreshPlayer("wow", love, haha, wow, sad,angry);
+                                removeCurrentPlaySong(2000); //TODO set Time
+
                                 sonifyWow.triggerAttackRelease('C4', '1n', '+0', velocity.wow);
                                 sonifyWow.triggerAttackRelease('E4', '1n', '+0', velocity.wow);
                                 sonifyWow.triggerAttackRelease('AB4', '1n', '+0', velocity.wow);
                                 sonifyWow.releaseAll();
                                 break;
                             case "sad":
+                                refreshPlayer("sad", love, haha, wow, sad,angry);
+                                removeCurrentPlaySong(2000); //TODO set Time
+
                                 sonifySad.triggerAttackRelease('A3', '1n', '+0', velocity.sad);
                                 sonifySad.triggerAttackRelease('D4', '1n', '+0', velocity.sad);
                                 sonifySad.triggerAttackRelease('F4', '1n', '+0', velocity.sad);
@@ -131,6 +176,9 @@ angular.module('sonificationAPP.services.sounds', [])
                                 sonifySad.releaseAll();
                                 break;
                             case "angry":
+                                refreshPlayer("angry", love, haha, wow, sad,angry);
+                                removeCurrentPlaySong(2000); //TODO set Time
+
                                 sonifyAngry.triggerAttackRelease('A4', '1n', '+0', velocity.angry);
                                 sonifyAngry.triggerAttackRelease('C5', '1n', '+0', velocity.angry);
                                 sonifyAngry.triggerAttackRelease('EB5', '1n', '+0', velocity.angry);
@@ -155,22 +203,32 @@ angular.module('sonificationAPP.services.sounds', [])
                             case "love":
                                 currentsong = new Audio ("../../sounds/instrument_v2/love_strings_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "love";
+                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "haha":
                                 currentsong = new Audio ("../../sounds/instrument_v2/haha_flute_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "haha";
+                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "wow":
                                 currentsong = new Audio ("../../sounds/instrument_v2/wow_trumpet_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "wow";
+                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "sad":
                                 currentsong = new Audio ("../../sounds/instrument_v2/sad_bassoons_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "sad";
+                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "angry":
                                 currentsong = new Audio ("../../sounds/instrument_v2/angry_horns_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "angry";
+                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                         }
                     }
@@ -217,6 +275,7 @@ angular.module('sonificationAPP.services.sounds', [])
                         currentsong_love = new Audio ("../../sounds/instrument_v2/love_strings.mp3");
                         currentsong_love.play();
                         currentsong_love.volume = reactionValue.love;
+
 
                         currentsong_haha = new Audio ("../../sounds/instrument_v2/haha_flute.mp3");
                         currentsong_haha.play();
@@ -266,26 +325,36 @@ angular.module('sonificationAPP.services.sounds', [])
                             currentsong = new Audio ("../../sounds/animals/haha_goat.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.love;
+                            $rootscope.currentPlay.sound = "love";
+                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "haha":
                             currentsong = new Audio ("../../sounds/animals/haha_goat.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.haha;
+                            $rootscope.currentPlay.sound = "haha";
+                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "wow":
                             currentsong = new Audio ("../../sounds/animals/wow_elephant.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.wow;
+                            $rootscope.currentPlay.sound = "wow";
+                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "sad":
                             currentsong = new Audio ("../../sounds/animals/sad_dog.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.sad;
+                            $rootscope.currentPlay.sound = "sad";
+                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "angry":
                             currentsong = new Audio ("../../sounds/animals/angry_cat.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.angry;
+                            $rootscope.currentPlay.sound = "angry";
+                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         default:
                     }
@@ -317,22 +386,32 @@ angular.module('sonificationAPP.services.sounds', [])
                             case "love":
                                 currentsong = new Audio ("../../sounds/instrument_v2/love_strings_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "love";
+                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "haha":
                                 currentsong = new Audio ("../../sounds/instrument_v2/haha_flute_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "haha";
+                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "wow":
                                 currentsong = new Audio ("../../sounds/instrument_v2/wow_trumpet_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "wow";
+                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "sad":
                                 currentsong = new Audio ("../../sounds/instrument_v2/sad_bassoons_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "sad";
+                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "angry":
                                 currentsong = new Audio ("../../sounds/instrument_v2/angry_horns_short.mp3");
                                 currentsong.play();
+                                $rootscope.currentPlay.sound = "angry";
+                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                         }
                     }
@@ -385,6 +464,8 @@ angular.module('sonificationAPP.services.sounds', [])
                             (function() {
                                 console.log("warte " + timetmp + " ms auf " + reaction.name)
                                 reaction.timeout = setTimeout(function(){
+                                    $rootscope.currentPlay.sound = reaction.name;
+                                    removeCurrentPlaySong(reaction.time);
                                     sonify[reaction.name].play(); /*play music by Reaction*/
                                     sonify[reaction.name].volume = reactionValue[reaction.name];
                                     console.log("spiele " + reaction.name);
@@ -403,6 +484,7 @@ angular.module('sonificationAPP.services.sounds', [])
                 stopPlaying: function(){
                     removePolysynth();
                     breaksounds();
+                    removeCurrentPlaySong(0);
                 }
 
 

@@ -1,36 +1,42 @@
 footer.ng-footer
-  .container
-    .row
+    .container
+        .row
+            .col-md-5
+                ul.footernavi
 
-      .col-md-5
-       ul.footernavi
-          li
-            i.fa.fa-stop-circle.icon(ng-click="stopPlaying()")
-          li
-            i.icon.love(ng-click="sonifyByReaction('love')")
-          li
-            i.icon.haha(ng-click="sonifyByReaction('haha')")
-          li
-            i.icon.wow(ng-click="sonifyByReaction('wow')")
-          li
-            i.icon.sad(ng-click="sonifyByReaction('sad')")
-          li
-            i.icon.angry(ng-click="sonifyByReaction('angry')")
-      .col-md-2
-        form.form-horizontal
-          fieldset
-            select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
-              option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
-      .col-md-5
-        ul.footernavi.pull-right
-          li
-            span.small © 2017 SonificationApp. All Rights Reserved
-          li.text-right
-            a.small(href="/imprint") Imprint
+                    li
+                        i.fa.fa-stop-circle.icon(ng-click="stopPlaying()")
+                    li
+                        i.icon.love(ng-click="sonifyByReaction('love')")
+                    li
+                        i.icon.haha(ng-click="sonifyByReaction('haha')")
+                    li
+                        i.icon.wow(ng-click="sonifyByReaction('wow')")
+                    li
+                        i.icon.sad(ng-click="sonifyByReaction('sad')")
+                    li
+                        i.icon.angry(ng-click="sonifyByReaction('angry')")
+
+            .col-md-2
+                form.form-horizontal
+                    fieldset
+                        select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
+                            option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
+            .col-md-5
+                ul.footernavi.pull-right
+                    li
+                        span.small © 2017 SonificationApp. All Rights Reserved
+                    li.text-right
+                        a.small(href="/imprint") Imprint
 
 
 
+.lightbox.love(ng-show="currentPlay.sound", ng-class="{'red': currentPlay.sound == 'love', 'yellow': currentPlay.sound != 'love'}")
 
+    .container.text-center
+        .emoji.icon(ng-class="currentPlay.sound")
+        h1 {{currentPlay[currentPlay.sound] || "3002"}}
+        h2 {{currentPlay.sound}}
 
 
 
