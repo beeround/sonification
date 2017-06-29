@@ -34,48 +34,52 @@ div(ng-controller="dashboardCtrl")
                                 i.fa.fa-play-circle
                                 span Sound wiedergeben
 
-                            p(ng-click='openModal(fav, $index)')
-                                i.fa.fa-remove
-                                span Favorit entfernen
-
-                            a(ng-href='/app/search/{{fav.id}}')
-                                i.fa.fa-link
-                                span Zur Detailansicht
-
-                        .col-md-7
+                        .col-md-6
                             .row
-                                .col-md-12
-                                    h3
-                                        | {{fav.name}}
-                                        span.icon.like {{fav.fan_count| number:0}}
-
-                                .col-md-12.chart
+                                .col-md-9.chart
                                     .row.chart-inner
-                                        .col
-                                            .bar.love(style="height: calc({{fav.reactionProzent.love}}% + 30px);")
+                                        .col.emotions
+                                            .outer
+                                                .bar.love(style="height: calc({{fav.reactionProzent.love}}%);")
                                             span.love {{fav.allReactions.total_love| number:0}}
                                         .col
-                                            .bar.haha(style="height: calc({{fav.reactionProzent.haha}}% + 30px);")
+                                            .outer
+                                                .bar.haha(style="height: calc({{fav.reactionProzent.haha}}%);")
                                             span.haha {{fav.allReactions.total_haha| number:0}}
 
                                         .col
-                                            .bar.wow(style="height: calc({{fav.reactionProzent.wow}}% + 30px);")
+                                            .outer
+                                                .bar.wow(style="height: calc({{fav.reactionProzent.wow}}%);")
                                             span.wow {{fav.allReactions.total_wow| number:0}}
 
                                         .col
-                                            .bar.sad(style="height: calc({{fav.reactionProzent.sad}}% + 30px);")
+                                            .outer
+                                                .bar.sad(style="height: calc({{fav.reactionProzent.sad}}%);")
                                             span.sad {{fav.allReactions.total_sad| number:0}}
 
                                         .col
-                                            .bar.angry(style="height: calc({{fav.reactionProzent.angry}}% + 30px);")
+                                            .outer
+                                                .bar.angry(style="height: calc({{fav.reactionProzent.angry}}%);")
                                             span.angry {{fav.allReactions.total_angry| number:0}}
 
-                        .col-md-2
+                        .col-md-3
                             p.small Hinzugefügt am: {{fav.date | date:'dd.MM.yyyy'}}
-                            button.btn.btn-primary.btn-sm.openAcc(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px")
+                            h3| {{fav.name}}
+                            p.likes.icon.like {{fav.fan_count| number:0}}
+
+                            p.favorit(ng-click='openModal(fav, $index)')(style="margin-top:30px margin-bottom:5px")
+                                i.fa.fa-remove
+                                span Favorit entfernen
+
+                            a.favorit(ng-href='/app/search/{{fav.id}}')
+                                i.fa.fa-link
+                                span Zur Detailansicht
+
+
+                    .row
+                        .col-md-2.offset-md-10
+                            .button.lastpost(data-target='#index{{$index}}', data-toggle='collapse', data-parent='#accordion', style="margin-right:15px") letzte Posts
                                 i.fa.fa-caret-down
-
-
 
 
 

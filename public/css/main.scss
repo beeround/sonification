@@ -492,6 +492,7 @@ footer {
   background-position: 20px;
 
   .small {
+    text-align: right;
     font-size: 10px;
     color: $grey;
     margin-top: 8px;
@@ -514,6 +515,7 @@ footer {
     }
     p {
       cursor: pointer;
+      margin-bottom: 5px;
     }
     p:hover, a:hover {
       color: $brand-primary;
@@ -543,7 +545,6 @@ footer {
     right: 0;
   }
 
-
 }
 
 .playSong.searchPlay {
@@ -565,9 +566,9 @@ footer {
   }
 }
 .chart {
-  height: 285px;
+  height: 168px;
   position: relative;
-  margin-top: 50px;
+  margin-top: 85px;
 
   .chart-inner {
     height: 100%;
@@ -576,7 +577,7 @@ footer {
 
     .col {
       text-align: center;
-      margin: 0 50px;
+      margin: 0 28px;
 
       span {
         text-align: center;
@@ -586,6 +587,7 @@ footer {
         margin-right: auto;
         left: 0;
         right: 0;
+        font-size: 12px;
 
       }
     }
@@ -672,3 +674,21 @@ footer {
 .emoticons-settings li{
   margin-right: 11px;
 }
+
+.likes{
+  font-size: 14px;
+}
+
+.lastpost{
+  color: #ff9800;
+  margin-left: 32px;
+}
+
+.fa-caret-down{
+  padding-left: 10px;
+}
+
+.favorit{
+  margin-bottom: 5px;
+}
+
