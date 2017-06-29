@@ -692,3 +692,45 @@ footer {
   margin-bottom: 5px;
 }
 
+//Compare
+.result-margin{
+  margin-bottom: 20px;
+}
+
+.compare-results{
+  font-size: 18px;
+  h3{
+    margin-top: 5px;
+  }
+}
+.compare-box{
+  color: white;
+  .col{
+    padding:0px;
+  }
+}
+.compare-emoticons{
+  text-align: center;
+  margin-top: 56px;
+  font-size: 32px;
+}
+
+.emoticons-number p{
+  padding-bottom: 6px;
+}
+
+.compare-bar{
+  height: 22px;
+  margin-top: 8px;
+}
+
+.compare-bar-left{
+  float: right;
+  border-radius: 10px 0px 0px 10px;
+}
+.compare-bar-right{
+  border-radius: 0px 10px 10px 0px;
+}
+.compare-bar-calc{
+  width: calc(50% - 15px);
+}

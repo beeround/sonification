@@ -1,19 +1,20 @@
 section(ng-controller="compareCtrl")
-    h1 Compare
-
     .row
-        .col-md-6
-            form(ng-submit="searchUserOne()")
-                .row
-                    .col-md-8
-                        .form-group
-                            input.form-control(type='text', required, ng-model="queryOne.name" placeholder='Facebook page name')
-                    .col-md-2
-                        button.btn.btn-primary(type='submit') search
+        .col-md-2
+        .col-md-8
+            .text-center.search-logo
+                    img(src="/img/socialsound_logo.png")
+    .row
+        .col-md-5
+            form.result-margin(ng-submit="searchUserOne()")
+                    div.input-group
+                        input.form-control(type='text', required, ng-focus="openCollapse('lastsearchs')", ng-blur="closeCollapse('lastsearchs')",ng-model="queryOne.name" placeholder='Facebook Seite suchen...')
+                        span.input-group-btn
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-search
+
             .row
                 .col-md-12(ng-show="searchResultsOne && !dataLeft")
-                    h3 Search Results
-
                     .search(ng-show="currentWindowOne == 'SearchList'")
                         .searchResult(ng-repeat="search in searchResultsOne")
                             .card.card-inverse(style='background-color: #333; border-color: #333;')
@@ -25,33 +26,86 @@ section(ng-controller="compareCtrl")
                                     p.card-text {{search.fan_count}} Likes
 
 
-                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')") show feed
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')") Feed anzeigen
+
+            .row.compare-results
+                .col-md-12.search-results(ng-show="dataLeft")
+                    .row
+                        .col-md-6
+                            img(style="width:160px" ng-src="{{dataLeft.picture.data.url}}")
+                            h3(style="margin-top:10px") {{dataLeft.name}}
+
+                            div.compare-box
+                                p.playSong(ng-click="sonify(dataLeft.allReactions.total_love, dataLeft.allReactions.total_haha, dataLeft.allReactions.total_wow, dataLeft.allReactions.total_sad, dataLeft.allReactions.total_angry)")
+                                    i.fa.fa-play-circle
+                                    span Sound wiedergeben
+                                p
+                                    span.icon.like {{dataLeft.fan_count| number:0}}
+                                p
+                                    a(ng-href='/app/search/{{dataLeft.id}}')
+                                        i.fa.fa-link
+                                        | Zur Detailansicht
+
+                                //p Total Reaction: {{dataLeft.total_reaction}}
+                                //p Reaction Value: {{dataLeft.total_reactionvalue}}
+                        .col-md-4
+                        .col-md-2.emoticons-number
+                            //p Like: {{dataLeft | json}}
+                            p(style='color: #ffa3d3;') {{dataLeft.allReactions.total_love}}
+                            p(style="color: #fffd00;") {{dataLeft.allReactions.total_haha}}
+                            p(style="color: #38dacd;") {{dataLeft.allReactions.total_wow}}
+                            p(style="color: #949494;") {{dataLeft.allReactions.total_sad}}
+                            p(style="color: #9a0400;") {{dataLeft.allReactions.total_angry}}
+
+        .col-md-2.compare-emoticons
+            .row
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.love}}%; background-color: #ffa3d3;')
+                div
+                    i.icon.love
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.love}}%; background-color: #ffa3d3;')
 
             .row
-                .col-md-12(ng-show="dataLeft")
-                    h3 Name: {{dataLeft.name}}
-                    p Fans: {{dataLeft.fan_count}}
-                    p Reaction Value: {{dataLeft.total_reactionvalue}}
-                    p Total Reaction: {{dataLeft.total_reaction}}
-                    p All Reactions: {{dataLeft.allReactions | json}}
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.haha}}%; background-color: #fffd00;')
+                div
+                    i.icon.haha
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.haha}}%; background-color: #fffd00;')
 
+            .row
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.wow}}%; background-color: #38dacd;')
+                div
+                    i.icon.wow
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.wow}}%; background-color: #38dacd;')
+            .row
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.sad}}%; background-color: #949494;')
+                div
+                    i.icon.sad
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.sad}}%; background-color: #949494;')
+            .row
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.angry}}%; background-color: #9a0400;')
+                div
+                    i.icon.angry
+                div.compare-bar-calc
+                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.angry}}%; background-color: #9a0400;')
 
+        .col-md-5
+            form.result-margin(ng-submit="searchUserTwo()")
+                    div.input-group
+                        input.form-control(type='text', required, ng-focus="openCollapse('lastsearchs')", ng-blur="closeCollapse('lastsearchs')",ng-model="queryTwo.name" placeholder='Facebook Seite suchen...')
+                        span.input-group-btn
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-search
 
-
-
-
-        .col-md-6
-            form(ng-submit="searchUserTwo()")
-                .row
-                    .col-md-8
-                        .form-group
-                            input.form-control(type='text', required, ng-model="queryTwo.name" placeholder='Facebook page name')
-                    .col-md-2
-                        button.btn.btn-primary(type='submit') search
             .row
                 .col-md-12(ng-show="searchResultsTwo && !dataRight")
-                    h3 Search Results
-
                     .search(ng-show="currentWindowTwo == 'SearchList'")
                         .searchResult(ng-repeat="search in searchResultsTwo")
                             .card.card-inverse(style='background-color: #333; border-color: #333;')
@@ -63,14 +117,37 @@ section(ng-controller="compareCtrl")
                                     p.card-text {{search.fan_count}} Likes
 
 
-                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')") show feed
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')") Feed anzeigen
 
-            .row
-                .col-md-12(ng-show="dataRight")
-                    h3 Name: {{dataRight.name}}
-                    p Fans: {{dataRight.fan_count}}
-                    p Reaction Value: {{dataRight.total_reactionvalue}}
-                    p Total Reaction: {{dataRight.total_reaction}}
-                    p All Reactions: {{dataRight.allReactions | json}}
+
+
+            .row.compare-results
+                .col-md-12.search-results(ng-show="dataRight")
+                    .row
+                        .col-md-2.emoticons-number
+                            //p Like: {{dataLeft | json}}
+                            p(style='color: #ffa3d3;') {{dataRight.allReactions.total_love}}
+                            p(style="color: #fffd00;") {{dataRight.allReactions.total_haha}}
+                            p(style="color: #38dacd;") {{dataRight.allReactions.total_wow}}
+                            p(style="color: #949494;") {{dataRight.allReactions.total_sad}}
+                            p(style="color: #9a0400;") {{dataRight.allReactions.total_angry}}
+                        .col-md-4
+                        .col-md-6(style ='text-align: right;')
+                            img(style="width:160px" ng-src="{{dataRight.picture.data.url}}")
+                            h3(style="margin-top:10px") {{dataRight.name}}
+
+                            div.compare-box
+                                p.playSong(ng-click="sonify(dataLeft.allReactions.total_love, dataLeft.allReactions.total_haha, dataLeft.allReactions.total_wow, dataLeft.allReactions.total_sad, dataLeft.allReactions.total_angry)")
+                                    i.fa.fa-play-circle
+                                    span Sound wiedergeben
+                                p
+                                    span.icon.like {{dataRight.fan_count| number:0}}
+                                p
+                                    a(ng-href='/app/search/{{dataLeft.id}}')
+                                        i.fa.fa-link
+                                        | Zur Detailansicht
+
+                                //p Total Reaction: {{dataLeft.total_reaction}}
+                                //p Reaction Value: {{dataLeft.total_reactionvalue}}
 
 include ../../layout/angular-footer
