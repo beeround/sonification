@@ -174,11 +174,7 @@ a:hover {
 }
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
+
 
   .container {
     margin-top: 0;
@@ -549,10 +545,15 @@ footer {
 
 
 }
+
+.playSong.searchPlay {
+  font-size: 18px;
+}
 .searchChart {
   position: absolute!important;
-  bottom: 70px!important;
+  bottom: 80px!important;
   margin-top: 0!important;
+
 
 
   .col {

@@ -1,3 +1,5 @@
+
+
 function reactionInPercent(reaction, total) {
   var reactionInPercent = reaction / total;
   return reactionInPercent;
