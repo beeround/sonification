@@ -26,14 +26,14 @@ section(ng-controller="compareCtrl")
                                     p.card-text {{search.fan_count}} Likes
 
 
-                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')") Feed anzeigen
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')") Auswählen
 
             .row.compare-results
                 .col-md-12.search-results(ng-show="dataLeft")
                     .row
                         .col-md-6
-                            img(style="width:160px" ng-src="{{dataLeft.picture.data.url}}")
                             h3(style="margin-top:10px") {{dataLeft.name}}
+                            img(style="width:160px" ng-src="{{dataLeft.picture.data.url}}")
 
                             div.compare-box
                                 p.playSong(ng-click="sonify(dataLeft.allReactions.total_love, dataLeft.allReactions.total_haha, dataLeft.allReactions.total_wow, dataLeft.allReactions.total_sad, dataLeft.allReactions.total_angry)")
@@ -117,7 +117,7 @@ section(ng-controller="compareCtrl")
                                     p.card-text {{search.fan_count}} Likes
 
 
-                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')") Feed anzeigen
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')") Auswählen
 
 
 
@@ -133,8 +133,11 @@ section(ng-controller="compareCtrl")
                             p(style="color: #9a0400;") {{dataRight.allReactions.total_angry}}
                         .col-md-4
                         .col-md-6(style ='text-align: right;')
-                            img(style="width:160px" ng-src="{{dataRight.picture.data.url}}")
                             h3(style="margin-top:10px") {{dataRight.name}}
+                                p.small
+                                    span.icon.like {{dataRight.fan_count| number:0}}
+                            img(style="width:160px" ng-src="{{dataRight.picture.data.url}}")
+
 
                             div.compare-box
                                 p.playSong(ng-click="sonify(dataLeft.allReactions.total_love, dataLeft.allReactions.total_haha, dataLeft.allReactions.total_wow, dataLeft.allReactions.total_sad, dataLeft.allReactions.total_angry)")
