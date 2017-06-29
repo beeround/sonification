@@ -117,47 +117,40 @@
                             p {{fb.message}}
 
                             a(ng-href="{{fb.permalink_url}}", target="blank") Permanentlink
-                            button(ng-click="sonify(fb.love.summary.total_count, fb.haha.summary.total_count,fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count)") sonifizieren
                             img(ng-src="{{fb.full_picture}}")
 
-                            .row
-                                .col
-                                    h5 Love
-                                    p {{fb.love.summary.total_count}}
-
-                                .col
-                                    h5 Haha
-                                    p {{fb.haha.summary.total_count}}
-
-                                .col
-                                    h5 Wow
-                                    p {{fb.wow.summary.total_count}}
-
-                                .col
-                                    h5 Sad
-                                    p {{fb.sad.summary.total_count}}
-
-                                .col
-                                    h5 Angry
-                                    p {{fb.angry.summary.total_count}}
-                                hr
                     .col-md-4
-                        ul.reaction
-                            li
-                                .col-md-8
-                                    div.love(style="width: {{fb.reactionProzent.love}}%;")
-                            li
-                                .col-md-8
-                                    div.haha(style="width: {{fb.reactionProzent.haha}}%;")
-                            li
-                                .col-md-8
-                                    div.wow(style="width: {{fb.reactionProzent.wow}}%;")
-                            li
-                                .col-md-8
-                                    div.sad(style="width: {{fb.reactionProzent.sad}}%;")
-                            li
-                                .col-md-8
-                                    div.angry(style="width: {{fb.reactionProzent.angry}}%;")
+                        .row
+                            .col-md-12.chart.searchChart
+                                .row.chart-inner
+                                    .col
+                                        .outer
+                                            .bar.love(style="height: calc({{fb.reactionProzent.love}}%);")
+                                        span.love {{fb.love.summary.total_count| number:0}}
+                                    .col
+                                        .outer
+                                            .bar.haha(style="height: calc({{fb.reactionProzent.haha}}%);")
+                                        span.haha {{fb.haha.summary.total_count| number:0}}
+
+                                    .col
+                                        .outer
+                                            .bar.wow(style="height: calc({{fb.reactionProzent.wow}}%);")
+                                        span.wow {{fb.wow.summary.total_count| number:0}}
+
+                                    .col
+                                        .outer
+                                            .bar.sad(style="height: calc({{fb.reactionProzent.sad}}%);")
+                                        span.sad {{fb.sad.summary.total_count| number:0}}
+
+                                    .col
+                                        .outer
+                                            .bar.angry(style="height: calc({{fb.reactionProzent.angry}}%);")
+                                        span.angry {{fb.angry.summary.total_count| number:0}}
+                            .row(style="bottom:15px; position:absolute;left:10px")
+                                .col
+                                    p.playSong(ng-click="sonify(fb.love.summary.total_count, fb.haha.summary.total_count,fb.wow.summary.total_count, fb.sad.summary.total_count, fb.angry.summary.total_count)")
+                                        i.fa.fa-play-circle
+                                        span Sound wiedergeben
 
 
         .row(ng-show="fbData.length == 0")

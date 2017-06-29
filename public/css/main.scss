@@ -212,6 +212,9 @@ header {
 .searchResult {
   margin-bottom: 20px;
 
+  img {
+    width:auto!important;
+  }
   span {
     cursor: pointer;
   }
@@ -546,6 +549,20 @@ footer {
 
 
 }
+.searchChart {
+  position: absolute!important;
+  bottom: 70px!important;
+  margin-top: 0!important;
+
+
+  .col {
+    margin: 0 10px!important;
+
+    span {
+      color: white;
+    }
+  }
+}
 .chart {
   height: 285px;
   position: relative;
@@ -572,12 +589,28 @@ footer {
       }
     }
 
-    .bar {
+    .outer {
       width: 30px;
       border-radius: 15px;
       min-height: 30px;
       position: absolute;
       bottom: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      height: 100%;
+      background-color: $brand-darkest;
+      right: 0;
+    }
+    .bar {
+      width: 30px;
+      border-radius: 15px;
+      min-height: 30px;
+      position: absolute;
+      bottom: 0;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: bottom;
