@@ -8,7 +8,7 @@ section(ng-controller="compareCtrl")
         .col-md-5
             form.result-margin(ng-submit="searchUserOne()")
                     div.input-group
-                        input.form-control(type='text', required, ng-focus="openCollapse('lastsearchs')", ng-blur="closeCollapse('lastsearchs')",ng-model="queryOne.name" placeholder='Facebook Seite suchen...')
+                        input.form-control(type='text', required, ng-focus="openCollapse('lastsearchs')", ng-blur="closeCollapse('lastsearchs')",ng-model="queryOne.name" placeholder='1. Facebook Seite suchen...')
                         span.input-group-btn
                             button.btn.btn-primary(type='submit')
                                 i.fa.fa-search
@@ -48,8 +48,8 @@ section(ng-controller="compareCtrl")
 
                                 //p Total Reaction: {{dataLeft.total_reaction}}
                                 //p Reaction Value: {{dataLeft.total_reactionvalue}}
-                        .col-md-4
-                        .col-md-2.emoticons-number
+                        .col-md-3
+                        .col-md-3.emoticons-number
                             //p Like: {{dataLeft | json}}
                             p(style='color: #ffa3d3;') {{dataLeft.allReactions.total_love}}
                             p(style="color: #fffd00;") {{dataLeft.allReactions.total_haha}}
@@ -57,7 +57,9 @@ section(ng-controller="compareCtrl")
                             p(style="color: #949494;") {{dataLeft.allReactions.total_sad}}
                             p(style="color: #9a0400;") {{dataLeft.allReactions.total_angry}}
 
-        .col-md-2.compare-emoticons
+        .col-md-2(ng-hide="dataLeft")
+            .row
+        .col-md-2.compare-emoticons(ng-show="dataLeft")
             .row
                 div.compare-bar-calc
                     div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.love}}%; background-color: #ffa3d3;')
@@ -99,7 +101,7 @@ section(ng-controller="compareCtrl")
         .col-md-5
             form.result-margin(ng-submit="searchUserTwo()")
                     div.input-group
-                        input.form-control(type='text', required, ng-focus="openCollapse('lastsearchs')", ng-blur="closeCollapse('lastsearchs')",ng-model="queryTwo.name" placeholder='Facebook Seite suchen...')
+                        input.form-control(type='text', required, ng-focus="openCollapse('lastsearchs')", ng-blur="closeCollapse('lastsearchs')",ng-model="queryTwo.name" placeholder='2. Facebook Seite suchen...')
                         span.input-group-btn
                             button.btn.btn-primary(type='submit')
                                 i.fa.fa-search
@@ -134,8 +136,6 @@ section(ng-controller="compareCtrl")
                         .col-md-4
                         .col-md-6(style ='text-align: right;')
                             h3(style="margin-top:10px") {{dataRight.name}}
-                                p.small
-                                    span.icon.like {{dataRight.fan_count| number:0}}
                             img(style="width:160px" ng-src="{{dataRight.picture.data.url}}")
 
 
