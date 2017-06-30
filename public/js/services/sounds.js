@@ -436,8 +436,6 @@ angular.module('sonificationAPP.services.sounds', [])
                             (function() {
                                 console.log("warte " + timetmp + " ms auf " + reaction.name)
                                 reaction.timeout = setTimeout(function(){
-                                    $rootscope.currentPlay.sound = reaction.name;
-                                    removeCurrentPlaySong(reaction.time);
                                     sonify[reaction.name].play(); /*play music by Reaction*/
                                     sonify[reaction.name].volume = reactionValue[reaction.name];
                                     console.log("spiele " + reaction.name);
