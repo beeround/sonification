@@ -203,32 +203,24 @@ angular.module('sonificationAPP.services.sounds', [])
                             case "love":
                                 currentsong = new Audio ("../../sounds/instrument_v2/love_strings_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "love";
-                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "haha":
                                 currentsong = new Audio ("../../sounds/instrument_v2/haha_flute_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "haha";
+
                                 removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "wow":
                                 currentsong = new Audio ("../../sounds/instrument_v2/wow_trumpet_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "wow";
-                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "sad":
                                 currentsong = new Audio ("../../sounds/instrument_v2/sad_bassoons_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "sad";
-                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                             case "angry":
                                 currentsong = new Audio ("../../sounds/instrument_v2/angry_horns_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "angry";
-                                removeCurrentPlaySong(2000); //TODO set Time
                                 break;
                         }
                     }
@@ -325,36 +317,26 @@ angular.module('sonificationAPP.services.sounds', [])
                             currentsong = new Audio ("../../sounds/animals/haha_goat.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.love;
-                            $rootscope.currentPlay.sound = "love";
-                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "haha":
                             currentsong = new Audio ("../../sounds/animals/haha_goat.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.haha;
-                            $rootscope.currentPlay.sound = "haha";
-                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "wow":
                             currentsong = new Audio ("../../sounds/animals/wow_elephant.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.wow;
-                            $rootscope.currentPlay.sound = "wow";
-                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "sad":
                             currentsong = new Audio ("../../sounds/animals/sad_dog.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.sad;
-                            $rootscope.currentPlay.sound = "sad";
-                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         case "angry":
                             currentsong = new Audio ("../../sounds/animals/angry_cat.mp3");
                             currentsong.play();
                             currentsong.volume = reactionsValue.angry;
-                            $rootscope.currentPlay.sound = "angry";
-                            removeCurrentPlaySong(2); //TODO set Time
                             break;
                         default:
                     }
@@ -386,32 +368,22 @@ angular.module('sonificationAPP.services.sounds', [])
                             case "love":
                                 currentsong = new Audio ("../../sounds/instrument_v2/love_strings_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "love";
-                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "haha":
                                 currentsong = new Audio ("../../sounds/instrument_v2/haha_flute_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "haha";
-                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "wow":
                                 currentsong = new Audio ("../../sounds/instrument_v2/wow_trumpet_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "wow";
-                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "sad":
                                 currentsong = new Audio ("../../sounds/instrument_v2/sad_bassoons_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "sad";
-                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                             case "angry":
                                 currentsong = new Audio ("../../sounds/instrument_v2/angry_horns_short.mp3");
                                 currentsong.play();
-                                $rootscope.currentPlay.sound = "angry";
-                                removeCurrentPlaySong(2); //TODO set Time
                                 break;
                         }
                     }
