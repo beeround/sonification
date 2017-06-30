@@ -354,9 +354,10 @@ angular.module('sonificationAPP.services.sounds', [])
                     }
                     soundON = true;
 
+                    // wow timeMS : 979
                     arrayReactions = [
                         {"name": "love","value" : love, "timeMS": 3458, "valueVolume": 1, "timeout": 0},
-                        {"name": "wow","value" : wow, "timeMS": 979, "valueVolume": 1, "timeout": 0},
+                        {"name": "wow","value" : wow, "timeMS": 1500, "valueVolume": 1, "timeout": 0},
                         {"name": "haha","value" : haha, "timeMS": 1792, "valueVolume": 1, "timeout": 0},
                         {"name": "sad","value" : sad, "timeMS": 3854, "valueVolume": 1, "timeout": 0},
                         {"name": "angry","value" : angry, "timeMS": 2896, "valueVolume": 1, "timeout": 0}
@@ -433,15 +434,19 @@ angular.module('sonificationAPP.services.sounds', [])
                         let i = 0;
                         let timetmp = 0;
                         for (let reaction of arrayReactions) {
-                            (function() {
-                                console.log("warte " + timetmp + " ms auf " + reaction.name)
-                                reaction.timeout = setTimeout(function(){
-                                    sonify[reaction.name].play(); /*play music by Reaction*/
-                                    sonify[reaction.name].volume = reactionValue[reaction.name];
-                                    console.log("spiele " + reaction.name);
-                                    }, (timetmp));
-                                timetmp = timetmp + reaction.timeMS;
-                            })(i);
+                            console.log(reaction);
+                            console.log("warte " + timetmp + " ms auf " + reaction.name);
+
+                            $timeout(function () {
+                                refreshPlayer(reaction.name, love, haha, wow, sad,angry);
+                                sonify[reaction.name].play();
+                                sonify[reaction.name].volume = reactionValue[reaction.name];
+
+                            },timetmp);
+
+                            timetmp = timetmp + reaction.timeMS;
+                            removeCurrentPlaySong(16000);
+
                             i++;
 
 

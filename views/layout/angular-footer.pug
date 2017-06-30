@@ -3,7 +3,6 @@ footer.ng-footer
         .row
             .col-md-5
                 ul.footernavi
-
                     li
                         i.fa.fa-stop-circle.icon(ng-click="stopPlaying()")
                     li
@@ -33,7 +32,7 @@ footer.ng-footer
 
     .container.text-center
         .emoji.icon(ng-class="currentPlay.sound")
-        h1(count-to='{{currentPlay[currentPlay.sound]}}', value='0', duration='1')
+        h1(count-to='{{currentPlay[currentPlay.sound]}}', value='0', duration='1', ng-show="currentPlay[currentPlay.sound] != '0'")
         h2 {{currentPlay.sound}}
 
 
