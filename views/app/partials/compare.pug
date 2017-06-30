@@ -23,7 +23,7 @@ section(ng-controller="compareCtrl")
                                         img.profile(ng-src="{{search.picture.data.url}}")
                                         | {{search.name}}
                                     p.card-text {{search.category}}
-                                    p.card-text {{search.fan_count}} Likes
+                                    p.card-text {{search.fan_count | number:0}} Gefällt mir
 
 
                                     span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')") Auswählen
@@ -49,7 +49,7 @@ section(ng-controller="compareCtrl")
                                 //p Total Reaction: {{dataLeft.total_reaction}}
                                 //p Reaction Value: {{dataLeft.total_reactionvalue}}
                         .col-md-3
-                        .col-md-3.emoticons-number
+                        .col-md-3.emoticons-number.emoticons-number-left
                             //p Like: {{dataLeft | json}}
                             p(style='color: #ffa3d3;') {{dataLeft.allReactions.total_love}}
                             p(style="color: #fffd00;") {{dataLeft.allReactions.total_haha}}
@@ -116,7 +116,7 @@ section(ng-controller="compareCtrl")
                                         img.profile(ng-src="{{search.picture.data.url}}")
                                         | {{search.name}}
                                     p.card-text {{search.category}}
-                                    p.card-text {{search.fan_count}} Likes
+                                    p.card-text {{search.fan_count | number:0}} Gefällt mir
 
 
                                     span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')") Auswählen
@@ -126,7 +126,7 @@ section(ng-controller="compareCtrl")
             .row.compare-results
                 .col-md-12.search-results(ng-show="dataRight")
                     .row
-                        .col-md-2.emoticons-number
+                        .col-md-2.emoticons-number.emoticons-number-right
                             //p Like: {{dataLeft | json}}
                             p(style='color: #ffa3d3;') {{dataRight.allReactions.total_love}}
                             p(style="color: #fffd00;") {{dataRight.allReactions.total_haha}}
