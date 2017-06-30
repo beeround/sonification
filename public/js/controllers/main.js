@@ -45,8 +45,11 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Instrument + Reihenfolge":
+                case "Instrumentenfolge Primacy":
                     soundService.playSoundsV5(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Instrumentenfolge Recency":
+                    soundService.playSoundsV6(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Animals":
                     soundService.playSoundsV4(0, 0, 0, 0, 0, reaction);
@@ -62,8 +65,11 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV2(love, haha, wow, sad, angry, null);
                     break;
-                case "Instrument + Reihenfolge":
+                case "Instrumentenfolge Primacy":
                     soundService.playSoundsV5(love, haha, wow, sad, angry, null);
+                    break;
+                case "Instrumentenfolge Recency":
+                    soundService.playSoundsV6(love, haha, wow, sad, angry, null);
                     break;
                 case "Animals":
                     soundService.playSoundsV4(love, haha, wow, sad, angry, null);

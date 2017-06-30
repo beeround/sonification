@@ -18,10 +18,11 @@ angular.module('sonificationAPP.services.sounds', [])
             let arrayReactions;
             let timeouts = [];
             let sounds=[
-                {name: "Simple"},
-                {name: "Instrument"},
-                {name: "Instrument + Reihenfolge"},
-                {name: "Animals"}
+                {name: "Simple", description: "Einfacher Ton. Die höchste Reaktion wird hervorgehoben."},
+                {name: "Instrument", description: "Ein Instrument spielt die höchste Reaktion."},
+                {name: "Instrumentenfolge Primacy", description: "Die höchste Reaktion wird zuerst gespielt."},
+                {name: "Instrumentenfolge Recency", description: "Die niedrigste Reaktion wird zuerst gespielt."},
+                {name: "Animals", description: "Tiersounds."}
             ];
 
             //sound = lova,haha,wow,sad or angry
