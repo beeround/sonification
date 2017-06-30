@@ -16,6 +16,7 @@ angular.module('sonificationAPP.services.sounds', [])
             let sonifyAngry = new Tone;
             let soundON = false;
             let arrayReactions;
+            let timeouts = [];
             let sounds=[
                 {name: "Simple"},
                 {name: "Instrument"},
@@ -27,21 +28,25 @@ angular.module('sonificationAPP.services.sounds', [])
 
             function refreshPlayer (type, love, haha, wow, sad, angry) {
 
-                $rootScope.currentPlay = {
-                    sound : type,
-                    love: love,
-                    wow: wow,
-                    haha: haha,
-                    sad: sad,
-                    angry: angry
-                };
+                if(soundON){
+                    console.log("true")
+                    $rootScope.currentPlay = {
+                        sound : type,
+                        love: love,
+                        wow: wow,
+                        haha: haha,
+                        sad: sad,
+                        angry: angry
+                    };
+                }
             };
 
             //remove sound =
             function removeCurrentPlaySong (timeoutMS){
-                $timeout(function () {
+                timeouts.push($timeout(function () {
                     $rootScope.currentPlay.sound = "";
-                },timeoutMS)
+                    console.log("schließen")
+                },timeoutMS))
             }
 
             let removePolysynth = function(){
@@ -55,24 +60,30 @@ angular.module('sonificationAPP.services.sounds', [])
             };
             let breaksounds = function(){
                 currentsong.pause();
+                currentsong.currentTime = 0;
                 currentsong_love.pause();
+                currentsong_love.currentTime = 0;
                 currentsong_wow.pause();
+                currentsong_wow.currentTime = 0;
                 currentsong_haha.pause();
+                currentsong_haha.currentTime = 0;
                 currentsong_sad.pause();
+                currentsong_sad.currentTime = 0;
                 currentsong_angry.pause();
+                currentsong_angry.currentTime = 0;
+
                 soundON = false;
                 sonify.love.pause();
                 sonify.haha.pause();
                 sonify.wow.pause();
                 sonify.sad.pause();
                 sonify.angry.pause();
-                if(typeof arrayReactions !== 'undefined'){
-                    clearTimeout(arrayReactions[0].timeout);
-                    clearTimeout(arrayReactions[1].timeout);
-                    clearTimeout(arrayReactions[2].timeout);
-                    clearTimeout(arrayReactions[3].timeout);
-                    clearTimeout(arrayReactions[4].timeout);
+
+                while(timeouts.length){
+                    $timeout.cancel(timeouts.pop());
+
                 }
+
             };
 
             return {
@@ -437,22 +448,21 @@ angular.module('sonificationAPP.services.sounds', [])
                             console.log(reaction);
                             console.log("warte " + timetmp + " ms auf " + reaction.name);
 
-                            $timeout(function () {
-                                refreshPlayer(reaction.name, love, haha, wow, sad,angry);
-                                sonify[reaction.name].play();
-                                sonify[reaction.name].volume = reactionValue[reaction.name];
+                            timeouts.push($timeout(function () {
+                                if(soundON){
+                                    refreshPlayer(reaction.name, love, haha, wow, sad,angry);
+                                    sonify[reaction.name].play();
+                                    sonify[reaction.name].volume = reactionValue[reaction.name];
+                                }
+                                console.log(timetmp);
 
-                            },timetmp);
+                            },timetmp));
 
                             timetmp = timetmp + reaction.timeMS;
-                            removeCurrentPlaySong(16000);
-
                             i++;
-
-
-
-
                         }
+                        removeCurrentPlaySong(15000);
+
 
                     }
                 },

@@ -28,7 +28,7 @@ footer.ng-footer
                     li.text-right
                         a.small(href="/imprint") Imprint
 
-.lightbox.love(ng-show="currentPlay.sound", ng-class="{'red': currentPlay.sound == 'love', 'yellow': currentPlay.sound != 'love'}")
+.lightbox(ng-click="stopPlaying()",ng-show="currentPlay.sound", ng-class="{'love': currentPlay.sound == 'love', 'haha': currentPlay.sound == 'haha', 'wow': currentPlay.sound == 'wow', 'sad': currentPlay.sound == 'sad', 'angry': currentPlay.sound == 'angry'}")
 
     .container.text-center
         .emoji.icon(ng-class="currentPlay.sound")
