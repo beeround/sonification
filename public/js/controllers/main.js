@@ -17,6 +17,13 @@ angular.module('sonificationAPP.controllers.main', [])
             console.log("stop music");
         };
 
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) { // escape key maps to keycode `27`
+                if($rootScope.currentPlay){
+                    soundService.stopPlaying();
+                }
+            }
+        });
         $scope.sounds = soundService.getSounds();
 
         $http.get('/user/get/selectedSoundSkin').then(result => {

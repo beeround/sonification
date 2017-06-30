@@ -452,12 +452,17 @@ hr {
     position: fixed;
     bottom:0px;
     left:0px;
-    background-color: #131b21;
+    background-color: $brand-primary;
+
+  a {
+    color: white;
+  }
     .container{
       padding: 5px 15px 5px 0;
     .selectbox{
       width: 100%;
       margin-bottom: 0px;
+      color: white;
     }
     .col-md-5{
       padding-top: 8px;
