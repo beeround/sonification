@@ -61,6 +61,9 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Animals":
                     soundService.playSoundsV4(0, 0, 0, 0, 0, reaction);
                     break;
+                case "Beat":
+                    soundService.playSoundsV7(0, 0, 0, 0, 0, reaction);
+                    break;
             }
 
         };
@@ -80,6 +83,9 @@ angular.module('sonificationAPP.controllers.main', [])
                     break;
                 case "Animals":
                     soundService.playSoundsV4(love, haha, wow, sad, angry, null);
+                    break;
+                case "Beat":
+                    soundService.playSoundsV7(love, haha, wow, sad, angry, null);
                     break;
             }
 
