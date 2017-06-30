@@ -21,13 +21,22 @@ function reactionsInPercent(love, haha, wow, sad, angry) {
   };
   return reactionsInPercent;
 }
-function sortReactions (arrayReactions) {
+function sortReactionsQuietToLoud (arrayReactions) {
 arrayReactions.sort(function (a, b) {
     if (a.value < b.value) return -1;
     if (a.value > b.value) return 1;
     return 0;
 });
 }
+
+function sortReactionsLoudToQuiet (arrayReactions) {
+    arrayReactions.sort(function (a, b) {
+        if (a.value < b.value) return 1;
+        if (a.value > b.value) return -1;
+        return 0;
+    });
+}
+
 function percentToMidiValue(reactionsInPercent) {
   var midiValues = {
     love: reactionsInPercent.love * 255,

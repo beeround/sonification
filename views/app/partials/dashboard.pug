@@ -64,7 +64,7 @@ div(ng-controller="dashboardCtrl")
 
                         .col-md-3
                             p.small Hinzugefügt am: {{fav.date | date:'dd.MM.yyyy'}}
-                            h3| {{fav.name}}
+                            h3 {{fav.name}}
                             p.likes.icon.like {{fav.fan_count| number:0}}
 
                             p.favorit(ng-click='openModal(fav, $index)')(style="margin-top:30px margin-bottom:5px")
