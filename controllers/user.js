@@ -11,7 +11,7 @@ const moment = require('moment');
  */
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect('/dashboard');
+    return res.redirect('/app');
   }
   res.render('account/login', {
     title: 'Login'
@@ -42,7 +42,7 @@ exports.postLogin = (req, res, next) => {
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Success! You are logged in.' });
+      req.flash('success', { msg: 'Du hast dich erfolgreich eingeloggt!' });
       res.redirect('/app');
     });
   })(req, res, next);
@@ -63,7 +63,7 @@ exports.logout = (req, res) => {
  */
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/');
+    return res.redirect('/app');
   }
   res.render('account/signup', {
     title: 'Create Account'
@@ -307,7 +307,7 @@ exports.postReset = (req, res, next) => {
  */
 exports.getForgot = (req, res) => {
   if (req.isAuthenticated()) {
-    return res.redirect('/');
+    return res.redirect('/app');
   }
   res.render('account/forgot', {
     title: 'Forgot Password'

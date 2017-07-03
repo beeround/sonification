@@ -3,26 +3,29 @@ extends ../layout/structure
 block content
   .row(style="margin-top:50px")
 
-    .col-md-8.col-md-offset-2
-      .col-md-8.col-md-offset-2
-        h3.text-center Sign up
-        form#signup-form.form-horizontal(method='POST', action="/signup")
+    .col-md-6
+      img(src="/img/socialsound_logo.png", style="width:100%; margin-top: 100px")
+
+    .col-md-6
+      .col-md-10.col-md-offset-2
+        h3 Registrieren
+        form#signup-form.form-horizontal(method='POST', action="/signup", style="margin-top:30px")
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
               input.form-control(type='name', name='name', id='name', placeholder='Name', autofocus, required)
           .form-group
-              input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+              input.form-control(type='email', name='email', id='email', placeholder='E-Mail', autofocus, required)
           .form-group
-              input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+              input.form-control(type='password', name='password', id='password', placeholder='Passwort', required)
           .form-group
-              input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+              input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Passwort bestätigen', required)
           .form-group
             .row
               .col-md-3
                 button.btn.btn-primary.pull-left(type='submit')
-                  | Signup
-              .col-md-3
-                a.btn.btn-empty(href='/login')
-                  | Have an account? Log in
+                  | Registrieren
 
-
+            .row
+              .col-md-12(style="margin-top:70px")
+                a(href='/login')
+                  | Du hast bereits einen Account? Jetzt einloggen

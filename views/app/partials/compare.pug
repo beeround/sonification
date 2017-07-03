@@ -4,7 +4,8 @@ section(ng-controller="compareCtrl")
         .col-md-8
             .text-center.search-logo
                     img(src="/img/socialsound_logo.png")
-    .row
+
+    .row(style="margin-top: 50px; margin-bottom: 100px")
         .col-md-5
             form.result-margin(ng-submit="searchUserOne()")
                     div.input-group
@@ -16,24 +17,24 @@ section(ng-controller="compareCtrl")
             .row
                 .col-md-12(ng-show="searchResultsOne && !dataLeft")
                     .search(ng-show="currentWindowOne == 'SearchList'")
-                        .searchResult(ng-repeat="search in searchResultsOne")
-                            .card.card-inverse(style='background-color: #333; border-color: #333;')
-                                .card-block
-                                    h3.card-title
-                                        img.profile(ng-src="{{search.picture.data.url}}")
-                                        | {{search.name}}
-                                    p.card-text {{search.category}}
-                                    p.card-text {{search.fan_count | number:0}} Gefällt mir
+                        .searchResult.box(ng-repeat="search in searchResultsOne")
+                            .row
+                                .col-md-6
+                                    span {{search.name}}
 
+                                .col-md-4
+                                    p.icon.like {{search.fan_count| number:0}}
 
-                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')") Auswählen
+                                .col-md-2
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'left')")
+                                        i.fa.fa-arrow-right
 
             .row.compare-results
                 .col-md-12.search-results(ng-show="dataLeft")
                     .row
-                        .col-md-6
+                        .col-md-12(style ='text-align: right')
                             h3(style="margin-top:10px") {{dataLeft.name}}
-                            img(style="width:160px" ng-src="{{dataLeft.picture.data.url}}")
+                            img(style="width:160px;margin-bottom: 15px" ng-src="{{dataLeft.picture.data.url}}")
 
                             div.compare-box
                                 p.playSong(ng-click="sonify(dataLeft.allReactions.total_love, dataLeft.allReactions.total_haha, dataLeft.allReactions.total_wow, dataLeft.allReactions.total_sad, dataLeft.allReactions.total_angry)")
@@ -48,55 +49,57 @@ section(ng-controller="compareCtrl")
 
                                 //p Total Reaction: {{dataLeft.total_reaction}}
                                 //p Reaction Value: {{dataLeft.total_reactionvalue}}
-                        .col-md-3
-                        .col-md-3.emoticons-number.emoticons-number-left
-                            //p Like: {{dataLeft | json}}
-                            p(style='color: #ffa3d3;') {{dataLeft.allReactions.total_love}}
-                            p(style="color: #fffd00;") {{dataLeft.allReactions.total_haha}}
-                            p(style="color: #38dacd;") {{dataLeft.allReactions.total_wow}}
-                            p(style="color: #949494;") {{dataLeft.allReactions.total_sad}}
-                            p(style="color: #9a0400;") {{dataLeft.allReactions.total_angry}}
 
-        .col-md-2(ng-hide="dataLeft")
+        .col-md-2
             .row
-        .col-md-2.compare-emoticons(ng-show="dataLeft")
-            .row
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.love}}%; background-color: #ffa3d3;')
-                div
-                    i.icon.love
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.love}}%; background-color: #ffa3d3;')
+                .col-md-12.compare-emoticons(ng-show="dataLeft")
+                    .row
+                        div.compare-bar-calc
+                            .outerLeft
+                                div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: calc({{dataLeft.reactionProzent.love}}% + 15px); background-color: #ffa3d3;')
+                        div
+                            i.icon.love
+                        div.compare-bar-calc
+                            .outerRight
+                                div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: calc({{dataRight.reactionProzent.love}}% + 15px); background-color: #ffa3d3;')
 
-            .row
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.haha}}%; background-color: #fffd00;')
-                div
-                    i.icon.haha
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.haha}}%; background-color: #fffd00;')
+                    .row
+                        div.compare-bar-calc
+                            .outerLeft
+                                div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: calc({{dataLeft.reactionProzent.haha}}% + 15px); background-color: #fffd00;')
+                        div
+                            i.icon.haha
+                        div.compare-bar-calc
+                            .outerRight
+                                div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: calc({{dataRight.reactionProzent.haha}}% + 15px); background-color: #fffd00;')
 
-            .row
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.wow}}%; background-color: #38dacd;')
-                div
-                    i.icon.wow
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.wow}}%; background-color: #38dacd;')
-            .row
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.sad}}%; background-color: #949494;')
-                div
-                    i.icon.sad
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.sad}}%; background-color: #949494;')
-            .row
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: {{dataLeft.reactionProzent.angry}}%; background-color: #9a0400;')
-                div
-                    i.icon.angry
-                div.compare-bar-calc
-                    div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: {{dataRight.reactionProzent.angry}}%; background-color: #9a0400;')
+                    .row
+                        div.compare-bar-calc
+                            .outerLeft
+                                div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: calc({{dataLeft.reactionProzent.wow}}% + 15px); background-color: #38dacd;')
+                        div
+                            i.icon.wow
+                        div.compare-bar-calc
+                            .outerRight
+                                div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: calc({{dataRight.reactionProzent.wow}}% + 15px); background-color: #38dacd;')
+                    .row
+                        div.compare-bar-calc
+                            .outerLeft
+                                div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: calc({{dataLeft.reactionProzent.sad}}% + 15px); background-color: #949494;')
+                        div
+                            i.icon.sad
+                        div.compare-bar-calc
+                            .outerRight
+                                div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: calc({{dataRight.reactionProzent.sad}}% + 15px); background-color: #949494;')
+                    .row
+                        div.compare-bar-calc
+                            .outerLeft
+                                div.compare-bar.compare-bar-left(ng-show="dataLeft" style='width: calc({{dataLeft.reactionProzent.angry}}% + 15px); background-color: #9a0400;')
+                        div
+                            i.icon.angry
+                        div.compare-bar-calc
+                            .outerRight
+                                div.compare-bar.compare-bar-right(ng-show="dataRight" style='width: calc({{dataRight.reactionProzent.angry}}% + 15px); background-color: #9a0400;')
 
         .col-md-5
             form.result-margin(ng-submit="searchUserTwo()")
@@ -109,34 +112,26 @@ section(ng-controller="compareCtrl")
             .row
                 .col-md-12(ng-show="searchResultsTwo && !dataRight")
                     .search(ng-show="currentWindowTwo == 'SearchList'")
-                        .searchResult(ng-repeat="search in searchResultsTwo")
-                            .card.card-inverse(style='background-color: #333; border-color: #333;')
-                                .card-block
-                                    h3.card-title
-                                        img.profile(ng-src="{{search.picture.data.url}}")
-                                        | {{search.name}}
-                                    p.card-text {{search.category}}
-                                    p.card-text {{search.fan_count | number:0}} Gefällt mir
+                        .searchResult.box(ng-repeat="search in searchResultsTwo")
+                            .row
+                                .col-md-6
+                                    span {{search.name}}
 
+                                .col-md-4
+                                    p.icon.like {{search.fan_count| number:0}}
 
-                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')") Auswählen
+                                .col-md-2
+                                    span.btn.btn-primary.btn-sm(ng-click="changeFeed(search.id, 'right')")
+                                        i.fa.fa-arrow-right
 
 
 
             .row.compare-results
                 .col-md-12.search-results(ng-show="dataRight")
                     .row
-                        .col-md-2.emoticons-number.emoticons-number-right
-                            //p Like: {{dataLeft | json}}
-                            p(style='color: #ffa3d3;') {{dataRight.allReactions.total_love}}
-                            p(style="color: #fffd00;") {{dataRight.allReactions.total_haha}}
-                            p(style="color: #38dacd;") {{dataRight.allReactions.total_wow}}
-                            p(style="color: #949494;") {{dataRight.allReactions.total_sad}}
-                            p(style="color: #9a0400;") {{dataRight.allReactions.total_angry}}
-                        .col-md-4
-                        .col-md-6(style ='text-align: right;')
+                        .col-md-12(style ='text-align: left;')
                             h3(style="margin-top:10px") {{dataRight.name}}
-                            img(style="width:160px" ng-src="{{dataRight.picture.data.url}}")
+                            img(style="width:160px;margin-bottom: 15px" ng-src="{{dataRight.picture.data.url}}")
 
 
                             div.compare-box

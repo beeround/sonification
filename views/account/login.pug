@@ -2,9 +2,12 @@ extends ../layout/structure
 
 block content
   .row
-    .col-md-8.col-md-offset-2
-      .col-md-8.col-md-offset-2
-        h3 Login
+    .col-md-6
+      img(src="/img/socialsound_logo.png", style="width:100%; margin-top: 160px")
+
+    .col-md-6.col-md-offset-2
+      .col-md-10.col-md-offset-2
+        h3(style="margin-left:20px; margin-bottom:30px") Login
 
         form.form-horizontal(method='POST', action="/login")
           input(type='hidden', name='_csrf', value=_csrf)
@@ -20,7 +23,7 @@ block content
                 //i.fa.fa-user
                 | Login
 
-          .form-group
+          .form-group(style="margin-top:40px")
             .col-sm-12
               a.btn.btn-block.btn-empty(href='/auth/facebook')
                 | Login in with Facebook
@@ -28,14 +31,9 @@ block content
                 | Login in with Twitter
               a.btn.btn-block.btn-empty(href='/auth/google')
                 | Login in with Google
-          .form-group
+
+          .form-group(style="margin-top:70px")
             .col-sm-12
-              hr
-              a.col-sm-6.btn(href='/forgot')
+              a(href='/signup')
                 //i.fa.fa-user
-                | Forgot your password?
-          .form-group
-            .col-sm-12
-              a.col-sm-6.btn(href='/signup')
-                //i.fa.fa-user
-                | Sign up
+                | Noch kein Account? Jetzt registrieren

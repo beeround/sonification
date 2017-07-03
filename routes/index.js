@@ -4,8 +4,7 @@ const passportConfig = require('../config/passport');
 const fb = require('../modules/fb');
 
 router.get('/', function(req, res) {
-
-    res.render('index', { title: 'Home', message: 'Hello there!'});
+    res.redirect('/app');
 });
 router.get('/imprint', function(req, res) {
     res.render('imprint', { title: 'Imprint', message: 'Hello there!'});

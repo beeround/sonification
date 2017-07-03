@@ -19,12 +19,13 @@ footer.ng-footer
                     fieldset
                         select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
                             option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
+
             .col-md-5
                 ul.footernavi.pull-right
                     li
                         a.span.small(href="/imprint") © 2017 SonificationApp. All Rights Reserved
                     li.text-right
-                        a.small(href="/imprint") Imprint
+                        a.small(href="/imprint") Impressum
 
 .lightbox(ng-click="stopPlaying()",ng-show="currentPlay.sound", ng-class="{'love': currentPlay.sound == 'love', 'haha': currentPlay.sound == 'haha', 'wow': currentPlay.sound == 'wow', 'sad': currentPlay.sound == 'sad', 'angry': currentPlay.sound == 'angry'}")
 

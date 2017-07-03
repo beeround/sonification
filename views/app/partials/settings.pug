@@ -2,7 +2,7 @@ section(ng-controller="settingsCtrl")
     h1 Einstellungen
     .row
         .col-md-12
-            h4 1 Schritt
+            h4 1. Schritt
             p Wähle dein gewünschtes Instrument:
 
         .col-md-12
@@ -14,7 +14,7 @@ section(ng-controller="settingsCtrl")
                 p {{sound.description}}
 
         .col-md-12
-            h4 2 Schritt
+            h4 2. Schritt
             p Klicke nacheinander auf die Symbole um einen Sound zu erhalten und das gewählte Instrument zu testen:
             ul.nav.nav-pills.emoticons-settings
                 li
@@ -27,4 +27,11 @@ section(ng-controller="settingsCtrl")
                     i.icon.large.sad(ng-click="sonifyByReaction('sad')")
                 li
                     i.icon.large.angry(ng-click="sonifyByReaction('angry')")
+
+
+        .col-md-12
+            h4 3. Schritt
+            p Entscheide, ob ausschließlich der höchste Wert abgespielt werden soll.
+            label Nur höchster Wert abspielen
+                input(type='checkbox', ng-model='playHighest', style="margin-left:10px")
 
