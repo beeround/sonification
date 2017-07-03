@@ -462,6 +462,31 @@ exports.getSoundSkin = (req, res) => {
     });
 };
 
+exports.selectSoundOption = (req, res) => {
+
+    User.findById(req.user._id, (err, user) => {
+
+        if (err) { return next(err); }
+
+        user.selectedSoundOption = req.body.selectedSoundOption;
+
+        user.save(function () {
+            res.status(200).send("success")
+        });
+    });
+};
+
+exports.getSoundOption = (req, res) => {
+
+    User.findById(req.user._id, (err, user) => {
+
+        if (err) { return next(err); }
+
+        res.status(200).json(user.selectedSoundOption);
+
+    });
+};
+
 exports.removeFavorite = (req, res) => {
 
     User.update( {_id: req.user._id}, {$pull: {"favorites": {"fbID": req.body.fbID, }} } , function () {

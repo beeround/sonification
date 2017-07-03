@@ -25,23 +25,50 @@ angular.module('sonificationAPP.services.sounds', [])
             let arrayReactions;
             let timeouts = [];
             let sounds = [
-                {name: "Simple", description: "Einfacher Ton. Die höchste Reaktion wird hervorgehoben."},
-                {name: "Piano+Beat", description: "Piano mit Beat."},
-                {name: "Animals", description: "Tiersounds."},
-                {name: "Animals absteigend", description: "Tiersounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                {name: "Animals aufsteigend", description: "Tiersounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
-                {name: "Instrument", description: "Reactions werden mit Instrumenten sonifiziert."},
-                {name: "Instrument absteigend", description: "Instrumente: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                {name: "Instrument aufsteigend", description: "Instrumente: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
-                {name: "Humans", description: "Reactions werden mit Menschensounds sonifiziert."},
-                {name: "Humans absteigend", description: "Menschensounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                {name: "Humans aufsteigend", description: "Menschensounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
-                {name: "Crowd", description: "Reactions werden mit Menschenmengensounds sonifiziert."},
-                {name: "Crowd absteigend", description: "Menschenmengensounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                {name: "Crowd aufsteigend", description: "Menschenmengensounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
-                {name: "Sinus", description: "Reactions werden mit Sinus Sounds sonifiziert."},
-                {name: "Sinus absteigend", description: "Sinus Sounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                {name: "Sinus aufsteigend", description: "Sinus Sounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                {name: "Simple", options: [
+                    {name: "Nur höchster Wert", description: "Einfacher Ton. Die höchste Reaktion wird hervorgehoben."}
+                    ]
+                },
+                {name: "Piano+Beat", options: [
+                    {name: "normal", description: "Piano mit Beat."},
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
+                    ]
+                },
+                {name: "Animals", options: [
+                    {name: "normal", description: "Tiersounds."},
+                    {name: "Animals absteigend", description: "Tiersounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
+                    {name: "Animals aufsteigend", description: "Tiersounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
+                    ]
+                },
+                {name: "Instrument", options: [
+                    {name: "normal", description: "Reactions werden mit Instrumenten sonifiziert."},
+                    {name: "Instrument absteigend", description: "Instrumente: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
+                    {name: "Instrument aufsteigend", description: "Instrumente: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
+                ]
+                },
+                {name: "Humans", options: [
+                    {name: "normal", description: "Reactions werden mit Menschensounds sonifiziert."},
+                    {name: "Humans absteigend", description: "Menschensounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
+                    {name: "Humans aufsteigend", description: "Menschensounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
+                ]
+                },
+                {name: "Crowd", options: [
+                    {name: "normal", description: "Reactions werden mit Menschenmengensounds sonifiziert."},
+                    {name: "Crowd absteigend", description: "Menschenmengensounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
+                    {name: "Crowd aufsteigend", description: "Menschenmengensounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
+                ]
+                },
+                {name: "Sinus", options: [
+                    {name: "normal", description: "Reactions werden mit Sinus Sounds sonifiziert."},
+                    {name: "Sinus absteigend", description: "Sinus Sounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
+                    {name: "Sinus aufsteigend", description: "Sinus Sounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
+                ]
+                },
             ];
 
             //sound = lova,haha,wow,sad or angry
@@ -382,7 +409,7 @@ angular.module('sonificationAPP.services.sounds', [])
 
                     sonify.love = new Audio ("../../sounds/animals/love_doves.mp3");
                     sonify.haha = new Audio ("../../sounds/animals/haha_goat.mp3");
-                    sonify.wow = new Audio ("../../sounds/animals/swow_elephant.mp3");
+                    sonify.wow = new Audio ("../../sounds/animals/wow_elephant.mp3");
                     sonify.sad = new Audio ("../../sounds/animals/sad_dog.mp3");
                     sonify.angry = new Audio ("../../sounds/animals/angry_cat.mp3");
 
@@ -506,7 +533,7 @@ angular.module('sonificationAPP.services.sounds', [])
 
                     sonify.love = new Audio ("../../sounds/animals/love_doves.mp3");
                     sonify.haha = new Audio ("../../sounds/animals/haha_goat.mp3");
-                    sonify.wow = new Audio ("../../sounds/animals/swow_elephant.mp3");
+                    sonify.wow = new Audio ("../../sounds/animals/wow_elephant.mp3");
                     sonify.sad = new Audio ("../../sounds/animals/sad_dog.mp3");
                     sonify.angry = new Audio ("../../sounds/animals/angry_cat.mp3");
 
@@ -631,7 +658,7 @@ angular.module('sonificationAPP.services.sounds', [])
 
                     sonify.love = new Audio ("../../sounds/animals/love_doves.mp3");
                     sonify.haha = new Audio ("../../sounds/animals/haha_goat.mp3");
-                    sonify.wow = new Audio ("../../sounds/animals/swow_elephant.mp3");
+                    sonify.wow = new Audio ("../../sounds/animals/wow_elephant.mp3");
                     sonify.sad = new Audio ("../../sounds/animals/sad_dog.mp3");
                     sonify.angry = new Audio ("../../sounds/animals/angry_cat.mp3");
 

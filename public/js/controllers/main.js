@@ -36,17 +36,41 @@ angular.module('sonificationAPP.controllers.main', [])
             }
         });
 
+
+         $http.get('/user/get/selectedSoundOption').then(result => {
+         if(result.data != ""){
+         $scope.data = {selectedSoundOption:result.data};
+         }
+         else {
+         $scope.data = {selectedSoundOption:soundService.getSounds()[0].options[0].name};
+         }
+         });
+
+        $scope.SelectedSoundOptions = null;
+
         $scope.changeSelectedSound = function () {
             // Datenbank anbindung einfuegen
             let data = {
                 selectedSoundSkin : $scope.data.selectedSound
             };
-
             $http.post('/user/change/selectedSoundSkin', data);
+            $scope.sounds.map(result=>{
+                if (result.name == $scope.data.selectedSound ){
+                    $scope.SelectedSoundOptions = result.options
+                }
+            })
+        };
+        $scope.changeSelectedSoundOption = function () {
+            // Datenbank anbindung einfuegen
+            let data = {
+                selectedSoundOption : $scope.data.selectedOption
+            };
+
+            $http.post('/user/change/selectedSoundOption', data);
         };
 
         $scope.sonifyByReaction = function (reaction) {
-            switch($scope.data.selectedSound){
+            switch($scope.data.selectedSound) {
                 case "Simple":
                     soundService.playSoundsV1(0, 0, 0, 0, 0, reaction);
                     break;
@@ -56,47 +80,17 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Animals":
                     soundService.playSoundsV3_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Animals absteigend":
-                    soundService.playSoundsV3_2(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Animals aufsteigend":
-                    soundService.playSoundsV3_3(0, 0, 0, 0, 0, reaction);
-                    break;
                 case "Instrument":
                     soundService.playSoundsV4_1(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Instrument absteigend":
-                    soundService.playSoundsV4_2(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Instrument aufsteigend":
-                    soundService.playSoundsV4_3(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Humans":
                     soundService.playSoundsV5_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Humans absteigend":
-                    soundService.playSoundsV5_2(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Humans aufsteigend":
-                    soundService.playSoundsV5_3(0, 0, 0, 0, 0, reaction);
-                    break;
                 case "Crowd":
                     soundService.playSoundsV6_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Crowd absteigend":
-                    soundService.playSoundsV6_2(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Crowd aufsteigend":
-                    soundService.playSoundsV6_3(0, 0, 0, 0, 0, reaction);
-                    break;
                 case "Sinus":
                     soundService.playSoundsV7_1(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Sinus absteigend":
-                    soundService.playSoundsV7_2(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Sinus aufsteigend":
-                    soundService.playSoundsV7_3(0, 0, 0, 0, 0, reaction);
                     break;
             }
 
@@ -104,63 +98,105 @@ angular.module('sonificationAPP.controllers.main', [])
         $scope.sonify = function (love, haha, wow, sad, angry) {
             let reaction = null;
 
-            if($scope.playSettings.highest){
+            if($scope.data.selectedOption){
                 reaction = reactionTrend(love, haha, wow, sad, angry)
             }
             switch($scope.data.selectedSound) {
                 case "Simple":
-                    soundService.playSoundsV1(love, haha, wow, sad, angry, reaction);
+                    switch($scope.data.selectedOption) {
+                        case "Nur höchster Wert":
+                            soundService.playSoundsV1(love, haha, wow, sad, angry, reaction);
+                            break;
+                    }
                     break;
                 case "Piano+Beat":
-                    soundService.playSoundsV2(love, haha, wow, sad, angry, reaction);
+                    switch($scope.data.selectedOption) {
+                        case "normal":
+                            soundService.playSoundsV2(love, haha, wow, sad, angry, null);
+                            break;
+                    }
                     break;
                 case "Animals":
-                    soundService.playSoundsV3_1(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Animals absteigend":
-                    soundService.playSoundsV3_2(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Animals aufsteigend":
-                    soundService.playSoundsV3_3(love, haha, wow, sad, angry, reaction);
+                    switch($scope.data.selectedOption) {
+                        case "normal":
+                            soundService.playSoundsV3_1(love, haha, wow, sad, angry, null);
+                            break;
+                        case "absteigend":
+                            soundService.playSoundsV3_2(love, haha, wow, sad, angry, null);
+                            break;
+                        case "aufsteigend":
+                            soundService.playSoundsV3_3(love, haha, wow, sad, angry, null);
+                            break;
+                        case "Nur höchster Wert":
+                            soundService.playSoundsV3_1(love, haha, wow, sad, angry, reaction);
+                            break;
+                    }
                     break;
                 case "Instrument":
-                    soundService.playSoundsV4_1(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Instrument absteigend":
-                    soundService.playSoundsV4_2(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Instrument aufsteigend":
-                    soundService.playSoundsV4_3(love, haha, wow, sad, angry, reaction);
+                    switch($scope.data.selectedOption) {
+                        case "normal":
+                            soundService.playSoundsV4_1(love, haha, wow, sad, angry, null);
+                            break;
+                        case "absteigend":
+                            soundService.playSoundsV4_2(love, haha, wow, sad, angry, null);
+                            break;
+                        case "aufsteigend":
+                            soundService.playSoundsV4_3(love, haha, wow, sad, angry, null);
+                            break;
+                        case "Nur höchster Wert":
+                            soundService.playSoundsV4_1(love, haha, wow, sad, angry, reaction);
+                            break;
+                    }
                     break;
                 case "Humans":
-                    soundService.playSoundsV5_1(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Humans absteigend":
-                    soundService.playSoundsV5_2(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Humans aufsteigend":
-                    soundService.playSoundsV5_3(love, haha, wow, sad, angry, reaction);
+                    switch($scope.data.selectedOption) {
+                        case "normal":
+                            soundService.playSoundsV5_1(love, haha, wow, sad, angry, null);
+                            break;
+                        case "absteigend":
+                            soundService.playSoundsV5_2(love, haha, wow, sad, angry, null);
+                            break;
+                        case "aufsteigend":
+                            soundService.playSoundsV5_3(love, haha, wow, sad, angry, null);
+                            break;
+                        case "Nur höchster Wert":
+                            soundService.playSoundsV5_1(love, haha, wow, sad, angry, reaction);
+                            break;
+                    }
                     break;
                 case "Crowd":
-                    soundService.playSoundsV6_1(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Crowd absteigend":
-                    soundService.playSoundsV6_2(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Crowd aufsteigend":
-                    soundService.playSoundsV6_3(love, haha, wow, sad, angry, reaction);
+                    switch($scope.data.selectedOption) {
+                        case "normal":
+                            soundService.playSoundsV6_1(love, haha, wow, sad, angry, null);
+                            break;
+                        case "absteigend":
+                            soundService.playSoundsV6_2(love, haha, wow, sad, angry, null);
+                            break;
+                        case "aufsteigend":
+                            soundService.playSoundsV6_3(love, haha, wow, sad, angry, null);
+                            break;
+                        case "Nur höchster Wert":
+                            soundService.playSoundsV6_1(love, haha, wow, sad, angry, reaction);
+                            break;
+                    }
                     break;
                 case "Sinus":
-                    soundService.playSoundsV7_1(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Sinus absteigend":
-                    soundService.playSoundsV7_2(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Sinus aufsteigend":
-                    soundService.playSoundsV7_3(love, haha, wow, sad, angry, reaction);
+                    switch($scope.data.selectedOption) {
+                        case "normal":
+                            soundService.playSoundsV7_1(love, haha, wow, sad, angry, null);
+                            break;
+                        case "absteigend":
+                            soundService.playSoundsV7_2(love, haha, wow, sad, angry, null);
+                            break;
+                        case "aufsteigend":
+                            soundService.playSoundsV7_3(love, haha, wow, sad, angry, null);
+                            break;
+                        case "Nur höchster Wert":
+                            soundService.playSoundsV7_1(love, haha, wow, sad, angry, reaction);
+                            break;
+                    }
                     break;
             }
-
         };
 
         google.charts.load("current", {packages:["corechart"]});

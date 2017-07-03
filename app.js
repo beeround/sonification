@@ -133,6 +133,8 @@ app.get('/user/get/favorites', passportConfig.isAuthenticated,  userController.g
 app.post('/user/add/favorite', passportConfig.isAuthenticated,  userController.addFavorite);
 app.post('/user/change/selectedSoundSkin', passportConfig.isAuthenticated,  userController.selectSoundSkin);
 app.get('/user/get/selectedSoundSkin', passportConfig.isAuthenticated,  userController.getSoundSkin);
+app.post('/user/change/selectedSoundOption', passportConfig.isAuthenticated,  userController.selectSoundOption);
+app.get('/user/get/selectedSoundOption', passportConfig.isAuthenticated,  userController.getSoundOption);
 
 
 app.put('/user/remove/favorite', passportConfig.isAuthenticated,  userController.removeFavorite);
