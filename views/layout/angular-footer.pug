@@ -18,14 +18,19 @@ footer.ng-footer
 
             .col-md-4
                 .row
-                    .col-md-5
-                        form.form-horizontal(style="margin-top:-7px")
+                    .col-md-6
+                        form.form-horizontal
                             fieldset
                                 select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
                                     option(ng-repeat="sound in sounds" ng-value="sound.name" title="{{sound.description}}") {{sound.name}}
-                    .col-md-7(style="margin-top:5px")
-                        label.small Höchster Wert abspielen
-                            input(type='checkbox', ng-model='playSettings.highest', style="margin-left:10px")
+
+
+                    .col-md-6
+                        form.form-horizontal
+                            fieldset
+                                select#selectbasic2.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSoundOption()" ng-model="data.selectedSoundOption")
+                                    option(ng-repeat=" soundOptions in optionsFromSelectedSound" ng-value="soundOptions.name") {{soundOptions.name}}
+
 
             .col-md-5
                 ul.footernavi.pull-right

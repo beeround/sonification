@@ -12,6 +12,8 @@ angular.module('sonificationAPP.controllers.main', [])
 
     .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout, soundService) {
         $scope.playSettings = [];
+        $scope.data = {};
+        $scope.optionsFromSelectedSound = null;
 
         $scope.stopPlaying = function () {
             soundService.stopPlaying();
@@ -26,44 +28,54 @@ angular.module('sonificationAPP.controllers.main', [])
             }
         });
         $scope.sounds = soundService.getSounds();
+        function getOptionbySound(sound){
 
+            $scope.sounds.map(result=>{
+                if (result.name == sound ){
+                    $scope.optionsFromSelectedSound = result.options;
+                    console.log("test");
+                    let dataOption = {
+                        selectedSoundOption : $scope.optionsFromSelectedSound[0].name
+                    };
+                    $http.post('/user/change/selectedSoundOption', dataOption);
+                    $scope.data.selectedSoundOption = $scope.optionsFromSelectedSound[0].name;
+                }
+            })
+
+        };
         $http.get('/user/get/selectedSoundSkin').then(result => {
             if(result.data != ""){
-                $scope.data = {selectedSound:result.data};
+                $scope.data.selectedSound = result.data;
+                getOptionbySound($scope.data.selectedSound);
             }
             else {
-                $scope.data = {selectedSound:soundService.getSounds()[0].name};
+                let tmp = soundService.getSounds();
+                $scope.data.selectedSound = tmp[0].name;
             }
         });
-
-
          $http.get('/user/get/selectedSoundOption').then(result => {
          if(result.data != ""){
-         $scope.data = {selectedSoundOption:result.data};
+         $scope.data.selectedSoundOption = result.data;
          }
          else {
-         $scope.data = {selectedSoundOption:soundService.getSounds()[0].options[0].name};
+             let tmp = soundService.getSounds();
+             console.log(tmp[0].options[0].name);
+         $scope.data.selectedSoundOption = tmp[0].options[0].name;
          }
          });
-
-        $scope.SelectedSoundOptions = null;
-
         $scope.changeSelectedSound = function () {
             // Datenbank anbindung einfuegen
             let data = {
                 selectedSoundSkin : $scope.data.selectedSound
             };
             $http.post('/user/change/selectedSoundSkin', data);
-            $scope.sounds.map(result=>{
-                if (result.name == $scope.data.selectedSound ){
-                    $scope.SelectedSoundOptions = result.options
-                }
-            })
+            getOptionbySound($scope.data.selectedSound);
+
         };
         $scope.changeSelectedSoundOption = function () {
             // Datenbank anbindung einfuegen
             let data = {
-                selectedSoundOption : $scope.data.selectedOption
+                selectedSoundOption : $scope.data.selectedSoundOption
             };
 
             $http.post('/user/change/selectedSoundOption', data);
@@ -98,26 +110,29 @@ angular.module('sonificationAPP.controllers.main', [])
         $scope.sonify = function (love, haha, wow, sad, angry) {
             let reaction = null;
 
-            if($scope.data.selectedOption){
+            if($scope.data.selectedSoundOption){
                 reaction = reactionTrend(love, haha, wow, sad, angry)
             }
             switch($scope.data.selectedSound) {
                 case "Simple":
-                    switch($scope.data.selectedOption) {
+                    switch($scope.data.selectedSoundOption) {
                         case "Nur höchster Wert":
                             soundService.playSoundsV1(love, haha, wow, sad, angry, reaction);
                             break;
                     }
                     break;
                 case "Piano+Beat":
-                    switch($scope.data.selectedOption) {
+                    switch($scope.data.selectedSoundOption) {
                         case "normal":
                             soundService.playSoundsV2(love, haha, wow, sad, angry, null);
+                            break;
+                        case "Nur höchster Wert":
+                            soundService.playSoundsV2(love, haha, wow, sad, angry, reaction);
                             break;
                     }
                     break;
                 case "Animals":
-                    switch($scope.data.selectedOption) {
+                    switch($scope.data.selectedSoundOption) {
                         case "normal":
                             soundService.playSoundsV3_1(love, haha, wow, sad, angry, null);
                             break;
@@ -133,7 +148,7 @@ angular.module('sonificationAPP.controllers.main', [])
                     }
                     break;
                 case "Instrument":
-                    switch($scope.data.selectedOption) {
+                    switch($scope.data.selectedSoundOption) {
                         case "normal":
                             soundService.playSoundsV4_1(love, haha, wow, sad, angry, null);
                             break;
@@ -149,7 +164,7 @@ angular.module('sonificationAPP.controllers.main', [])
                     }
                     break;
                 case "Humans":
-                    switch($scope.data.selectedOption) {
+                    switch($scope.data.selectedSoundOption) {
                         case "normal":
                             soundService.playSoundsV5_1(love, haha, wow, sad, angry, null);
                             break;
@@ -165,7 +180,7 @@ angular.module('sonificationAPP.controllers.main', [])
                     }
                     break;
                 case "Crowd":
-                    switch($scope.data.selectedOption) {
+                    switch($scope.data.selectedSoundOption) {
                         case "normal":
                             soundService.playSoundsV6_1(love, haha, wow, sad, angry, null);
                             break;
@@ -181,7 +196,7 @@ angular.module('sonificationAPP.controllers.main', [])
                     }
                     break;
                 case "Sinus":
-                    switch($scope.data.selectedOption) {
+                    switch($scope.data.selectedSoundOption) {
                         case "normal":
                             soundService.playSoundsV7_1(love, haha, wow, sad, angry, null);
                             break;

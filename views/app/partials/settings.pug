@@ -10,9 +10,9 @@ section(ng-controller="settingsCtrl")
                 fieldset
                     select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
                         option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
-                    select#selectbasic2.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSoundOption()" ng-model="data.selectedOption")
-                        option(ng-repeat=" soundOptions in SelectedSoundOptions" ng-value="soundOptions.name") {{soundOptions.name}}
-            .description(ng-repeat=" soundOptions in SelectedSoundOptions ", ng-show="soundOptions.name == data.selectedOption")
+                    select#selectbasic2.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSoundOption()" ng-model="data.selectedSoundOption")
+                        option(ng-repeat=" soundOptions in optionsFromSelectedSound" ng-value="soundOptions.name") {{soundOptions.name}}
+            .description(ng-repeat=" soundOptions in optionsFromSelectedSound ", ng-show="soundOptions.name == data.selectedOption")
                 p {{soundOptions.description}}
         .col-md-12
             h4 2. Schritt
