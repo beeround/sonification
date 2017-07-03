@@ -25,7 +25,7 @@ footer.ng-footer
                                     option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
                     .col-md-7(style="margin-top:5px")
                         label.small Höchster Wert abspielen
-                            input(type='checkbox', ng-model='playHighest', style="margin-left:10px")
+                            input(type='checkbox', ng-model='playSettings.highest', style="margin-left:10px")
 
             .col-md-5
                 ul.footernavi.pull-right
@@ -38,7 +38,7 @@ footer.ng-footer
 
     .container.text-center
         .emoji.icon(ng-class="currentPlay.sound")
-        h1(count-to='{{currentPlay[currentPlay.sound]}}', value='0', duration='1', ng-show="currentPlay[currentPlay.sound] != '0'")
+        h1(count-to='{{currentPlay[currentPlay.sound]}}', value='0', duration='1')
         h2 {{currentPlay.sound}}
 
 
