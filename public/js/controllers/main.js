@@ -53,10 +53,10 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV4_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Instrument Primacy":
+                case "Instrument absteigend":
                     soundService.playSoundsV4_2(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Instrument Recency":
+                case "Instrument aufsteigend":
                     soundService.playSoundsV4_3(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Animals":
@@ -68,28 +68,28 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Humans":
                     soundService.playSoundsV5_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Humans Primacy":
+                case "Humans absteigend":
                     soundService.playSoundsV5_2(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Humans Recency":
+                case "Humans aufsteigend":
                     soundService.playSoundsV5_3(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Crowd":
                     soundService.playSoundsV6_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Crowd Primacy":
+                case "Crowd absteigend":
                     soundService.playSoundsV6_2(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Crowd Recency":
+                case "Crowd aufsteigend":
                     soundService.playSoundsV6_3(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Sinus":
                     soundService.playSoundsV7_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Sinus Primacy":
+                case "Sinus absteigend":
                     soundService.playSoundsV7_2(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Sinus Recency":
+                case "Sinus aufsteigend":
                     soundService.playSoundsV7_3(0, 0, 0, 0, 0, reaction);
                     break;
             }
@@ -108,10 +108,10 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Instrument":
                     soundService.playSoundsV4_1(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Instrument Primacy":
+                case "Instrument absteigend":
                     soundService.playSoundsV4_2(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Instrument Recency":
+                case "Instrument aufsteigend":
                     soundService.playSoundsV4_3(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Animals":
@@ -123,28 +123,28 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Humans":
                     soundService.playSoundsV5_1(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Humans Primacy":
+                case "Humans absteigend":
                     soundService.playSoundsV5_2(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Humans Recency":
+                case "Humans aufsteigend":
                     soundService.playSoundsV5_3(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Crowd":
                     soundService.playSoundsV6_1(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Crowd Primacy":
+                case "Crowd absteigend":
                     soundService.playSoundsV6_2(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Crowd Recency":
+                case "Crowd aufsteigend":
                     soundService.playSoundsV6_3(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Sinus":
                     soundService.playSoundsV7_1(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Sinus Primacy":
+                case "Sinus absteigend":
                     soundService.playSoundsV7_2(love, haha, wow, sad, angry, reaction);
                     break;
-                case "Sinus Recency":
+                case "Sinus aufsteigend":
                     soundService.playSoundsV7_3(love, haha, wow, sad, angry, reaction);
                     break;
             }
