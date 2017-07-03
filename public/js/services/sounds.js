@@ -89,6 +89,7 @@ angular.module('sonificationAPP.services.sounds', [])
                 currentsong_angry.currentTime = 0;
 
                 soundON = false;
+                sonify.beat.pause();
                 sonify.love.pause();
                 sonify.haha.pause();
                 sonify.wow.pause();
@@ -287,7 +288,7 @@ angular.module('sonificationAPP.services.sounds', [])
                     soundON = true;
 
                     arrayReactions = [
-                        {"name": "beat","value" : 0, "timeMS": 16000, "valueVolume": 0.8, "timeout": 0},
+                        {"name": "beat","value" : 0, "timeMS": 16000, "valueVolume": 0.5, "timeout": 0},
                         {"name": "haha","value" : haha, "timeMS": 2740, "valueVolume": 1, "timeout": 0},
                         {"name": "love","value" : love, "timeMS": 4060, "valueVolume": 1, "timeout": 0},
                         {"name": "angry","value" : angry, "timeMS": 2740, "valueVolume": 1, "timeout": 0},
@@ -404,8 +405,10 @@ angular.module('sonificationAPP.services.sounds', [])
 
                         let i = 0;
                         let timetmp = 0;
+                        sonify.beat.play();
                         timeouts.push($timeout(function () {
-                            sonify.beat.play();
+                            sonify.beat.pause();
+                            sonify.beat.currentTime = 0;
                         },16000));
 
                         for (let reaction of arrayReactions) {
