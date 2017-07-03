@@ -50,6 +50,18 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Simple":
                     soundService.playSoundsV1(0, 0, 0, 0, 0, reaction);
                     break;
+                case "Piano+Beat":
+                    soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Animals":
+                    soundService.playSoundsV3_1(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Animals absteigend":
+                    soundService.playSoundsV3_2(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Animals aufsteigend":
+                    soundService.playSoundsV3_3(0, 0, 0, 0, 0, reaction);
+                    break;
                 case "Instrument":
                     soundService.playSoundsV4_1(0, 0, 0, 0, 0, reaction);
                     break;
@@ -58,12 +70,6 @@ angular.module('sonificationAPP.controllers.main', [])
                     break;
                 case "Instrument aufsteigend":
                     soundService.playSoundsV4_3(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Animals":
-                    soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
-                    break;
-                case "Piano+Beat":
-                    soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Humans":
                     soundService.playSoundsV5_1(0, 0, 0, 0, 0, reaction);
@@ -105,6 +111,18 @@ angular.module('sonificationAPP.controllers.main', [])
                 case "Simple":
                     soundService.playSoundsV1(love, haha, wow, sad, angry, reaction);
                     break;
+                case "Piano+Beat":
+                    soundService.playSoundsV2(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Animals":
+                    soundService.playSoundsV3_1(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Animals absteigend":
+                    soundService.playSoundsV3_2(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Animals aufsteigend":
+                    soundService.playSoundsV3_3(love, haha, wow, sad, angry, reaction);
+                    break;
                 case "Instrument":
                     soundService.playSoundsV4_1(love, haha, wow, sad, angry, reaction);
                     break;
@@ -113,12 +131,6 @@ angular.module('sonificationAPP.controllers.main', [])
                     break;
                 case "Instrument aufsteigend":
                     soundService.playSoundsV4_3(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Animals":
-                    soundService.playSoundsV2(love, haha, wow, sad, angry, reaction);
-                    break;
-                case "Piano+Beat":
-                    soundService.playSoundsV3(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Humans":
                     soundService.playSoundsV5_1(love, haha, wow, sad, angry, reaction);
@@ -677,15 +689,26 @@ angular.module('sonificationAPP.controllers.main', [])
 
                 if(side == 'left'){
                     $scope.dataLeft = results.data;
-
+                    $scope.dataLeft.ReactionsPerPost = getReactionsPerPost($scope.dataLeft);
+                    console.log($scope.dataLeft)
                 }
                 else {
                     $scope.dataRight = results.data;
-
+                    $scope.dataRight.ReactionsPerPost = getReactionsPerPost($scope.dataRight);
+                    console.log($scope.dataRight)
                 }
 
 
             })
+        }
+        function getReactionsPerPost(data){
+            let ReactionValue = data.allReactions.total_love + data.allReactions.total_haha + data.allReactions.total_wow + data.allReactions.total_sad + data.allReactions.total_angry
+            let PostValue = data.posts.data.length;
+            let ReactionPerPost = 0;
+            ReactionPerPost = ReactionValue/PostValue;
+            return ReactionPerPost;
+
+
         }
 
         function getAllReactions(data) {
