@@ -11,6 +11,7 @@ angular.module('sonificationAPP.controllers.main', [])
     })
 
     .controller('mainCtrl', function ($scope, $http, $location, $rootScope, $timeout, soundService) {
+        $scope.playHighest = false;
 
         $scope.stopPlaying = function () {
             soundService.stopPlaying();
@@ -72,9 +73,10 @@ angular.module('sonificationAPP.controllers.main', [])
         };
         $scope.sonify = function (love, haha, wow, sad, angry) {
             let reaction = null;
-            /* if(){
+            if($scope.playHighest){
+                console.log("test");
                 reaction = reactionTrend(love, haha, wow, sad, angry)
-            }*/
+            }
             switch($scope.data.selectedSound) {
                 case "Simple":
                     soundService.playSoundsV1(love, haha, wow, sad, angry, reaction);

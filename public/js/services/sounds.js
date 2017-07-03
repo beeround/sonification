@@ -665,38 +665,59 @@ angular.module('sonificationAPP.services.sounds', [])
                                 currentsong.play();
                                 currentsong_love = sonify.beat;
                                 currentsong_love.play();
+                                timeouts.push($timeout(function () {
+                                    currentsong_love.pause();
+                                    currentsong_love.currentTime = 0;
+                                },arrayReactions[2].timeMS));
+
                                 refreshPlayer("love", love, haha, wow, sad,angry);
                                 removeCurrentPlaySong(arrayReactions[2].timeMS);
                                 break;
                             case "haha":
                                 currentsong = sonify.haha;
                                 currentsong.play();
-                                currentsong_haha = sonify.beat;
-                                currentsong_haha.play();
+                                    currentsong_haha = sonify.beat;
+                                    currentsong_haha.play();
+                                timeouts.push($timeout(function () {
+                                    currentsong_haha.pause();
+                                    currentsong_haha.currentTime = 0;
+                                },arrayReactions[1].timeMS));
                                 refreshPlayer("haha", love, haha, wow, sad,angry);
                                 removeCurrentPlaySong(arrayReactions[1].timeMS);
                                 break;
                             case "wow":
                                 currentsong = sonify.wow;
                                 currentsong.play();
-                                currentsong_wow = sonify.beat;
-                                currentsong_wow.play();
+                                    currentsong_wow = sonify.beat;
+                                    currentsong_wow.play();
+                                timeouts.push($timeout(function () {
+                                    currentsong_wow.pause();
+                                    currentsong_wow.currentTime = 0;
+                                },arrayReactions[4].timeMS));
                                 refreshPlayer("wow", love, haha, wow, sad,angry);
                                 removeCurrentPlaySong(arrayReactions[4].timeMS);
                                 break;
                             case "sad":
                                 currentsong = sonify.sad;
                                 currentsong.play();
-                                currentsong_sad = sonify.beat;
-                                currentsong_sad.play();
+                                    currentsong_sad = sonify.beat;
+                                    currentsong_sad.play();
+                                timeouts.push($timeout(function () {
+                                    currentsong_sad.pause();
+                                    currentsong_sad.currentTime = 0;
+                                },arrayReactions[5].timeMS));
                                 refreshPlayer("sad", love, haha, wow, sad,angry);
                                 removeCurrentPlaySong(arrayReactions[5].timeMS);
                                 break;
                             case "angry":
                                 currentsong = sonify.angry;
                                 currentsong.play();
-                                currentsong_angry = sonify.beat;
-                                currentsong_angry.play();
+                                    currentsong_angry = sonify.beat;
+                                    currentsong_angry.play();
+                                timeouts.push($timeout(function () {
+                                    currentsong_angry.pause();
+                                    currentsong_angry.currentTime = 0;
+                                },arrayReactions[3].timeMS));
                                 refreshPlayer("angry", love, haha, wow, sad,angry);
                                 removeCurrentPlaySong(arrayReactions[3].timeMS);
                                 break;
