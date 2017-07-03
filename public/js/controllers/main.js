@@ -51,22 +51,46 @@ angular.module('sonificationAPP.controllers.main', [])
                     soundService.playSoundsV1(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Instrument":
-                    soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
+                    soundService.playSoundsV4_1(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Instrument Primacy":
-                    soundService.playSoundsV5(0, 0, 0, 0, 0, reaction);
+                    soundService.playSoundsV4_2(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Instrument Recency":
-                    soundService.playSoundsV6(0, 0, 0, 0, 0, reaction);
+                    soundService.playSoundsV4_3(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Animals":
-                    soundService.playSoundsV4(0, 0, 0, 0, 0, reaction);
+                    soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Piano+Beat":
-                    soundService.playSoundsV7(0, 0, 0, 0, 0, reaction);
+                    soundService.playSoundsV3(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Humans":
-                    soundService.playSoundsV8(0, 0, 0, 0, 0, reaction);
+                    soundService.playSoundsV5_1(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Humans Primacy":
+                    soundService.playSoundsV5_2(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Humans Recency":
+                    soundService.playSoundsV5_3(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Crowd":
+                    soundService.playSoundsV6_1(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Crowd Primacy":
+                    soundService.playSoundsV6_2(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Crowd Recency":
+                    soundService.playSoundsV6_3(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Sinus":
+                    soundService.playSoundsV7_1(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Sinus Primacy":
+                    soundService.playSoundsV7_2(0, 0, 0, 0, 0, reaction);
+                    break;
+                case "Sinus Recency":
+                    soundService.playSoundsV7_3(0, 0, 0, 0, 0, reaction);
                     break;
             }
 
@@ -75,7 +99,6 @@ angular.module('sonificationAPP.controllers.main', [])
             let reaction = null;
 
             if($scope.playSettings.highest){
-                console.log("test");
                 reaction = reactionTrend(love, haha, wow, sad, angry)
             }
             switch($scope.data.selectedSound) {
@@ -83,22 +106,46 @@ angular.module('sonificationAPP.controllers.main', [])
                     soundService.playSoundsV1(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Instrument":
-                    soundService.playSoundsV2(love, haha, wow, sad, angry, reaction);
+                    soundService.playSoundsV4_1(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Instrument Primacy":
-                    soundService.playSoundsV5(love, haha, wow, sad, angry, reaction);
+                    soundService.playSoundsV4_2(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Instrument Recency":
-                    soundService.playSoundsV6(love, haha, wow, sad, angry, reaction);
+                    soundService.playSoundsV4_3(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Animals":
-                    soundService.playSoundsV4(love, haha, wow, sad, angry, reaction);
+                    soundService.playSoundsV2(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Piano+Beat":
-                    soundService.playSoundsV7(love, haha, wow, sad, angry, reaction);
+                    soundService.playSoundsV3(love, haha, wow, sad, angry, reaction);
                     break;
                 case "Humans":
-                    soundService.playSoundsV8(love, haha, wow, sad, angry, reaction);
+                    soundService.playSoundsV5_1(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Humans Primacy":
+                    soundService.playSoundsV5_2(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Humans Recency":
+                    soundService.playSoundsV5_3(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Crowd":
+                    soundService.playSoundsV6_1(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Crowd Primacy":
+                    soundService.playSoundsV6_2(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Crowd Recency":
+                    soundService.playSoundsV6_3(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Sinus":
+                    soundService.playSoundsV7_1(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Sinus Primacy":
+                    soundService.playSoundsV7_2(love, haha, wow, sad, angry, reaction);
+                    break;
+                case "Sinus Recency":
+                    soundService.playSoundsV7_3(love, haha, wow, sad, angry, reaction);
                     break;
             }
 
