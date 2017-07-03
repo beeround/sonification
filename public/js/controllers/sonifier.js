@@ -59,10 +59,10 @@ function reactionTrend(love, haha, wow, sad, angry) {
 
   if (love > wow && love > haha && love > sad && love > angry) {
     reaction = "love";
-  } else if (wow > love && wow > haha && wow > sad && wow > angry) {
-    reaction = "wow";
   } else if (haha > love && haha > wow && haha > sad && haha > angry) {
     reaction = "haha";
+  } else if (wow > love && wow > haha && wow > sad && wow > angry) {
+    reaction = "wow";
   } else if (sad > love && sad > haha && sad > wow && sad > angry) {
     reaction = "sad";
   } else if (angry > love && angry > haha && angry > wow && angry > sad) {
