@@ -215,7 +215,7 @@ angular.module('sonificationAPP.services.sounds', [])
                             break;
                         case "sad":
                             refreshPlayer("sad", love, haha, wow, sad, angry);
-                            removeCurrentPlaySong(2000); //TODO set Time
+                            removeCurrentPlaySong(4100); //TODO set Time
 
                             sonifySad.triggerAttackRelease('A3', '1n', '+0', velocity.sad);
                             sonifySad.triggerAttackRelease('D4', '1n', '+0', velocity.sad);
