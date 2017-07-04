@@ -25,47 +25,47 @@ angular.module('sonificationAPP.services.sounds', [])
             let arrayReactions;
             let timeouts = [];
             let sounds = [
-                {name: "Simple", options: [
-                    {name: "Nur höchster Wert", description: "Einfacher Ton. Die höchste Reaktion wird hervorgehoben."}
+                {name: "Einfach", description:"Einfache Töne, die mit Ton.js generiert werden", options: [
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt."}
                     ]
                 },
-                {name: "Piano+Beat", options: [
-                    {name: "normal", description: "Piano mit Beat."},
-                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
-                    ]
-                },
-                {name: "Animals", options: [
-                    {name: "normal", description: "Tiersounds."},
-                    {name: "absteigend", description: "Tiersounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                    {name: "aufsteigend", description: "Tiersounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                {name: "Piano mit Beat", description:"Piano Töne mit einem Hintergrundbeat", options: [
+                    {name: "Piano-Spezial", description: "Spezielle Reihenfolge: Haha -> Love -> Angry -> Wow -> Sad."},
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                     ]
                 },
-                {name: "Instrument", options: [
-                    {name: "normal", description: "Reactions werden mit Instrumenten sonifiziert."},
-                    {name: "absteigend", description: "Instrumente: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                    {name: "aufsteigend", description: "Instrumente: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                {name: "Tiere", description:"Einfache Tiergeräusche", options: [
+                    {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
+                    {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
+                    {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
+                    {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
+                    ]
+                },
+                {name: "Instrumente", description:"Verschiedene Instrumente zur den einzelnen Reaktionen", options: [
+                    {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
+                    {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
+                    {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                 ]
                 },
-                {name: "Humans", options: [
-                    {name: "normal", description: "Reactions werden mit Menschensounds sonifiziert."},
-                    {name: "absteigend", description: "Menschensounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                    {name: "aufsteigend", description: "Menschensounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                {name: "Menschen", description:"Menschenliche reaktionen", options: [
+                    {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
+                    {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
+                    {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                 ]
                 },
-                {name: "Crowd", options: [
-                    {name: "normal", description: "Reactions werden mit Menschenmengensounds sonifiziert."},
-                    {name: "absteigend", description: "Menschenmengensounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                    {name: "aufsteigend", description: "Menschenmengensounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                {name: "Zuschauer", description:"Publikum reactionen", options: [
+                    {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
+                    {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
+                    {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                 ]
                 },
-                {name: "Sinus", options: [
-                    {name: "normal", description: "Reactions werden mit Sinus Sounds sonifiziert."},
-                    {name: "absteigend", description: "Sinus Sounds: Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss."},
-                    {name: "aufsteigend", description: "Sinus Sounds: Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss."},
+                {name: "Sinus", description:"Sinuston mit Sentic Forms (Manfred Clynes)", options: [
+                    {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
+                    {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
+                    {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                 ]
                 },

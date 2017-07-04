@@ -40,26 +40,26 @@ div(ng-controller="dashboardCtrl")
                                     .row.chart-inner
                                         .col.emotions
                                             .outer
-                                                .bar.love(style="height: calc({{fav.reactionProzent.love}}%);")
+                                                .bar.love(style="height: calc({{fav.reactionProzent.love}}% + 13px);")
                                             span.love {{fav.allReactions.total_love| number:0}}
                                         .col
                                             .outer
-                                                .bar.haha(style="height: calc({{fav.reactionProzent.haha}}%);")
+                                                .bar.haha(style="height: calc({{fav.reactionProzent.haha}}% + 13px);")
                                             span.haha {{fav.allReactions.total_haha| number:0}}
 
                                         .col
                                             .outer
-                                                .bar.wow(style="height: calc({{fav.reactionProzent.wow}}%);")
+                                                .bar.wow(style="height: calc({{fav.reactionProzent.wow}}% + 13px);")
                                             span.wow {{fav.allReactions.total_wow| number:0}}
 
                                         .col
                                             .outer
-                                                .bar.sad(style="height: calc({{fav.reactionProzent.sad}}%);")
+                                                .bar.sad(style="height: calc({{fav.reactionProzent.sad}}% + 13px);")
                                             span.sad {{fav.allReactions.total_sad| number:0}}
 
                                         .col
                                             .outer
-                                                .bar.angry(style="height: calc({{fav.reactionProzent.angry}}%);")
+                                                .bar.angry(style="height: calc({{fav.reactionProzent.angry}}% + 13px);")
                                             span.angry {{fav.allReactions.total_angry| number:0}}
 
                         .col-md-3

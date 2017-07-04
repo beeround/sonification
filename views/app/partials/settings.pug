@@ -1,22 +1,22 @@
 section(ng-controller="settingsCtrl")
-    h1 Einstellungen
+    h1 SoundLabor
     .row
         .col-md-12
             h4 1. Schritt
-            p Wähle dein gewünschtes Instrument:
+            p Wähle deine gewünschte Sound-Kategorie:
 
         .col-md-12
             form.form-horizontal
                 fieldset
                     select#selectbasic.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSound()" ng-model="data.selectedSound")
                         option(ng-repeat="sound in sounds" ng-value="sound.name") {{sound.name}}
-                    select#selectbasic2.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSoundOption()" ng-model="data.selectedSoundOption")
-                        option(ng-repeat=" soundOptions in optionsFromSelectedSound" ng-value="soundOptions.name") {{soundOptions.name}}
-            .description(ng-repeat=" soundOptions in optionsFromSelectedSound ", ng-show="soundOptions.name == data.selectedOption")
-                p {{soundOptions.description}}
+                    .description(ng-repeat=" sound in sounds" ng-show="sound.name == data.selectedSound")
+                        p {{sound.description}}
+
+
         .col-md-12
             h4 2. Schritt
-            p Klicke nacheinander auf die Symbole um einen Sound zu erhalten und das gewählte Instrument zu testen:
+            p Klicke nacheinander auf die Symbole um einen Sound zu erhalten und die Töne zu testen:
 
             ul.nav.nav-pills.emoticons-settings
                 li
@@ -29,4 +29,15 @@ section(ng-controller="settingsCtrl")
                     i.icon.large.sad(ng-click="sonifyByReaction('sad')")
                 li
                     i.icon.large.angry(ng-click="sonifyByReaction('angry')")
+
+
+        .col-md-12
+            h4 3. Schritt
+            p Wähle eine Option zur Abspielreihenfolge:
+            form.form-horizontal
+                fieldset
+                    select#selectbasic2.form-control.selectbox(name='selectbasic' ng-change="changeSelectedSoundOption()" ng-model="data.selectedSoundOption")
+                        option(ng-repeat=" soundOptions in optionsFromSelectedSound" ng-value="soundOptions.name") {{soundOptions.name}}
+                    .description(ng-repeat=" soundOptions in optionsFromSelectedSound" ng-show="soundOptions.name == data.selectedSoundOption")
+                        p {{soundOptions.description}}
 

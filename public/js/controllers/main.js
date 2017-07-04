@@ -83,29 +83,28 @@ angular.module('sonificationAPP.controllers.main', [])
 
         $scope.sonifyByReaction = function (reaction) {
             switch($scope.data.selectedSound) {
-                case "Simple":
+                case "Einfach":
                     soundService.playSoundsV1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Piano+Beat":
+                case "Piano mit Beat":
                     soundService.playSoundsV2(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Animals":
+                case "Tiere":
                     soundService.playSoundsV3_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Instrument":
+                case "Instrumente":
                     soundService.playSoundsV4_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Humans":
+                case "Menschen":
                     soundService.playSoundsV5_1(0, 0, 0, 0, 0, reaction);
                     break;
-                case "Crowd":
+                case "Zuschauer":
                     soundService.playSoundsV6_1(0, 0, 0, 0, 0, reaction);
                     break;
                 case "Sinus":
                     soundService.playSoundsV7_1(0, 0, 0, 0, 0, reaction);
                     break;
             }
-
         };
         $scope.sonify = function (love, haha, wow, sad, angry) {
             let reaction = null;
@@ -114,16 +113,16 @@ angular.module('sonificationAPP.controllers.main', [])
                 reaction = reactionTrend(love, haha, wow, sad, angry)
             }
             switch($scope.data.selectedSound) {
-                case "Simple":
+                case "Einfach":
                     switch($scope.data.selectedSoundOption) {
                         case "Nur höchster Wert":
                             soundService.playSoundsV1(love, haha, wow, sad, angry, reaction);
                             break;
                     }
                     break;
-                case "Piano+Beat":
+                case "Piano mit Beat":
                     switch($scope.data.selectedSoundOption) {
-                        case "normal":
+                        case "Piano-Spezial":
                             soundService.playSoundsV2(love, haha, wow, sad, angry, null);
                             break;
                         case "Nur höchster Wert":
@@ -131,15 +130,15 @@ angular.module('sonificationAPP.controllers.main', [])
                             break;
                     }
                     break;
-                case "Animals":
+                case "Tiere":
                     switch($scope.data.selectedSoundOption) {
-                        case "normal":
+                        case "Normal":
                             soundService.playSoundsV3_1(love, haha, wow, sad, angry, null);
                             break;
-                        case "absteigend":
+                        case "Absteigend":
                             soundService.playSoundsV3_2(love, haha, wow, sad, angry, null);
                             break;
-                        case "aufsteigend":
+                        case "Aufsteigend":
                             soundService.playSoundsV3_3(love, haha, wow, sad, angry, null);
                             break;
                         case "Nur höchster Wert":
@@ -147,15 +146,15 @@ angular.module('sonificationAPP.controllers.main', [])
                             break;
                     }
                     break;
-                case "Instrument":
+                case "Instrumente":
                     switch($scope.data.selectedSoundOption) {
-                        case "normal":
+                        case "Normal":
                             soundService.playSoundsV4_1(love, haha, wow, sad, angry, null);
                             break;
-                        case "absteigend":
+                        case "Absteigend":
                             soundService.playSoundsV4_2(love, haha, wow, sad, angry, null);
                             break;
-                        case "aufsteigend":
+                        case "Aufsteigend":
                             soundService.playSoundsV4_3(love, haha, wow, sad, angry, null);
                             break;
                         case "Nur höchster Wert":
@@ -163,15 +162,15 @@ angular.module('sonificationAPP.controllers.main', [])
                             break;
                     }
                     break;
-                case "Humans":
+                case "Menschen":
                     switch($scope.data.selectedSoundOption) {
-                        case "normal":
+                        case "Normal":
                             soundService.playSoundsV5_1(love, haha, wow, sad, angry, null);
                             break;
-                        case "absteigend":
+                        case "Absteigend":
                             soundService.playSoundsV5_2(love, haha, wow, sad, angry, null);
                             break;
-                        case "aufsteigend":
+                        case "Aufsteigend":
                             soundService.playSoundsV5_3(love, haha, wow, sad, angry, null);
                             break;
                         case "Nur höchster Wert":
@@ -179,15 +178,15 @@ angular.module('sonificationAPP.controllers.main', [])
                             break;
                     }
                     break;
-                case "Crowd":
+                case "Zuschauer":
                     switch($scope.data.selectedSoundOption) {
-                        case "normal":
+                        case "Normal":
                             soundService.playSoundsV6_1(love, haha, wow, sad, angry, null);
                             break;
-                        case "absteigend":
+                        case "Absteigend":
                             soundService.playSoundsV6_2(love, haha, wow, sad, angry, null);
                             break;
-                        case "aufsteigend":
+                        case "Aufsteigend":
                             soundService.playSoundsV6_3(love, haha, wow, sad, angry, null);
                             break;
                         case "Nur höchster Wert":
@@ -197,13 +196,13 @@ angular.module('sonificationAPP.controllers.main', [])
                     break;
                 case "Sinus":
                     switch($scope.data.selectedSoundOption) {
-                        case "normal":
+                        case "Normal":
                             soundService.playSoundsV7_1(love, haha, wow, sad, angry, null);
                             break;
-                        case "absteigend":
+                        case "Absteigend":
                             soundService.playSoundsV7_2(love, haha, wow, sad, angry, null);
                             break;
-                        case "aufsteigend":
+                        case "Aufsteigend":
                             soundService.playSoundsV7_3(love, haha, wow, sad, angry, null);
                             break;
                         case "Nur höchster Wert":
