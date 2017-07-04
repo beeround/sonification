@@ -41,21 +41,21 @@ angular.module('sonificationAPP.services.sounds', [])
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                     ]
                 },
-                {name: "Instrumente", description:"Verschiedene Instrumente zur den einzelnen Reaktionen", options: [
+                {name: "Instrumente", description:"Verschiedene Instrumente zu den einzelnen Reaktionen", options: [
                     {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
                     {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
                     {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                 ]
                 },
-                {name: "Menschen", description:"Menschenliche reaktionen", options: [
+                {name: "Menschen", description:"Menschenliche Reaktionen", options: [
                     {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
                     {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
                     {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
                     {name: "Nur höchster Wert", description: "Es wird nur der höchste Wert abgespielt"},
                 ]
                 },
-                {name: "Zuschauer", description:"Publikum reactionen", options: [
+                {name: "Zuschauer", description:"Publikumsreaktionen", options: [
                     {name: "Normal", description: "Normale Reihenfolge: Love -> Haha -> Wow -> Sad -> Angry."},
                     {name: "Absteigend", description: "Die Reaktion mit dem größten Wert wird zuerst gespielt, die niedrigste am Schluss. (Primary Effekt)"},
                     {name: "Aufsteigend", description: "Die Reaktion mit dem niedrigsten Wert wird zuerst gespielt, die größte am Schluss. (Recency Effekt)"},
