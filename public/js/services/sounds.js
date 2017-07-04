@@ -186,7 +186,7 @@ angular.module('sonificationAPP.services.sounds', [])
                     switch (trendReaction) {
                         case "love":
                             refreshPlayer("love", love, haha, wow, sad, angry);
-                            removeCurrentPlaySong(2000); //TODO set Time
+                            removeCurrentPlaySong(2000);
 
                             sonifyLove.triggerAttackRelease("D4", "2n", "+0", velocity.love);
                             sonifyLove.triggerAttackRelease("E4", "2n", "+0.1", velocity.love);
@@ -196,7 +196,7 @@ angular.module('sonificationAPP.services.sounds', [])
                             break;
                         case "haha":
                             refreshPlayer("haha", love, haha, wow, sad, angry);
-                            removeCurrentPlaySong(2000); //TODO set Time
+                            removeCurrentPlaySong(2000);
 
                             sonifyHaha.triggerAttackRelease('A5', '8n', '+0', velocity.haha);
                             sonifyHaha.triggerAttackRelease('GB5', '8n', '+0.1', velocity.haha);
@@ -206,7 +206,7 @@ angular.module('sonificationAPP.services.sounds', [])
                             break;
                         case "wow":
                             refreshPlayer("wow", love, haha, wow, sad, angry);
-                            removeCurrentPlaySong(2000); //TODO set Time
+                            removeCurrentPlaySong(2000);
 
                             sonifyWow.triggerAttackRelease('C4', '1n', '+0', velocity.wow);
                             sonifyWow.triggerAttackRelease('E4', '1n', '+0', velocity.wow);
@@ -215,7 +215,7 @@ angular.module('sonificationAPP.services.sounds', [])
                             break;
                         case "sad":
                             refreshPlayer("sad", love, haha, wow, sad, angry);
-                            removeCurrentPlaySong(4100); //TODO set Time
+                            removeCurrentPlaySong(4100);
 
                             sonifySad.triggerAttackRelease('A3', '1n', '+0', velocity.sad);
                             sonifySad.triggerAttackRelease('D4', '1n', '+0', velocity.sad);
@@ -228,7 +228,7 @@ angular.module('sonificationAPP.services.sounds', [])
                             break;
                         case "angry":
                             refreshPlayer("angry", love, haha, wow, sad, angry);
-                            removeCurrentPlaySong(2000); //TODO set Time
+                            removeCurrentPlaySong(2000);
 
                             sonifyAngry.triggerAttackRelease('A4', '1n', '+0', velocity.angry);
                             sonifyAngry.triggerAttackRelease('C5', '1n', '+0', velocity.angry);
@@ -1534,7 +1534,7 @@ angular.module('sonificationAPP.services.sounds', [])
                     soundON = true;
 
                     arrayReactions = [
-                        {"name": "love", "value": love, "timeMS": 7560, "valueVolume": 1, "timeout": 0},
+                        {"name": "love", "value": love, "timeMS": 5260, "valueVolume": 1, "timeout": 0},
                         {"name": "haha", "value": haha, "timeMS": 3380, "valueVolume": 1, "timeout": 0},
                         {"name": "wow", "value": wow, "timeMS": 3380, "valueVolume": 1, "timeout": 0},
                         {"name": "sad", "value": sad, "timeMS": 2230, "valueVolume": 1, "timeout": 0},
@@ -1656,7 +1656,7 @@ angular.module('sonificationAPP.services.sounds', [])
                     soundON = true;
 
                     arrayReactions = [
-                        {"name": "love", "value": love, "timeMS": 7560, "valueVolume": 1, "timeout": 0},
+                        {"name": "love", "value": love, "timeMS": 5260, "valueVolume": 1, "timeout": 0},
                         {"name": "wow", "value": wow, "timeMS": 3380, "valueVolume": 1, "timeout": 0},
                         {"name": "haha", "value": haha, "timeMS": 3380, "valueVolume": 1, "timeout": 0},
                         {"name": "sad", "value": sad, "timeMS": 2230, "valueVolume": 1, "timeout": 0},
@@ -1779,7 +1779,7 @@ angular.module('sonificationAPP.services.sounds', [])
                     soundON = true;
 
                     arrayReactions = [
-                        {"name": "love", "value": love, "timeMS": 7560, "valueVolume": 1, "timeout": 0},
+                        {"name": "love", "value": love, "timeMS": 5260, "valueVolume": 1, "timeout": 0},
                         {"name": "wow", "value": wow, "timeMS": 3380, "valueVolume": 1, "timeout": 0},
                         {"name": "haha", "value": haha, "timeMS": 3380, "valueVolume": 1, "timeout": 0},
                         {"name": "sad", "value": sad, "timeMS": 2230, "valueVolume": 1, "timeout": 0},
